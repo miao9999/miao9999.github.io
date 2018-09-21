@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CheckBox 与 ListView 的结合使用 - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CheckBox 与 ListView 的结合使用">
+<meta property="og:url" content="http://miao9999.github.io.com/2016/11/24/CheckBox与ListView结合使用/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.">
+<meta property="og:image" content="http://img.blog.csdn.net/20161124165242502">
+<meta property="og:updated_time" content="2017-07-02T10:08:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CheckBox 与 ListView 的结合使用">
+<meta name="twitter:description" content="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161124165242502">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-CheckBox与ListView结合使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CheckBox 与 ListView 的结合使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/11/24/CheckBox与ListView结合使用/" class="article-date">
+  <time datetime="2016-11-24T09:03:27.000Z" itemprop="datePublished">2016-11-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="实现效果-长按litsview的item时-checkbox显示checkbox可选中在这个效果当中可能会有checkbox被选中时出现混乱的情况在此记录一下这个解决办法"><a href="#实现效果-长按LitsView的item时-CheckBox显示-CheckBox可选中-在这个效果当中可能会有CheckBox被选中时出现混乱的情况-在此记录一下这个解决办法" class="headerlink" title="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法."></a>实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.</h4><a id="more"></a>
+<ol>
+<li><p>先做准备工作: 一个listview 的item行布局</p>
+<pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+      android:orientation=&quot;vertical&quot;
+      android:layout_width=&quot;match_parent&quot;
+      android:layout_height=&quot;match_parent&quot;&gt;
+&lt;TextView
+android:layout_margin=&quot;10dp&quot;
+android:id=&quot;@+id/tv_item_list_name&quot;
+android:layout_width=&quot;wrap_content&quot;
+android:layout_height=&quot;wrap_content&quot;/&gt;
+&lt;TextView
+android:layout_margin=&quot;10dp&quot;
+android:layout_toRightOf=&quot;@id/tv_item_list_name&quot;
+android:id=&quot;@+id/tv_item_list_age&quot;
+android:layout_width=&quot;wrap_content&quot;
+android:layout_height=&quot;wrap_content&quot;/&gt;
+&lt;CheckBox
+android:layout_alignParentRight=&quot;true&quot;
+android:layout_margin=&quot;10dp&quot;
+android:visibility=&quot;gone&quot;
+android:id=&quot;@+id/ckb_item_list&quot;
+android:layout_width=&quot;wrap_content&quot;
+android:layout_height=&quot;wrap_content&quot;/&gt;
+&lt;/RelativeLayout&gt;
+</code></pre></li>
+<li><p>listview的adapter        </p>
+<pre><code>                                                                                                                                        package com.limiao.checkbox;     
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.zip.Inflater;
+
+/**
+ * Created by limiao on 16/11/24.
+ */
+
+public class MyAdapter extends BaseAdapter {
+private List&lt;Person&gt; mPersons;
+private Context mContext;
+private boolean mVisibility = false;// checkbox是否显示,默认不显示
+public MyAdapter(Context context) {
+mContext = context;
+notifyDataSetChanged();
+}
+
+public void setVisibility(boolean visibility) {
+mVisibility = visibility;
+notifyDataSetChanged();
+}
+
+public void setPersons(List&lt;Person&gt; persons) {
+mPersons = persons;
+notifyDataSetChanged();
+}
+
+@Override
+public int getCount() {
+return mPersons == null ? 0 : mPersons.size();
+}
+
+@Override
+public Object getItem(int position) {
+return mPersons.get(position);
+}
+
+@Override
+public long getItemId(int position) {
+return position;
+}
+
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+ViewHolder holder = null;
+if (convertView == null) {
+    convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list, parent, false);
+    holder = new ViewHolder(convertView);
+    convertView.setTag(holder);
+} else {
+    holder = (ViewHolder) convertView.getTag();
+}
+Person person = mPersons.get(position);
+holder.mNameTv.setText(person.getName());
+holder.mAgeTv.setText(person.getAge());
+if (mVisibility) {
+    holder.mCheckBox.setVisibility(View.VISIBLE);
+    final ViewHolder finalHolder = holder;
+
+    /**
+     * 此处要用setOnClickListener,而不是setOnCheckedChangeListener()
+     * 否则会出现混乱的情况
+     */
+
+    holder.mCheckBox.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            CheckBox checkBox = (CheckBox) v;
+            finalHolder.mCheckBox.setChecked(checkBox.isChecked());
+        }
+    });
+}
+return convertView;
+}
+
+private static class ViewHolder {
+private TextView mNameTv;
+private TextView mAgeTv;
+private CheckBox mCheckBox;
+
+public ViewHolder(View view) {
+    mNameTv = (TextView) view.findViewById(R.id.tv_item_list_name);
+    mAgeTv = (TextView) view.findViewById(R.id.tv_item_list_age);
+    mCheckBox = (CheckBox) view.findViewById(R.id.ckb_item_list);
+}
+</code></pre><p>}</p>
+</li>
+</ol>
+<p>在为CheckBox设置选中状态时,这里需要用setOnClickListener(),才不会出现混乱,如果用setOnCheckedChangeListener()就会出现以下的情况</p>
+<p><img src="http://img.blog.csdn.net/20161124165242502" alt="CheckBox的选中状态出现混乱"></p>
+<ol>
+<li>一个很简单的实体类</li>
+</ol>
+<pre><code>package com.limiao.checkbox;
+/**
+ * Created by limiao on 16/11/23.
+ */
+
+public class Person  {
+String  name ;
+String age;
+
+public Person(String name, String age) {
+this.name = name;
+this.age = age;
+}
+
+public String getName() {
+return name;
+}
+
+public void setName(String name) {
+this.name = name;
+}
+
+public String getAge() {
+return age;
+}
+
+public void setAge(String age) {
+this.age = age;
+}
+}
+</code></pre><ol>
+<li><p>最后是MainActivity</p>
+<pre><code>package com.limiao.checkbox;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+private ListView mListView;
+private MyAdapter mMyAdapter;
+private List&lt;Person&gt; mPersons;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+mListView = (ListView) findViewById(R.id.lv_aty_main);
+mPersons = new ArrayList&lt;&gt;();
+for (int i = 0; i &lt; 90; i++) {
+    Person person = new Person(&quot;aaa&quot;,&quot;34&quot;);
+    mPersons.add(person);
+}
+mMyAdapter = new MyAdapter(this);
+mMyAdapter.setPersons(mPersons);
+mListView.setAdapter(mMyAdapter);
+mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+    @Override
+    public boolean onItemLongClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+        mMyAdapter.setVisibility(true);
+        return false;
+    }
+});
+}
+}
+</code></pre></li>
+</ol>
+<p><a href="https://github.com/miao9999/checkbox/tree/master" target="_blank" rel="external">demo的完整的下载地址</a></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>Contents</h3>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现效果-长按litsview的item时-checkbox显示checkbox可选中在这个效果当中可能会有checkbox被选中时出现混乱的情况在此记录一下这个解决办法"><span class="toc-number">1.</span> <span class="toc-text">实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/11/实现图片轮播的几种方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          实现图片轮播的几种方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/05/用gradle打包android_apk时遇到的一些问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用 grandle 打包 Android APK 时遇到的一些问题&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

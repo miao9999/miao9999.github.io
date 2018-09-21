@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kotlin in Action 4 - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.3.2 Kotlin 用于 Android典型的移动应用与典型的企业应用是非常不同的。移动应用是比较小的，它不依赖于整合现有的代码库，它通常需要迅速交付，同时确保在多种设备上可靠地运行。Kotlin 正好可以做这样的项目。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin in Action 4">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/08/18/Kotlin in Action -4/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="1.3.2 Kotlin 用于 Android典型的移动应用与典型的企业应用是非常不同的。移动应用是比较小的，它不依赖于整合现有的代码库，它通常需要迅速交付，同时确保在多种设备上可靠地运行。Kotlin 正好可以做这样的项目。">
+<meta property="og:updated_time" content="2017-09-13T16:43:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kotlin in Action 4">
+<meta name="twitter:description" content="1.3.2 Kotlin 用于 Android典型的移动应用与典型的企业应用是非常不同的。移动应用是比较小的，它不依赖于整合现有的代码库，它通常需要迅速交付，同时确保在多种设备上可靠地运行。Kotlin 正好可以做这样的项目。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Kotlin in Action -4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kotlin in Action 4
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/08/18/Kotlin in Action -4/" class="article-date">
+  <time datetime="2017-08-18T09:03:27.000Z" itemprop="datePublished">2017-08-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Kotlin/">Kotlin</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="132-kotlin-用于-android"><a href="#1-3-2-Kotlin-用于-Android" class="headerlink" title="1.3.2 Kotlin 用于 Android"></a>1.3.2 Kotlin 用于 Android</h4><p>典型的移动应用与典型的企业应用是非常不同的。移动应用是比较小的，它不依赖于整合现有的代码库，它通常需要迅速交付，同时确保在多种设备上可靠地运行。Kotlin 正好可以做这样的项目。<br><a id="more"></a><br>Kotlin 语言的特点是结合支持Android框架的特殊编译器插件，将Android开发变成一个更加高效和愉快的体验。一般的开发任务，例如向控件添加侦听器或将布局元素绑定到字段，都可以用更少的代码完成，甚至有些不用代码（编译器会为你自动生成）。Ando 库（<a href="https://github.com/kotlin/anko）也是" target="_blank" rel="external">https://github.com/kotlin/anko）也是</a> Kotlin 团队构建的，通过为许多的 Android API 添加友好的 Kotlin 适配器从而更进一步提高你的体验。</p>
+<p>这里有一个 Anko 的简单例子，只是用来公共能做用 Kotiln 开发 Android 的感觉，你把下面的代码输入到 Activity 中，一个简单的应用就完成了。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">verticalLayout&#123;</div><div class="line">  <span class="keyword">val</span> name = editText();     <span class="number">1</span></div><div class="line">  button(<span class="string">"say hello"</span>)&#123;       <span class="number">2</span></div><div class="line">    onClick&#123;toast(<span class="string">"hello,<span class="subst">$&#123;name.text&#125;</span>!"</span>)&#125;    <span class="number">3</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>1：创建一个文本字段</p>
+<p>2：当点击是，这个按钮会显示文本字段中的值</p>
+<p>3：添加监听器和显示 toast 的简单的 API</p>
+<p>使用 Kotlin 的另一个好处是应用的可靠性更好。如果你有过开发 Android 应用的经验，毫无疑问你非常熟悉提示<em>程序已经停止</em>的这种不幸。当你的程序抛出一个未处理的异常时，通常是<em>空指针异常</em>，这时就会出现这个提示。Kotlin 型系统是能严格的追踪空值，使用空指针异常不那么紧迫。大多数的 Java 代码在 Kotion 中编译时都会导致 <em>空指针异常</em> ，确保在应用程序到达用户之前解决这个错误。</p>
+<p>同归，由于 Kotlin 是完全兼容 Java 6 的，在使用时不会引入任何新的兼容性的问题。你会从 Kotlin 这种新语言的特性中得到好处，并且你依然能够在任何设备上运行你的应用程序，即使不是在最新的 Android 版本。</p>
+<p>在性能方面，使用 Kotlin 也不会带来任何坏处。由 Kotlin 编译器生成的代码在执行时也会像常规的 Java 代码一样有效。Kotlin 运行时是是非常简单的，所以不会发生编译后应用包的大小会增加很多。当你使用 <em>lambda</em> 时大多数的 Kotlin 标准库函数会内联它们。内联 <em>lambda</em> 确保没有新的对象被创建，应用程序也不会受到额外GC暂停。</p>
+<p>对比 Java，已经了解了 Kotlin 的许多优势，接下来我们看一下它的哲学，也是针对Kotlin 区别 JVM 的其他现代语言的最大的特点。</p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>Contents</h3>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#132-kotlin-用于-android"><span class="toc-number">1.</span> <span class="toc-text">1.3.2 Kotlin 用于 Android</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/08/Kotlin in Action -2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Kotlin in Action 2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/26/Kotlin in Action - 5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kotlin in Action 5&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

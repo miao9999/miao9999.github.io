@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Github + Hexo 博客的搭建 - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安装 Node.js &amp;nbsp;&amp;nbsp;  点击下载对 Node.js 不是很懂，只知道需要它。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github + Hexo 博客的搭建">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/04/14/github_+_hexo_博客搭建过程/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="安装 Node.js &amp;nbsp;&amp;nbsp;  点击下载对 Node.js 不是很懂，只知道需要它。">
+<meta property="og:updated_time" content="2017-07-02T10:08:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Github + Hexo 博客的搭建">
+<meta name="twitter:description" content="安装 Node.js &amp;nbsp;&amp;nbsp;  点击下载对 Node.js 不是很懂，只知道需要它。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-github_+_hexo_博客搭建过程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Github + Hexo 博客的搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/04/14/github_+_hexo_博客搭建过程/" class="article-date">
+  <time datetime="2017-04-14T09:03:27.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>安装 Node.js &nbsp;&nbsp;  <a href="https://nodejs.org/en/" target="_blank" rel="external">点击下载</a><br><br>对 Node.js 不是很懂，只知道需要它。<br><a id="more"></a></li>
+<li>安装 git (mac 自带，windows 就不清楚了)<br></li>
+<li>注册 github 账号。</li>
+<li>设置 SSH Key 到 github</li>
+<li>添加 SSH Key 到 github<br><strong>以上的几步网上随便找都能找到，比较简单，就不多啰嗦了</strong></li>
+<li>在 Github 中创建一个名字名 username.github.io 的仓库<br><br><strong>注意：</strong>这个仓库的名字必须要以相关联的 github的 username</li>
+<li><p>安装 Hexo</p>
+<ol>
+<li>新建一个名为 Hexo 的文件夹</li>
+<li>打开终端，运行 npm install -g hexo 进行安装</li>
+<li><p>安装完成后进入 Hexo 文件中运行<br>hexo init （初始化）<br>hexo g （生成）<br>hexo s（启动服务本地预览）  </p>
+<p><strong>到此博客搭建就完成了</strong><br>接下来换一个好看一点的主题</p>
+</li>
+<li><p>更换博客主题</p>
+<ol>
+<li>运行 hexo clean（清除以前的主题配置）</li>
+<li>复制主题 git clone 主题链接（如：git clone <a href="https://github.com/Haojen/hexo-theme-Anisina.git）" target="_blank" rel="external">https://github.com/Haojen/hexo-theme-Anisina.git）</a></li>
+<li>修改 Hexo 目录下的 config.yml 配置文件中的 theme 属性为主主题的名字（上面的例子中属性的名字就是Anisina）</li>
+<li>启动主题<br>cd themes/Anssina（主题名）<br>git pull<br>hexo g<br>hexo s （可有可无，不想本地预览可以省略）  </li>
+</ol>
+<p><strong>接下来就是重要的一步</strong>  </p>
+</li>
+<li>把博客的主题、文章等其他内容关联到 github 中，就可以通过username.github.io 访问  <ol>
+<li>进入 Hexo 的根目录<br>git clone https：//github.com.username/username.github.io.git  .deploy/miao9999.github.io<br>这名的意思是把 github 的远程仓库 clone 到本地一个 .deploy 文件中</li>
+<li>创建一个文本文件（.txt），复制以下的内容<br>hexo generate<br>cp -R public/* .deploy/miao9999.github.io<br>cd .deploy/miao9999.github.io<br>git add .<br>git commit -m “update”<br>git push origin master<br>把该文件命名为 deploy.sh 这样这个文件就是一个脚本文件，并把它放到 username.github.io 文件中的 .git文件夹中。在终端执行 bash deploy.sh 执行脚本文件，输入密码就可以完成博客的部署。  </li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>当完成可修改文章之后，进入 Hexo 根目录中执行<br>hexo g<br>bash deploy.sh 即可。   </p>
+</li>
+</ol>
+<p><hr><br><strong>PS:</strong>  常用的一些 hexo 命令<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>hexo new ’文章名‘ 新建文章<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo new page ‘pagename’  新建页面      </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;常用简写：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo n = hexo new 新建文章<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo g = hexo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generate 生成页面<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo s = hexo server 启动本地服务<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo d = hexo deploy 部署博客</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;刚开始学习，只能理解这<br>么多，后续对博客的美化以及一些其他的配置，研究之后再做记录。</p>
+<p>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><em>附</em></strong>  <a href="http://www.kancloud.cn/wizardforcel/hexo-doc/101377" target="_blank" rel="external">Hexo 中文文档</a></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/08/aty。fragment的简单封装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Activity 、Fragment 的简单封装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/07/file/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">File&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

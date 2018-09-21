@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Object - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Class Overview(类概述)这个类是 Java 类等级中的根。所有非初级的类型（包括数组）都是直接或间接继承这个类。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/06/02/Object/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="Class Overview(类概述)这个类是 Java 类等级中的根。所有非初级的类型（包括数组）都是直接或间接继承这个类。">
+<meta property="og:updated_time" content="2017-07-02T10:09:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Object">
+<meta name="twitter:description" content="Class Overview(类概述)这个类是 Java 类等级中的根。所有非初级的类型（包括数组）都是直接或间接继承这个类。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Object" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Object
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/06/02/Object/" class="article-date">
+  <time datetime="2017-06-02T09:03:27.000Z" itemprop="datePublished">2017-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/翻译/">翻译</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="class-overview类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>这个类是 Java 类等级中的根。所有非初级的类型（包括数组）都是直接或间接继承这个类。<br><a id="more"></a><br>按照以下这种风格写一个规范的 <span id="equals">equals</span> 方法：</p>
+<pre><code>// Use @Override to avoid accidental overloading.
+// 使用@Override 为了避免意外的过载
+  @Override public boolean equals(Object o) {
+// Return true if the objects are identical.
+// (This is just an optimization, not required for correctness.)
+// 如果对象是相同的就返回 true
+// （这仅仅是一种优化，并不要求正确性。）
+if (this == o) {
+  return true;
+}
+
+// Return false if the other object has the wrong type.
+// This type may be an interface depending on the interface&apos;s specification.
+// 如果另一个对象的类型有误，则返回 false
+// 这种类型可能是一个接口，取决于接口的规格
+if (!(o instanceof MyType)) {
+  return false;
+}
+
+// Cast to the appropriate type.
+// This will succeed because of the instanceof, and lets us access private fields.
+// 转换成适当的类型
+// 这将是成功的因为 o 是 Mytype 的实例，我们访问私有字段
+MyType lhs = (MyType) o;
+
+// Check each field. Primitive fields, reference fields, and nullable reference
+// fields are all treated differently.
+// 检查每一个字段。原始的字段，参考的字段，空引用的字段都被看成是不同的。
+return primitiveField == lhs.primitiveField &amp;&amp;
+        referenceField.equals(lhs.referenceField) &amp;&amp;
+        (nullableField == null ? lhs.nullableField == null
+                               : nullableField.equals(lhs.nullableField));
+  }
+</code></pre><p>如果要重写 equals 方法，同时也应该重写 hashCode 方法：相同的实例必须要有相同的哈希值。<br>参考 Effcetive Java 里的第 8 条，有更详细的说明。</p>
+<p>按照以下这种风格写一人规范的 <span id="hash">hashCode</span> 方法：</p>
+<pre><code> @Override public int hashCode() {
+// Start with a non-zero constant.
+// 开始于一个非零常数
+int result = 17;
+
+// Include a hash for each field.
+// 包括每一个字段的哈希值
+result = 31 * result + (booleanField ? 1 : 0);
+
+result = 31 * result + byteField;
+result = 31 * result + charField;
+result = 31 * result + shortField;
+result = 31 * result + intField;
+
+result = 31 * result + (int) (longField ^ (longField &gt;&gt;&gt; 32));
+
+result = 31 * result + Float.floatToIntBits(floatField);
+
+long doubleFieldBits = Double.doubleToLongBits(doubleField);
+result = 31 * result + (int) (doubleFieldBits ^ (doubleFieldBits &gt;&gt;&gt; 32));
+
+result = 31 * result + Arrays.hashCode(arrayField);
+
+result = 31 * result + referenceField.hashCode();
+result = 31 * result +
+    (nullableReferenceField == null ? 0
+                                    : nullableReferenceField.hashCode());
+
+return result;
+  }
+</code></pre><p>如果不打算将您的类型用作哈希键， 也不要只依赖于默认的 hashCode 方法实现。因为这样会不明显的破坏将来任何一个把该类型做为哈希键的编码。应该用抛异常的方法来替代：</p>
+<pre><code>@Override public int hashCode() {
+throw new UnsupportedOperationException();
+  }
+</code></pre><p>参考 Effective Java 第 9 条，有更详细的说明。</p>
+<p>为了调试方便，按照以下的风格重写 <span id="toString"> toString </span>是很常见的：</p>
+<pre><code>@Override public String toString() {
+return getClass().getName() + &quot;[&quot; +
+    &quot;primitiveField=&quot; + primitiveField + &quot;, &quot; +
+    &quot;referenceField=&quot; + referenceField + &quot;, &quot; +
+    &quot;arrayField=&quot; + Arrays.toString(arrayField) + &quot;]&quot;;
+  }
+</code></pre><p> 包含的字段集一般与用 equals 方法测试的字段是一样的。</p>
+<p> 参考 Effective Java 第 10 条，有更详细的说明。</p>
+<h3 id="public-constructors公共构造方法"><a href="#Public-Constructors（公共构造方法）" class="headerlink" title="Public Constructors（公共构造方法）"></a>Public Constructors（公共构造方法）</h3><p><strong><code>public Object()</code></strong></p>
+<p>构造一个新的 Object 实例。</p>
+<h3 id="public-methods公共方法"><a href="#Public-Methods-公共方法" class="headerlink" title="Public Methods(公共方法)"></a>Public Methods(公共方法)</h3><p><span id="eq"><strong><code>public boolean equals(Object o)</code></strong></span></p>
+<p>比较该实例与指定的对象，并且指示它们是否相同。为了相同，<em>o</em> 必须使用特定的类比较来表示与此实例相同的对象。<br>通用约定是，这种比较应该是自反性，对称性，传递性。除了 null，没有引用的对象等于 null。</p>
+<p>仅仅当 this==o 的时候默认返回 true。如果想要实现自己的 equals 方法，参考<a href="#equals">写一个正确的 equals 方法</a>。</p>
+<p>对于 equals 方法和 hashCode 方法来说，通用约定是，如果两个对象根据 equals 方法比较是相等的，那么调用这两个对象中任意一个对象的 hashCode 方法都必须产生同样的整数结果。这就意味着，Object 的任意一个子类通常这两个方法都会复写，或者都不复写。</p>
+<p><em>参数</em></p>
+<p>o    与该实例比较的对象。</p>
+<p><em>返回值</em></p>
+<p>如果指定的对象与该对象相同，返回 true ，否则返回 false。</p>
+<p><em>参考</em></p>
+<p><a href="#hashcode">hashCode()</a></p>
+<p><strong><code>public final Class&lt;?&gt; getClass()</code></strong></p>
+<p>返回一个唯一的 Class 实例，表示这个对象的类。注意，getClass()是一个特例，它事实上返回Class ,Foo 是对表达式类型的擦除当 getClass（）被调用时（这里我也不懂，实在不知道该怎么翻译 &gt; .. &lt;）。</p>
+<p>正如这个例子，下面的代码实际上是会可以编译的，虽然有人认为可能不会：</p>
+<pre><code>List l = new ArrayList();
+   Class c = l.getClass();
+</code></pre><p><em>返回值</em></p>
+<p>该对象类的实例。</p>
+<p><sapn id="hashcode"><strong><code>public int hashCode()</code></strong></sapn></p>
+<p>返回一个该对象的 hash code，根据约定，如果两个对象通过 equals 方法返回 true，那么这两个对象一定会返回相同的 hash code 值。这就意味着 Object 的所有子类都会同时复写这两个方法或是一个全都不复写。</p>
+<p>注意，除非用 euqals 比较的信息改变，否则 hash 的值是不会变的。</p>
+<p>如果想要实现自己的 hashCode 方法，<a href="#hash">参考写一个正确的 hashCode 方法</a>.</p>
+<p><em>返回值</em></p>
+<p>该对象的 hash code。</p>
+<p><em>参考</em></p>
+<p><a href="#eq">equals（Object）</a></p>
+<p><strong><code>public final void notify()</code></strong></p>
+<p>由于一个正在等待该对象的监听器的（通过调用 wait() 方法）线程被唤醒。如果正在等待的线程多于一个，VM 会任意选择它们中的一个。被选择的这个线程不会马上执行。该线程调用 notify() 方法先释放该对象的监听器。而且，所选的线程仍要与试图同步在同一对象上的其他线程竞争。</p>
+<p>这个方法只能由该对象监听器的线程调用。线程成为该对象监听器的所有者</p>
+<ul>
+<li>通过执行该对象的同步方法；</li>
+<li>通过执行同步对象的同步语句的正文；</li>
+<li>如果对象类型为Class，则通过执行同步静态方法。</li>
+</ul>
+<p><em>参考</em></p>
+<p>notify()</p>
+<p>wait()</p>
+<p>wait(long)</p>
+<p>wait(long,int)</p>
+<p>Thread</p>
+<p><strong><code>public final void notifyAll()</code></strong></p>
+<p>由于所有正在等待该对象的监听器的（通过调用 wait() 方法）线程被唤醒。这些线程不会马上执行。线程调用 notify() 方法先释放该对象的监听器。而且，这些线程仍要与试图同步在同一对象上的其他线程竞争。</p>
+<p>这个方法只能由该对象监听器的线程调用。线程成为该对象监听器的所有者</p>
+<ul>
+<li>通过执行该对象的同步方法；</li>
+<li>通过执行同步对象的同步语句的正文；</li>
+<li>如果对象类型为Class，则通过执行同步静态方法。</li>
+</ul>
+<p><em>异常</em></p>
+<p>IllegalMonitorStateException（非法监视状态异常） 当调用该方法的线程不是该对象监听器的所有者。</p>
+<p><em>参考</em></p>
+<p>notify()  </p>
+<p>wait()</p>
+<p>wait(long) </p>
+<p>wait(long,int)</p>
+<p><strong><code>public String toString()</code></strong></p>
+<p>返回一个简洁的，人类可读的描述该对象的字符串。建议子类复写这个方法，并且提供一个考虑到该对象的类型和数据的实现。默认的实现相当于以下的表达形式：</p>
+<pre><code>getClass().getName() + &apos;@&apos; + Integer.toHexString(hashCode())
+</code></pre><p>如果想要实现一个自己的 toString 方法，参见<a href="#toString">写一个正确的 toString 方法</a>。</p>
+<p><em>返回值</em></p>
+<p>该对象的一个可打印的表达形式。</p>
+<p><strong><code>public final void wait()</code></strong></p>
+<p>由于调用线程时要等到另一个线程调用了该对象的 notify() 或 notifyAll() 方法。该方法只能由该对象的监听器的线程调用，参见 notify() 中如何使一个线程成为监听器的所有者。</p>
+<p>一个正在等待的线程可能会由于接受到 interrupt() 而导致提前停止等待，所以 wait 方法应该循环调用，以检查在继续之前已经等待的条件是否已满足。</p>
+<p>当线程在等待的时候，它会放弃对该对象的监听器的所有权。当它被通知（或是被中断）时，在开始运行之前它会重新获得监听器。</p>
+<p><em>异常</em></p>
+<p>IlleaglMonitorStateException (非法监视状态异常)  当调用该方法的线程不是该对象的监听所有者。</p>
+<p>InterruptedException (中断异常) 如果当前线程已经被中断。在异常抛出之前，当前线程的中断状态会被清除。</p>
+<p><em>参考</em></p>
+<p>notify()</p>
+<p>notifyAll()</p>
+<p>wait(long)</p>
+<p>wait(long,int)</p>
+<p>Thread</p>
+<p><strong><code>public final void wait(long millis,int nanos)</code></strong></p>
+<p>由于调用线程时要等到另一个线程调用了该对象的 notify() 或 notifyAll() 方法，或是过了指定的超时时间。该方法只由该对象的监听器的线程调用，参见 notify() 中如何使一个线程成为监听器的所有者。</p>
+<p>一个正在等待的线程可能会由于接受到 interrupt() 而导致提前停止等待，所以 wait 方法应该循环调用，以检查在继续之前已经等待的条件是否已满足。</p>
+<p>当线程在等待的时候，它会放弃对该对象的监听器的所有权。当它被通知（或是被中断）时，在开始运行之前它会重新获得监听器。</p>
+<p>当超时时间为 0 时，表示正在调用的线程应该一直等待，除非被中断或是被通知。</p>
+<p><em>参数</em></p>
+<p>millis    等待的最大时间，以毫秒为单位。</p>
+<p>nanos     等待的毫秒数，以纳少为单位。</p>
+<p><em>异常</em></p>
+<p>IllegalArgumentException (非法参数异常)  当 millis &lt; 0,nanos &lt; 0 或 nanos &gt; 999999.</p>
+<p>IllegalMonitorStateException (非法监视状态异常)  当调用该方法的线程不是该对象的监听所有者。</p>
+<p>InterruptedException (中断异常)   如果当前线程已经被中断。在异常抛出之前，当前线程的中断状态会被清除。</p>
+<p><em>参考</em></p>
+<p>notify()</p>
+<p>notifyAll()</p>
+<p>wait(long)</p>
+<p>wait(long,int)</p>
+<p>Thread</p>
+<p><strong><code>public final void wait(long millis)</code></strong></p>
+<p>由于调用线程时要等到另一个线程调用了该对象的 notify() 或 notifyAll() 方法，或是过了指定的超时时间。该方法只由该对象的监听器的线程调用，参见 notify() 中如何使一个线程成为监听器的所有者。</p>
+<p>一个正在等待的线程可能会由于接受到 interrupt() 而导致提前停止等待，所以 wait 方法应该循环调用，以检查在继续之前已经等待的条件是否已满足。</p>
+<p>当线程在等待的时候，它会放弃对该对象的监听器的所有权。当它被通知（或是被中断）时，在开始运行之前它会重新获得监听器。</p>
+<p>当超时时间为 0 时，表示正在调用的线程应该一直等待，除非被中断或是被通知。</p>
+<p><em>参数</em></p>
+<p>millis    等待的最大时间，以毫秒为单位。</p>
+<p><em>异常</em></p>
+<p>IllegalArgumentException (非法参数异常)  当 millis &lt; 0,nanos &lt; 0 或 nanos &gt; 999999.</p>
+<p>IllegalMonitorStateException (非法监视状态异常)  当调用该方法的线程不是该对象的监听所有者。</p>
+<p>InterruptedException (中断异常)   如果当前线程已经被中断。在异常抛出之前，当前线程的中断状态会被清除。</p>
+<p><em>参考</em></p>
+<p>notify()</p>
+<p>notifyAll()</p>
+<p>wait(long)</p>
+<p>wait(long,int)</p>
+<p>Thread</p>
+<p>###Protected Methods(被保护的方法)</p>
+<p><strong><code>protected Object clone()</code></strong></p>
+<p>创造并返回该对象的一个副本。默认的实现返回一个所谓的浅的（”shallow”）的副本：它创建一个同类的新的实例，然后从该实例复制字段值（包括对象的引用）到新的实例。相反，“深”副本（deep）还会递归地克隆嵌套对象。需要实现这种克隆的子类应该调用 super.clone（）来创建新的实例，然后创建嵌套的可变对象的深层副本。</p>
+<p><em>返回值</em></p>
+<p>该对象的副本。</p>
+<p><em>异常</em></p>
+<p>CloneNotSupportedException (克隆不支持异常)  如果该对象的类不能实现 Cloneable 接口。</p>
+<p><strong><code>protected void finalize()</code></strong></p>
+<p>当垃圾收集器检测到该实例不再是可获得的时调用。默认不做任何操作，但为了释放资源该方法可以被复写。</p>
+<p>注意，重写该方法的对象比不重写更消耗资源。当该对象是不可获得的之后的终结器可能还会运行一段时间，这个由内存的压力决定，所以通过它们进行清理不是好的做法。另外，终结器运行在单个VM范围的终结器线程上，因此在终结器中时行模块化工作不是好的做法。终结器通常只需要有一个类，那个类有一个本地对等全，并且需要调用一个本地的方法去销毁本地对等体。即便这样，提供一个明确的关闭方法（并实现 Closeable 接口）是好的做法，并且坚持通过手动调用处理实例。这对于像文件这样的东西效果很好，但对于像 BigInteger 这样的东西来说，不是很好，那些典型的调用代码必须处理大量的临时文件。不幸的是，从单个终结器线程的角度来看，创建大量临时文件的代码是最差的代码。</p>
+<p>如果必须使用终结器，要考虑至少提供一个自己的 ReferenceQueue 并且有自己的线程来处理这个 queue。</p>
+<p>与构造函数不一样，终结器没有自动链接。需要自己调用 super.finalize()。</p>
+<p>由终结器抛出的未捕获的异常被忽略，不终止终结器的线程。参考 Effective Java 第 7 条，有更详细的说明。</p>
+<p><em>异常</em></p>
+<p>Throwable</p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>Contents</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#class-overview类概述"><span class="toc-number">1.</span> <span class="toc-text">Class Overview(类概述)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-constructors公共构造方法"><span class="toc-number">2.</span> <span class="toc-text">Public Constructors（公共构造方法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-methods公共方法"><span class="toc-number">3.</span> <span class="toc-text">Public Methods(公共方法)</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/07/file/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          File
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/21/ClearEditText/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">带删除按钮的 EditText&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

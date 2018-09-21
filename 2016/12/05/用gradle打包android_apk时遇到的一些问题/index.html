@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用 grandle 打包 Android APK 时遇到的一些问题 - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.打开终端进入到项目的根目录下,执行./gradlew -v 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到/User/用户名/.gradle/wrapper/dists(mac">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 grandle 打包 Android APK 时遇到的一些问题">
+<meta property="og:url" content="http://miao9999.github.io.com/2016/12/05/用gradle打包android_apk时遇到的一些问题/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="1.打开终端进入到项目的根目录下,执行./gradlew -v 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到/User/用户名/.gradle/wrapper/dists(mac">
+<meta property="og:updated_time" content="2017-07-02T10:07:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 grandle 打包 Android APK 时遇到的一些问题">
+<meta name="twitter:description" content="1.打开终端进入到项目的根目录下,执行./gradlew -v 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到/User/用户名/.gradle/wrapper/dists(mac">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-用gradle打包android_apk时遇到的一些问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用 grandle 打包 Android APK 时遇到的一些问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/12/05/用gradle打包android_apk时遇到的一些问题/" class="article-date">
+  <time datetime="2016-12-05T09:03:27.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.打开终端进入到项目的根目录下,执行<strong>./gradlew -v</strong> 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到<strong>/User/用户名/.gradle/wrapper/dists</strong>(mac的地址)这个文件中,一定要解压之后的文件.这个时候再执行./gradlew -v命令时就不会下载了,直接显示gradle的版本信息.在网速不是很好的情况下,这种方法可以快很多.<br><a id="more"></a><br>在这个过程中有时候还会出现gradlew:Perssion Denied 这样的错误提示,解决办法是:执行<strong>chmod +x gradlew</strong> 这样就可以解决了.</p>
+<p>如果在网上下载的demo的gradle版本跟自己的不一样,在执行这个命令时又会下载相应的版本,不想下载的话,就打开gradlewrapper.properties文件把里面的gradle版本改成自己已有的,不知道的话打开一个用自己的studio编译的文件打开相应的文件就可以看到,这样就不会下载了.</p>
+<p>2.在执行<strong>./gradlew clean</strong> 的时候,可能会出现getting error when trying to run new project in Android Studio 2.2.1这样的错误提示, 这是因为<strong>jdk的版本问题</strong>,我之前用的是1.7的,升级到1.8就好了.</p>
+<p>还可能出现SDK location not found .Define loaction with sdk .dir in the local,properties file or with  an ANDROID_HOME environment variable．这样的错误提示，这是因为找不到sdk的路径.  执行<strong>export ANDROID_HOME=/SDK地址/</strong>(可以在sdkmanager中查看)就可以解决了.</p>
+<p>4.执行<strong>./gradlew build </strong>的时候会出现gradle build fails on lint task 这样的错误提示,我不懂lint是指的什么,所心查了一下lint,在维基百科中是这样解释lint的:</p>
+<blockquote>
+<p>在电脑科学中,lint是一种工具程式的名称,它用来标记原始码中，某些可疑的、不具结构性（可能造成bug）的段落。它是一种静态程序分析工具，最早适用于C语言，在UNIX平台上开发出来。后来它成为通用术语，可用于描述在任何一种电脑程式语言中，用来标记原始码中有疑义段落的工具。</p>
+</blockquote>
+<p>解决办法是:在app中的build.gradle文件中在这里添加<strong>lintOptions</strong><br><a href="http://stackoverflow.com/questions/20699147/gradle-build-fails-on-lint-task" target="_blank" rel="external">这里有详细介绍</a></p>
+<pre><code>android {    
+ // This is important, it will run lint   
+ //checks but won&apos;t abort build   
+    lintOptions {      
+     abortOnError false   
+     }
+ }
+</code></pre><p>###总结:这是第一次使用gradle编译打包android apk,在这个过程中遇到很多问题,找了很多资料,很感谢前辈们的分享与总结,虽然在找资料的过程中很心烦,但还是坚持下来,把遇到的每一个问题都找到解决的办法,对自己来说也是一次很大的提升,至少对gradle有了更深的了解,加油!!!</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/24/CheckBox与ListView结合使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          CheckBox 与 ListView 的结合使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/11/BaseAdapter的最简单的封装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">BaseAdapter 的最简单的封装&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

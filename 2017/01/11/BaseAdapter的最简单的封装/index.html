@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BaseAdapter 的最简单的封装 - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BaseAdapter 的最简单的封装">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/01/11/BaseAdapter的最简单的封装/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.">
+<meta property="og:updated_time" content="2017-07-02T10:08:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BaseAdapter 的最简单的封装">
+<meta name="twitter:description" content="前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-BaseAdapter的最简单的封装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BaseAdapter 的最简单的封装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/01/11/BaseAdapter的最简单的封装/" class="article-date">
+  <time datetime="2017-01-11T09:03:27.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.<br><a id="more"></a><br>在做项目时listview可以说是最常用的一个组件了,在使用时需要一个adapter.在项目中也不可能只写一个listview,经常遇到的情况是有很多的页面都需要用listview来显示数据,在adapter中有很多的方法都是重复的,只有ViewHolder是根据不同的页面它的方法是不同的,所以在封装的时候只要把ViewHolder拿出来在需要的时候重写,其他的几个方法都可以封装起来.</p>
+<p>封装的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public abstract class ListAdapter&lt;T&gt;  extends BaseAdapter&#123;</div><div class="line">    protected List&lt;T&gt; mDatas;</div><div class="line">    protected Context mContext;</div><div class="line"></div><div class="line">    public ListAdapter(Context context) &#123;</div><div class="line">        mContext = context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setDatas(List&lt;T&gt; datas) &#123;</div><div class="line">        mDatas = datas;</div><div class="line">        notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount() &#123;</div><div class="line">        return mDatas == null ? 0 : mDatas.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getItem(int position) &#123;</div><div class="line">        return mDatas.get(position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position) &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>使用的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public class MyAdapter extends ListAdapter&lt;String&gt;&#123;</div><div class="line"></div><div class="line">    public MyAdapter(Context context) &#123;</div><div class="line">        super(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView(int position, View convertView, ViewGroup parent) &#123;</div><div class="line">        ViewHolder holder = null;</div><div class="line">        if (convertView == null) &#123;</div><div class="line">            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list,parent,false);</div><div class="line">            holder = new ViewHolder(convertView);</div><div class="line">            convertView.setTag(holder);</div><div class="line">        &#125;else &#123;</div><div class="line">            holder = (ViewHolder) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">        holder.mTextView.setText(mDatas.get(position));</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class ViewHolder&#123;</div><div class="line">        private TextView mTextView;</div><div class="line">        public ViewHolder(View view) &#123;</div><div class="line">            mTextView = (TextView) view.findViewById(R.id.list_item_tv);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>在使用的时候直接继承封装好的adapter在这里只需要复写getView()这一个方法就可以了.如果需要多个adapter这样的话写起来会少写很多.</p>
+<p>写出来之后再看,其实也不时很难,当时就是不会,搞不懂这个getView()方法怎么单独拿出来,现在看来,就是当时对抽象类的不理解,不知道在抽象类里可以不用全部复写父类的方法.</p>
+<p>###经验:想要对各个知识点理解的更透彻还是要多看demo,多看看别人都是怎么写的,为什么这么写,遇到没见过的知识点或是模糊的地方再去认真细究,通过这种方法既能加深理解,又能学会如何使用.</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/05/用gradle打包android_apk时遇到的一些问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          用 grandle 打包 Android APK 时遇到的一些问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/12/接口回调----点击item中的ImageView,在Activity中显示dialog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">接口回调-----点击 item 中的 ImageView，在 Activity 中显示dialog&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

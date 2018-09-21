@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Activity 、Fragment 的简单封装 - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在android开发中activity与fragment每个项目最基本的类，所以对它们二者的封装也是非常有必要的，今天就把这两个类简单的封装一下。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity 、Fragment 的简单封装">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/03/08/aty。fragment的简单封装/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="在android开发中activity与fragment每个项目最基本的类，所以对它们二者的封装也是非常有必要的，今天就把这两个类简单的封装一下。">
+<meta property="og:updated_time" content="2017-07-02T10:08:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activity 、Fragment 的简单封装">
+<meta name="twitter:description" content="在android开发中activity与fragment每个项目最基本的类，所以对它们二者的封装也是非常有必要的，今天就把这两个类简单的封装一下。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-aty。fragment的简单封装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Activity 、Fragment 的简单封装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/03/08/aty。fragment的简单封装/" class="article-date">
+  <time datetime="2017-03-08T09:03:27.000Z" itemprop="datePublished">2017-03-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在android开发中activity与fragment每个项目最基本的类，所以对它们二者的封装也是非常有必要的，今天就把这两个类简单的封装一下。<br><a id="more"></a><br>1、activity的封装</p>
+<pre><code>public abstract class BaseActivity extends AppCompatActivity implements OnClickListener{
+@Override
+public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    // 设置全屏
+    this.getWindow().setFlags(LayoutParams.FLAG_FULLSCREEN, LayoutParams.FLAG_FULLSCREEN);
+    super.onCreate(savedInstanceState, persistentState);
+    setContentView(setLayout());
+    setView();
+    setData();
+}
+
+
+
+/**
+ * 绑定布局
+ * @return
+ */
+protected abstract int  setLayout();
+
+/**
+ * 初始化组件
+ */
+protected abstract void setView();
+
+/**
+ * 设置数据等逻辑代码
+ */
+protected abstract void setData();
+
+/**
+ * 简化findViewById()
+ * @param resId
+ * @param &lt;T&gt;
+ * @return
+ */
+protected &lt;T extends View&gt; T fvbi(int resId){
+    return (T) findViewById(resId);
+}
+
+/**
+ * Intent跳转
+ * @param context
+ * @param clazz
+ */
+protected void toClass(Context context,Class&lt;? extends BaseActivity&gt; clazz){
+    toClass(context,clazz,null);
+}
+
+/**
+ * Intent带值跳转
+ * @param context
+ * @param clazz
+ * @param bundle
+ */
+protected void toClass(Context context, Class&lt;? extends BaseActivity&gt; clazz, Bundle bundle){
+    Intent intent = new Intent(context,clazz);
+    intent.putExtras(bundle);
+    startActivity(intent);
+}
+
+/**
+ * 带返回值的跳转
+ * @param context
+ * @param clazz
+ * @param bundle
+ * @param reuqestCode
+ */
+protected void toClass(Context context,Class&lt;? extends BaseActivity&gt; clazz,Bundle bundle,int reuqestCode){
+    Intent intent = new Intent(context,clazz);
+    intent.putExtras(bundle);
+    startActivityForResult(intent,reuqestCode);
+}
+
+}
+</code></pre><p>在activity中的onCreate（）方法，findviewbyid（）方法，以及一些跳转传值等，这些都是经常要用到的，所以把这些方法都封装在一起，用的时候能少写一些重复的代码。</p>
+<p>2、fragment的封装 ， fragment的封装与activity类似</p>
+<pre><code>public abstract class BaseFragment  extends Fragment implements OnClickListener{
+protected Context mContext;
+
+/**
+ * 当fragment与activity发生关联时调用
+ * @param context  与之相关联的activity
+ */
+@Override
+public void onAttach(Context context) {
+    super.onAttach(context);
+    mContext = context;
+}
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(setLayout(),null);
+    return view;
+}
+
+/**
+ * 绑定布局
+ * @return
+ */
+protected abstract int setLayout();
+
+@Override
+public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    initView();
+}
+
+/**
+ * 初始化组件
+ */
+protected abstract void initView();
+
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    initData();
+}
+
+/**
+ * 设置数据等逻辑代码
+ */
+protected abstract void initData();
+
+/**
+ * 简化findViewById
+ * @param resId
+ * @param &lt;T&gt;
+ * @return
+ */
+protected &lt;T extends View&gt; T fvbi(int resId){
+    return (T) getView().findViewById(resId);
+}
+
+/**
+ * intent跳转
+ * @param context
+ * @param clazz
+ */
+protected void toClass(Context context,Class&lt;? extends BaseActivity&gt; clazz){
+    toClass(context,clazz,null);
+}
+
+/**
+ * intent带值跳转
+ * @param context
+ * @param clazz
+ * @param bundle
+ */
+protected void toClass(Context context,Class&lt;? extends BaseActivity&gt; clazz,Bundle bundle){
+    Intent intent = new Intent(context,clazz);
+    intent.putExtras(bundle);
+    context.startActivity(intent);
+}
+
+/**
+ * 带返回值的跳转
+ * @param context
+ * @param clazz
+ * @param bundle
+ * @param requestCode
+ */
+protected void toClass(Context context,Class&lt;? extends BaseActivity&gt; clazz,Bundle bundle,int requestCode){
+    Intent intent = new Intent(context,clazz);
+    intent.putExtras(bundle);
+    getActivity().startActivityForResult(intent,requestCode);
+}
+
+}
+</code></pre><p>3、BaseActivity的使用</p>
+<pre><code>public class NextActivity extends BaseActivity{
+private TextView mTextView;
+@Override
+protected int setLayout() {
+    return R.layout.activity_main;
+}
+
+@Override
+protected void setView() {
+    mTextView = fvbi(R.id.tv);
+    mTextView.setOnClickListener(this);
+}
+
+@Override
+protected void setData() {
+    mTextView.setText(&quot;who are you&quot;);
+}
+
+@Override
+public void onClick(View v) {
+    switch (v.getId()){
+        case R.id.tv:
+            toClass(NextActivity.this, MainActivity.class);
+            break;
+    }
+}
+}
+</code></pre><p>4、BaseFragment的使用</p>
+<pre><code>public class TestFragment extends BaseFragment {
+private TextView mTextView;
+@Override
+protected int setLayout() {
+    return R.layout.activity_main;
+}
+
+@Override
+protected void initView() {
+    mTextView = fvbi(R.id.tv);
+    mTextView.setOnClickListener(this);
+}
+
+@Override
+protected void initData() {
+    mTextView.setText(&quot;fragment&quot;);
+}
+
+@Override
+public void onClick(View v) {
+    switch (v.getId()){
+        case R.id.tv:
+            toClass(mContext,MainActivity.class);
+            break;
+    }
+}
+}
+</code></pre><p>上述的封装，只是一些简单的封装，如果在项目中有一些其他的功能，几乎是每个activity或fragment都会用到的话，就把它封装在这两个类里。在刚学习的时候对于老师所讲的封装难以理解，即使知道了封装的好处，也不知道该如何入手自己封装，跟着老师封装几个，再多看看其他项目里的或是其他大神封装的例子之后，自己也就勉强可以封装几个简单的类了。所谓熟读唐诗三百首，不会作诗也会吟，多看看，多想想，见的多了，自然会有所体会。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/21/胡说八道之射雕/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          胡说八道之射雕
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/14/github_+_hexo_博客搭建过程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Github + Hexo 博客的搭建&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>带删除按钮的 EditText - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="带删除按钮的 EditText">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/06/21/ClearEditText/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好">
+<meta property="og:image" content="http://onyvps7wa.bkt.clouddn.com/image/blogclear.png">
+<meta property="og:image" content="http://onyvps7wa.bkt.clouddn.com/image/blogclear.gif">
+<meta property="og:updated_time" content="2017-07-02T10:08:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="带删除按钮的 EditText">
+<meta name="twitter:description" content="一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好">
+<meta name="twitter:image" content="http://onyvps7wa.bkt.clouddn.com/image/blogclear.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-ClearEditText" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      带删除按钮的 EditText
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/06/21/ClearEditText/" class="article-date">
+  <time datetime="2017-06-21T03:49:27.000Z" itemprop="datePublished">2017-06-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好通过触摸事件来实现，通过计算触摸的位置，这个位置正好就是该 Drawable 所在的位置。<br><a id="more"></a></p>
+<p>1.获取 EditText 的 DrawableRight</p>
+<pre><code>    mClearDrawable = getCompoundDrawables()[2];
+
+getCompoundDrawables() 方法源码是这样的
+
+     /**
+     * Returns drawables for the left, top, right, and bottom borders.
+     *
+    * @attr ref android.R.styleable#TextView_drawableLeft
+     * @attr ref android.R.styleable#TextView_drawableTop
+     * @attr ref android.R.styleable#TextView_drawableRight
+     * @attr ref android.R.styleable#TextView_drawableBottom
+     */
+    @NonNull
+    public Drawable[] getCompoundDrawables() {
+    final Drawables dr = mDrawables;
+    if (dr != null) {
+        return dr.mShowing.clone();
+    } else {
+        return new Drawable[] { null, null, null, null };
+    }
+    }
+</code></pre><p>   返回值是控件四周的 Drawable 数组，顺序为左、上、右、下。在这里需要的是右边的 Drawable，所以下标为 2.</p>
+<p>2.接下来就是获取并设置 Drawable 图标</p>
+<pre><code>if (mClearDrawable == null) {
+    mClearDrawable = getResources().getDrawable(R.drawable.x);
+}
+// 为 Drawable 设置为自身大小的宽高
+ mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
+</code></pre><p>3.最后一步就是设置点击 Drawable 图标实现删除文本框中的内容</p>
+<pre><code> @Override
+ public boolean onTouchEvent(MotionEvent event) {
+    if (event.getAction() == MotionEvent.ACTION_UP){
+    if (getCompoundDrawables()[2] != null){
+        boolean touchable  = event.getX() &gt; (getWidth() - getTotalPaddingRight())
+                &amp;&amp; (event.getX() &lt; (getWidth() - getPaddingRight()));
+        if (touchable){
+            this.setText(&quot;&quot;);
+        }
+    }
+}
+ return super.onTouchEvent(event);
+     }
+</code></pre><p>   <img src="http://onyvps7wa.bkt.clouddn.com/image/blogclear.png" alt="clear"></p>
+<p>   红色的横线代表的是 (getWidth() - getTotalPaddingRight()）的值，黑色的横线代表的是 (getWidth() - getPaddingRight()) 的值，当触摸到这两个值之间的位置就正好是 Drawable 所在位置。也就实现了点击删除图标就可以清空文本框中的内容。</p>
+<p> 到此最主要功能就可以实现了，当然还可以再添加一些其他的功能，以提高用户体验。比如，当文本框中没有内容时，就不显示删除图标，或是在输入错误时文本框抖动等。</p>
+<p> 首先实现删除图标的隐藏功能。</p>
+<pre><code> public void setClearIconVisible(boolean visible) {
+Drawable right = visible ? mClearDrawable : null;
+setCompoundDrawables(getCompoundDrawables()[0],getCompoundDrawables()[1],right,getCompoundDrawables()[3]);
+
+}
+</code></pre><p>   setCompoundDrawables() 方法里的四个参数就是按照左、上、右、下的顺序分别为组件添加四个方向上的 Drawable。这里添加的在右边的，所以在第三个位置设置刚刚设置好的 Drawable。其他设置为默认的。然后实 TextWatcher 接口，在 onTextChange 方法里进行设置。</p>
+<pre><code> public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+if (hasFocus){
+    setClearIconVisible(text.length() &gt; 0);
+}
+}
+</code></pre><p>   接下来实现抖动功能。</p>
+<pre><code>  public void setSharkAnimation(){
+ this.setAnimation(sharkAnimation(5));
+ }
+
+    public static Animation sharkAnimation(int counts){
+Animation translateAnimation = new TranslateAnimation(0,10,0,0);
+translateAnimation.setInterpolator(new CycleInterpolator(counts));
+translateAnimation.setDuration(1000);
+return translateAnimation;
+    }    
+</code></pre><p>   在输入错误或是有重要信息时调用 setSharkAnimation() 方法就可以实现了。</p>
+<p>   最终效果图：<br>       <img src="http://onyvps7wa.bkt.clouddn.com/image/blogclear.gif" alt="clear"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  实现文章中的功能并不是很难，只要动动手基本都可以实现。所以重点是要动手去做，在没有动手之前虽然也有很多的想法，想了几种可能实现的方法，那些方法到底能不能实现，或是实现起来有什么困难，亦或是可以更加简洁等等，这些都不是只靠想就可以做到的，所以以后再想到什么想法的时候一定要亲自动手实践一下，再做结论。以上！</p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>Contents</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/02/Object/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Object
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/30/ViewGroup-LayoutParams/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ViewGroup.LayoutParams&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

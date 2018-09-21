@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ViewGroup.LayoutParams - miao9999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Class Overview(类概述)LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 ViewGroup Layout Attribute ，列举了该类支持的所有子 view 的属性。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ViewGroup.LayoutParams">
+<meta property="og:url" content="http://miao9999.github.io.com/2017/06/30/ViewGroup-LayoutParams/index.html">
+<meta property="og:site_name" content="miao9999">
+<meta property="og:description" content="Class Overview(类概述)LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 ViewGroup Layout Attribute ，列举了该类支持的所有子 view 的属性。">
+<meta property="og:updated_time" content="2017-07-02T10:09:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ViewGroup.LayoutParams">
+<meta name="twitter:description" content="Class Overview(类概述)LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 ViewGroup Layout Attribute ，列举了该类支持的所有子 view 的属性。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-ViewGroup-LayoutParams" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ViewGroup.LayoutParams
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/06/30/ViewGroup-LayoutParams/" class="article-date">
+  <time datetime="2017-06-30T09:03:27.000Z" itemprop="datePublished">2017-06-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/翻译/">翻译</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="class-overview类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 <em>ViewGroup Layout Attribute</em> ，列举了该类支持的所有子 view 的属性。<br><a id="more"></a><br>LayoutParams 基类仅仅描述了 view 对宽度和高度的要求。对于每个方面，可以选择以下的一个：</p>
+<ul>
+<li>FILL_PARENT ：意味着 view 要设置成与它的父容器一样大（减去 padding 值）</li>
+<li>WRAP_CONTENT：意味着 view 要大到足以包围它的内容（加上 padding 值）</li>
+<li>一个确定的数字</li>
+</ul>
+<p>因为 ViewGroup 有不同的子类，所以 LayoutParams 也有不同的子类。例如，AbsoluteLayout 有它自己的可以设置 X 和 Y 的值的 LayoutParams 的子类。</p>
+<h3 id="developer-guides开发者指导"><a href="#Developer-Guides-开发者指导" class="headerlink" title="Developer Guides(开发者指导)"></a>Developer Guides(开发者指导)</h3><p>关于创建用户界面布局的更多信息，请阅读 XML Layout 开发者指导。</p>
+<h3 id="xml-attributesxml-属性"><a href="#XML-Attributes-XML-属性" class="headerlink" title="XML Attributes(XML 属性)"></a>XML Attributes(XML 属性)</h3><p><strong><code>android:layout_height</code></strong></p>
+<p>指定 view 的基本高度。对于包含布局管理器的任何 View，这是必需的属性。它的值可能是一个固定高度的尺寸值（如『12dp』）或是专用常量之一。</p>
+<p>如果是一个尺寸值，它是一个浮点数字加上一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>这也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>可以是以下常量值之一：</p>
+<table>
+<thead>
+<tr>
+<th>Constant(常量)</th>
+<th>Value(值)</th>
+<th>Description(描述)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fill_parent</td>
+<td>-1</td>
+<td>该 view 该被设置成与它的父容器一样大（减去 apdding 值）。在 API 8 之后这个常量被 mathc_parent 代替。</td>
+</tr>
+<tr>
+<td>match_parent</td>
+<td>-1</td>
+<td>该 view 该被设置成与它的父容器一样大（减去 padding 值）。在 API 8 里有介绍。</td>
+</tr>
+<tr>
+<td>wrap_content</td>
+<td>-1</td>
+<td>该 view 要大到足以包围它的内容（加上 padding 值）</td>
+</tr>
+</tbody>
+</table>
+<p>这相当于全局属性资源符号layout_height。</p>
+<p><strong><code>android:layout_width</code></strong></p>
+<p>指定 view 的基本宽度。对于包含布局管理器的任何 View，这是必需的属性。它的值可能是一个固定宽度的尺寸值（如『12dp』）或是专用常量之一。</p>
+<p>如果是一个尺寸值，它是一个浮点数字加上一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>这也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>可以是以下常量值之一：</p>
+<table>
+<thead>
+<tr>
+<th>Constant(常量)</th>
+<th>Value(值)</th>
+<th>Description(描述)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fill_parent</td>
+<td>-1</td>
+<td>该 view 该被设置成与它的父容器一样大（减去 apdding 值）。在 API 8 之后这个常量被 mathc_parent 代替。</td>
+</tr>
+<tr>
+<td>match_parent</td>
+<td>-1</td>
+<td>该 view 该被设置成与它的父容器一样大（减去 padding 值）。在 API 8 里有介绍。</td>
+</tr>
+<tr>
+<td>wrap_content</td>
+<td>-1</td>
+<td>该 view 要大到足以包围它的内容（加上 padding 值）</td>
+</tr>
+</tbody>
+</table>
+<p>这相当于全局属性资源符号layout_width。</p>
+<h3 id="constants常量"><a href="#Constants-常量" class="headerlink" title="Constants(常量)"></a>Constants(常量)</h3><p><strong><code>public static final int FILL_PARENT</code></strong></p>
+<p>View 所要求的高度或宽度的特殊值。FILL_PARENT 意味着 view 要设置成与它的父容器一样大，如果父容器有 padding 值，减去父容器的 padding 值。在 API 8 之后，这个值被 MAHCH_PARENT 代替。</p>
+<p>常量的值为：-1（十六进制：0xffffffff）</p>
+<p><strong><code>public static final int MATCH_PARENT</code></strong></p>
+<p>View 所要求的高度或宽度的特殊值。FILL_PARENT 意味着 view 要设置成与它的父容器一样大，如果父容器有 padding 值，减去父容器的 padding 值。在 API 8 里有介绍。</p>
+<p>常量的值为：-1（十六进制：0xffffffff）</p>
+<p><strong><code>public static final int WRAP_CONTENT</code></strong></p>
+<p>View 所要求的高度或宽度的特殊值。WRAP_CONTETN 意味着 view 要大到足以包围它的内容，把它自己的 padding 也计算进去。</p>
+<p>常量值为：-2（十六进制：0xfffffffe）</p>
+<h3 id="fields字段"><a href="#Fields-字段" class="headerlink" title="Fields(字段)"></a>Fields(字段)</h3><p><strong><code>public int height</code></strong></p>
+<p>view 被设置的高度。可以是 FILL_PARENT(在 API 8 之后被 MATCH_PARENT 代替) 或是 WRAP_CONTENT 常量之一，或是一个具体的大小。</p>
+<p><strong><code>public LayoutAnimationController.AnimationParameters</code></strong></p>
+<p>用在动画布局。</p>
+<p><strong><code>public int width</code></strong></p>
+<p>View 被设置的宽度。可以是 FILL_PARENT(在 API 8 之后被 MATCH_PARENT 代替) 或是 WRAP_CONTENT 常量之一，或是一个具体的大小。</p>
+<h3 id="public-constructors公共构造方法"><a href="#Public-Constructors-公共构造方法" class="headerlink" title="Public Constructors(公共构造方法)"></a>Public Constructors(公共构造方法)</h3><p><strong><code>public ViewGroup.LayoutParams(Context c ,AttributeSet attrs)</code></strong></p>
+<p>创建一个新的布局参数集合。这些值是从提供的属性集和 context 中提取的。映射到这组布局参数的XML属性是：</p>
+<ul>
+<li>layout_width：宽度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 API 8 之后被 MATCH_PARENT 代替）</li>
+<li>layout_height：高度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 API 8 之后被 MATCH_PARENT 代替）</li>
+</ul>
+<p><em>参数</em></p>
+<p>c        应用的环境</p>
+<p>attrs     来自于布局参数值的属性集合</p>
+<p><strong><code>public ViewGruop.LayoutParams(int width,int height)</code></strong></p>
+<p>创建一个指定宽高的布局参数的集合。</p>
+<p><em>参数</em></p>
+<p>width      宽度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在                 API 8 之后被 MATCH_PARENT 代替）</p>
+<p>height    高度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 API 8 之后被 MATCH_PARENT 代替）</p>
+<p><strong><code>public ViewGruop.LayoutParams(ViewGruop.LayoutParams source)</code></strong></p>
+<p>复制构造器。克隆 source 的宽高值。</p>
+<p><em>参数</em></p>
+<p>source     布局参数要复制的值</p>
+<h3 id="public-methods公共方法"><a href="#Public-Methods-公共方法" class="headerlink" title="Public Methods(公共方法)"></a>Public Methods(公共方法)</h3><p><strong><code>public void resolveLayoutDirection(int layoutDircetion)</code></strong></p>
+<p>根据布局方向解析布局参数。关心布局方向的子类应该重写这个方法。默认实现什么也不做。</p>
+<p><em>参数</em></p>
+<p>layoutDircetion     布局的方向    LAYOUT_DIRECTION_LIR（从左到右）     LAYOUT_DIRECTION_RTL （从右到左）</p>
+<h3 id="protected-methods被保护的方法"><a href="#Protected-Methods-被保护的方法" class="headerlink" title="Protected Methods(被保护的方法)"></a>Protected Methods(被保护的方法)</h3><p><strong><code>protected void setBaseAttributes(TypedArray a,int widthAttr, int heightAttr)</code></strong></p>
+<p>从提供的属性里面提取布局参数。</p>
+<p><em>参数</em></p>
+<p>a             提供的属性的风格</p>
+<p>widthAttr     width 属性的标识符</p>
+<p>heightAttr    height 属性的标识符</p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>Contents</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#class-overview类概述"><span class="toc-number">1.</span> <span class="toc-text">Class Overview(类概述)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#developer-guides开发者指导"><span class="toc-number">2.</span> <span class="toc-text">Developer Guides(开发者指导)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xml-attributesxml-属性"><span class="toc-number">3.</span> <span class="toc-text">XML Attributes(XML 属性)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constants常量"><span class="toc-number">4.</span> <span class="toc-text">Constants(常量)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fields字段"><span class="toc-number">5.</span> <span class="toc-text">Fields(字段)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-constructors公共构造方法"><span class="toc-number">6.</span> <span class="toc-text">Public Constructors(公共构造方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-methods公共方法"><span class="toc-number">7.</span> <span class="toc-text">Public Methods(公共方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#protected-methods被保护的方法"><span class="toc-number">8.</span> <span class="toc-text">Protected Methods(被保护的方法)</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/21/ClearEditText/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          带删除按钮的 EditText
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/02/ViewGroup-MarginLayoutParams/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ViewGroup.MarginLayoutParams&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 miao9999&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
