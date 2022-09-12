@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kotlin in Action 5 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="1.4 Kotlin 的哲学当我们说起 Kotlin 的时候，我们喜欢说它是一种实用、简洁、安全的语言，重点是互操作性。这几个词到底是什么意思呢？我们依次来看。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Kotlin in Action 5"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Kotlin in Action 5</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-26T09:03:27.000Z">
+          2017-08-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="1-4-Kotlin-的哲学"><a href="#1-4-Kotlin-的哲学" class="headerlink" title="1.4 Kotlin 的哲学"></a>1.4 Kotlin 的哲学</h3><p>当我们说起 Kotlin 的时候，我们喜欢说它是一种实用、简洁、安全的语言，重点是互操作性。这几个词到底是什么意思呢？我们依次来看。 <span id="more"></span></p>
+<h4 id="1-4-1-实用性"><a href="#1-4-1-实用性" class="headerlink" title="1.4.1 实用性"></a>1.4.1 实用性</h4><p>实用性对于我们来说是简单的：Kotlin 是一种实用性语言，设计用来解决现实世界中的问题。它的设计是基于多年制造大型系统的行业经验，它的特性被用来解决许多软件开发人员遇到的问题。另外，开发者是 JetBrains 的内部人员与已经使用了几年早期版本的 Kotlin 的社区成员，并且他们的反馈已经成为语言的发行版本。这些使用我们更有信心说 Kotlin 能够成功地帮助解决现实项目中的问题。</p>
+<p>Kotlin 不是一种研究的语言。我们并不是想提高编程语言设计的先进水平，也不想探索计算机科学中的创新思想。反而，在任何可能的时候，我们会依据其他的编程语言已经有的，并且被证明是成功的特性和解决方案。这样可以降低学习的复杂度，你也可以根据相似的概念更容易的学习。</p>
+<p>另外，Kotlin 不强制使用任何特定的编程风格或范式。在学习语言时，你可以使用与 Java 经验类似的风格和技术。然后，你会逐渐发现 Kotlin 更有用的特性，学习并运用到自己的代码中，使得代码更简洁通顺。</p>
+<p>Kotlin 实用主义的另一个方面是它更注重工具。智能的开发环境对于开发者的生产力就像一种好的语言一样重要，因为，对于 IDE 支持作为一个事后的想法不是一个选择。在 Kotlin 的情况下，IntelliJ IDEA 同步开发了编译器插件，并且把语言的特性设计在工具内部。</p>
+<p>在帮助你发现在 Kotlin 特性上 IDE 支持也是非常重要的。在很多情况下，工具会自动检测出一些常见的能用更简洁的结构的所替代的代码模式，并且会为你提供一个更合适的代码。通过自动修复学习语言的特性，你也可以学习在自己的代码中应用这些特性。</p>
+<h4 id="1-4-2-简洁性"><a href="#1-4-2-简洁性" class="headerlink" title="1.4.2 简洁性"></a>1.4.2 简洁性</h4><p>我们都知道，开发者阅读代码的时间比写代码的时间更多。想象一下你是一个大型项目开发者中的一员，你需要添加一个新的功能或是解决一个 bug，第一步你会做什么？你看先查看你需要改变的那部分代码，只有这样你才能实现修复。你要阅读大量的代码才知道你要做什么。这些代码可能是你的同事不久前写完的，或者是一个已经不再为此项目工作的其他人写的，又或者是你自己很久以前写的。只有当你理解了相关的代码之后你才能做出必要的修改。</p>
+<p>如果代码是更简单、更简洁，你才能很快地理解并继续。当然，好的设计和有意义的命名也是起到很重要的作用。但是语言的选择和它的简洁性也是至关重要的。当语言的语法能够清析的表达出代码的意图，并不需要用指定样板文件遮蔽代码的意图是如何完成的。</p>
+<p>在 Kotlin 中，我们尽量确保你写的代码是有意义的，并不仅仅是满足惯例。 很多标准的 Java 文件，例如 getters、setters 方法，和将构造函数参数分配给字段的逻辑，在 Kotlin 中这些都是隐藏的，不会扰乱源代码。</p>
+<p>另一个代码没必要那么长的原因是必须编写显示的代码去执行普通的任务，例如在集合中定位元素。就像其他现代的语言一样，Kotlin 有一个丰富的标准库能让你调用库中的方法代替那些长的、重复的代码。Kotlin 支持 lambdas，这样容易使小的代码块通过库函数。这样可以压缩库中共通的部分并保持独一性，具体的任务分配给用户代码。</p>
+<p>同时，Kotlin 尽量不会把源代码压缩可能的最小字符。例如，即使 Kotlin 支持运算符重载，用户也不能自己定义自己的操作符。所以，库开发者不能用隐藏式的符号序列代替方法名。单词比符号更容易阅读，更容易查找文档，即使有时候它们会比较长。</p>
+<p>更加简洁的代码，写的时间会减少，更重要的是读的时间也会减少。这样会提高效率，做事情更快。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

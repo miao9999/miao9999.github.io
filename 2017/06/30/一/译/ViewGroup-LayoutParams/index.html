@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ViewGroup.LayoutParams | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="Class Overview(类概述)LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 ViewGroup Layout Attribute ，列举了该类支持的所有子 view 的属性。
+LayoutParams 基类仅仅描述了 view 对宽度和高度的要求。对于每个方面，可以选择以下的一个：">
+  
+
+  
+  
+  <meta name="keywords" content="Android 翻译">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ViewGroup.LayoutParams"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ViewGroup.LayoutParams</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/06/30/一/译/ViewGroup-LayoutParams/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-06-30T09:03:27.000Z">
+          2017-06-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 <em>ViewGroup Layout Attribute</em> ，列举了该类支持的所有子 view 的属性。</p>
+<p>LayoutParams 基类仅仅描述了 view 对宽度和高度的要求。对于每个方面，可以选择以下的一个： <span id="more"></span></p>
+<ul>
+<li>FILL_PARENT ：意味着 view 要设置成与它的父容器一样大（减去 padding 值）</li>
+<li>WRAP_CONTENT：意味着 view 要大到足以包围它的内容（加上 padding 值）</li>
+<li>一个确定的数字</li>
+</ul>
+<p>因为 ViewGroup 有不同的子类，所以 LayoutParams 也有不同的子类。例如，AbsoluteLayout 有它自己的可以设置 X 和 Y 的值的 LayoutParams 的子类。</p>
+<h3 id="Developer-Guides-开发者指导"><a href="#Developer-Guides-开发者指导" class="headerlink" title="Developer Guides(开发者指导)"></a>Developer Guides(开发者指导)</h3><p>关于创建用户界面布局的更多信息，请阅读 XML Layout 开发者指导。</p>
+<h3 id="XML-Attributes-XML-属性"><a href="#XML-Attributes-XML-属性" class="headerlink" title="XML Attributes(XML 属性)"></a>XML Attributes(XML 属性)</h3><p><strong><code>android:layout_height</code></strong></p>
+<p>指定 view 的基本高度。对于包含布局管理器的任何 View，这是必需的属性。它的值可能是一个固定高度的尺寸值（如『12dp』）或是专用常量之一。</p>
+<p>如果是一个尺寸值，它是一个浮点数字加上一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>这也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>可以是以下常量值之一：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Constant(常量)</th>
+<th align="left">Value(值)</th>
+<th align="left">Description(描述)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">fill_parent</td>
+<td align="left">-1</td>
+<td align="left">该 view 该被设置成与它的父容器一样大（减去 apdding 值）。在 API 8 之后这个常量被 mathc_parent 代替。</td>
+</tr>
+<tr>
+<td align="left">match_parent</td>
+<td align="left">-1</td>
+<td align="left">该 view 该被设置成与它的父容器一样大（减去 padding 值）。在 API 8 里有介绍。</td>
+</tr>
+<tr>
+<td align="left">wrap_content</td>
+<td align="left">-1</td>
+<td align="left">该 view 要大到足以包围它的内容（加上 padding 值）</td>
+</tr>
+</tbody></table>
+<p>这相当于全局属性资源符号layout_height。</p>
+<p><strong><code>android:layout_width</code></strong></p>
+<p>指定 view 的基本宽度。对于包含布局管理器的任何 View，这是必需的属性。它的值可能是一个固定宽度的尺寸值（如『12dp』）或是专用常量之一。</p>
+<p>如果是一个尺寸值，它是一个浮点数字加上一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>这也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>可以是以下常量值之一：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Constant(常量)</th>
+<th align="left">Value(值)</th>
+<th align="left">Description(描述)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">fill_parent</td>
+<td align="left">-1</td>
+<td align="left">该 view 该被设置成与它的父容器一样大（减去 apdding 值）。在 API 8 之后这个常量被 mathc_parent 代替。</td>
+</tr>
+<tr>
+<td align="left">match_parent</td>
+<td align="left">-1</td>
+<td align="left">该 view 该被设置成与它的父容器一样大（减去 padding 值）。在 API 8 里有介绍。</td>
+</tr>
+<tr>
+<td align="left">wrap_content</td>
+<td align="left">-1</td>
+<td align="left">该 view 要大到足以包围它的内容（加上 padding 值）</td>
+</tr>
+</tbody></table>
+<p>这相当于全局属性资源符号layout_width。</p>
+<h3 id="Constants-常量"><a href="#Constants-常量" class="headerlink" title="Constants(常量)"></a>Constants(常量)</h3><p><strong><code>public static final int FILL_PARENT</code></strong></p>
+<p>View 所要求的高度或宽度的特殊值。FILL_PARENT 意味着 view 要设置成与它的父容器一样大，如果父容器有 padding 值，减去父容器的 padding 值。在 API 8 之后，这个值被 MAHCH_PARENT 代替。</p>
+<p>常量的值为：-1（十六进制：0xffffffff）</p>
+<p><strong><code>public static final int MATCH_PARENT</code></strong></p>
+<p>View 所要求的高度或宽度的特殊值。FILL_PARENT 意味着 view 要设置成与它的父容器一样大，如果父容器有 padding 值，减去父容器的 padding 值。在 API 8 里有介绍。</p>
+<p>常量的值为：-1（十六进制：0xffffffff）</p>
+<p><strong><code>public static final int WRAP_CONTENT</code></strong></p>
+<p>View 所要求的高度或宽度的特殊值。WRAP_CONTETN 意味着 view 要大到足以包围它的内容，把它自己的 padding 也计算进去。</p>
+<p>常量值为：-2（十六进制：0xfffffffe）</p>
+<h3 id="Fields-字段"><a href="#Fields-字段" class="headerlink" title="Fields(字段)"></a>Fields(字段)</h3><p><strong><code>public int height</code></strong></p>
+<p>view 被设置的高度。可以是 FILL_PARENT(在 API 8 之后被 MATCH_PARENT 代替) 或是 WRAP_CONTENT 常量之一，或是一个具体的大小。</p>
+<p><strong><code>public LayoutAnimationController.AnimationParameters</code></strong></p>
+<p>用在动画布局。</p>
+<p><strong><code>public int width</code></strong></p>
+<p>View 被设置的宽度。可以是 FILL_PARENT(在 API 8 之后被 MATCH_PARENT 代替) 或是 WRAP_CONTENT 常量之一，或是一个具体的大小。</p>
+<h3 id="Public-Constructors-公共构造方法"><a href="#Public-Constructors-公共构造方法" class="headerlink" title="Public Constructors(公共构造方法)"></a>Public Constructors(公共构造方法)</h3><p><strong><code>public ViewGroup.LayoutParams(Context c ,AttributeSet attrs)</code></strong></p>
+<p>创建一个新的布局参数集合。这些值是从提供的属性集和 context 中提取的。映射到这组布局参数的XML属性是：</p>
+<ul>
+<li>layout_width：宽度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 API 8 之后被 MATCH_PARENT 代替）</li>
+<li>layout_height：高度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 API 8 之后被 MATCH_PARENT 代替）</li>
+</ul>
+<p><em>参数</em></p>
+<p>c		应用的环境</p>
+<p>attrs 	来自于布局参数值的属性集合</p>
+<p><strong><code>public ViewGruop.LayoutParams(int width,int height)</code></strong></p>
+<p>创建一个指定宽高的布局参数的集合。</p>
+<p><em>参数</em></p>
+<p>width  	宽度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 				API 8 之后被 MATCH_PARENT 代替）</p>
+<p>height	高度，可以是一个精确的值，或 WRAP_CONTENT，或是 FILL_PARENT（在 API 8 之后被 MATCH_PARENT 代替）</p>
+<p><strong><code>public ViewGruop.LayoutParams(ViewGruop.LayoutParams source)</code></strong></p>
+<p>复制构造器。克隆 source 的宽高值。</p>
+<p><em>参数</em></p>
+<p>source 	布局参数要复制的值</p>
+<h3 id="Public-Methods-公共方法"><a href="#Public-Methods-公共方法" class="headerlink" title="Public Methods(公共方法)"></a>Public Methods(公共方法)</h3><p><strong><code> public void resolveLayoutDirection(int layoutDircetion)</code></strong></p>
+<p>根据布局方向解析布局参数。关心布局方向的子类应该重写这个方法。默认实现什么也不做。</p>
+<p><em>参数</em></p>
+<p>layoutDircetion 	布局的方向    LAYOUT_DIRECTION_LIR（从左到右） 	LAYOUT_DIRECTION_RTL （从右到左）</p>
+<h3 id="Protected-Methods-被保护的方法"><a href="#Protected-Methods-被保护的方法" class="headerlink" title="Protected Methods(被保护的方法)"></a>Protected Methods(被保护的方法)</h3><p><strong><code>protected void setBaseAttributes(TypedArray a,int widthAttr, int heightAttr)</code></strong></p>
+<p>从提供的属性里面提取布局参数。</p>
+<p><em>参数</em></p>
+<p>a 			提供的属性的风格</p>
+<p>widthAttr 	width 属性的标识符</p>
+<p>heightAttr	height 属性的标识符</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-翻译/">Android 翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

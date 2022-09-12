@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>checkbox 与 listView 的结合使用 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="checkbox 与 listView 的结合使用"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>checkbox 与 listView 的结合使用</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/11/24/一/CheckBox与ListView结合使用/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-11-24T09:03:32.000Z">
+          2016-11-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="实现效果-长按LitsView的item时-CheckBox显示-CheckBox可选中-在这个效果当中可能会有CheckBox被选中时出现混乱的情况-在此记录一下这个解决办法"><a href="#实现效果-长按LitsView的item时-CheckBox显示-CheckBox可选中-在这个效果当中可能会有CheckBox被选中时出现混乱的情况-在此记录一下这个解决办法" class="headerlink" title="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.  "></a>实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.  <span id="more"></span></h4><ol>
+<li><p>先做准备工作: 一个listview 的item行布局</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;RelativeLayout xmlns:android=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span><br><span class="line">      android:orientation=<span class="string">&quot;vertical&quot;</span></span><br><span class="line">      android:layout_width=<span class="string">&quot;match_parent&quot;</span></span><br><span class="line">      android:layout_height=<span class="string">&quot;match_parent&quot;</span>&gt;</span><br><span class="line">&lt;TextView</span><br><span class="line">android:layout_margin=<span class="string">&quot;10dp&quot;</span></span><br><span class="line">android:id=<span class="string">&quot;@+id/tv_item_list_name&quot;</span></span><br><span class="line">android:layout_width=<span class="string">&quot;wrap_content&quot;</span></span><br><span class="line">android:layout_height=<span class="string">&quot;wrap_content&quot;</span>/&gt;</span><br><span class="line">&lt;TextView</span><br><span class="line">android:layout_margin=<span class="string">&quot;10dp&quot;</span></span><br><span class="line">android:layout_toRightOf=<span class="string">&quot;@id/tv_item_list_name&quot;</span></span><br><span class="line">android:id=<span class="string">&quot;@+id/tv_item_list_age&quot;</span></span><br><span class="line">android:layout_width=<span class="string">&quot;wrap_content&quot;</span></span><br><span class="line">android:layout_height=<span class="string">&quot;wrap_content&quot;</span>/&gt;</span><br><span class="line">&lt;CheckBox</span><br><span class="line">android:layout_alignParentRight=<span class="string">&quot;true&quot;</span></span><br><span class="line">android:layout_margin=<span class="string">&quot;10dp&quot;</span></span><br><span class="line">android:visibility=<span class="string">&quot;gone&quot;</span></span><br><span class="line">android:id=<span class="string">&quot;@+id/ckb_item_list&quot;</span></span><br><span class="line">android:layout_width=<span class="string">&quot;wrap_content&quot;</span></span><br><span class="line">android:layout_height=<span class="string">&quot;wrap_content&quot;</span>/&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>listview的adapter		</p>
+<pre><code>                                                                                                                                        package com.limiao.checkbox;	 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.zip.Inflater;
+
+/**
+ * Created by limiao on 16/11/24.
+ */
+
+public class MyAdapter extends BaseAdapter &#123;
+private List&lt;Person&gt; mPersons;
+private Context mContext;
+private boolean mVisibility = false;// checkbox是否显示,默认不显示
+public MyAdapter(Context context) &#123;
+mContext = context;
+notifyDataSetChanged();
+&#125;
+
+public void setVisibility(boolean visibility) &#123;
+mVisibility = visibility;
+notifyDataSetChanged();
+&#125;
+
+public void setPersons(List&lt;Person&gt; persons) &#123;
+mPersons = persons;
+notifyDataSetChanged();
+&#125;
+
+@Override
+public int getCount() &#123;
+return mPersons == null ? 0 : mPersons.size();
+&#125;
+
+@Override
+public Object getItem(int position) &#123;
+return mPersons.get(position);
+&#125;
+
+@Override
+public long getItemId(int position) &#123;
+return position;
+&#125;
+
+@Override
+public View getView(int position, View convertView, ViewGroup parent) &#123;
+ViewHolder holder = null;
+if (convertView == null) &#123;
+    convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list, parent, false);
+    holder = new ViewHolder(convertView);
+    convertView.setTag(holder);
+&#125; else &#123;
+    holder = (ViewHolder) convertView.getTag();
+&#125;
+Person person = mPersons.get(position);
+holder.mNameTv.setText(person.getName());
+holder.mAgeTv.setText(person.getAge());
+if (mVisibility) &#123;
+    holder.mCheckBox.setVisibility(View.VISIBLE);
+    final ViewHolder finalHolder = holder;
+
+    /**
+     * 此处要用setOnClickListener,而不是setOnCheckedChangeListener()
+     * 否则会出现混乱的情况
+     */
+
+    holder.mCheckBox.setOnClickListener(new View.OnClickListener() &#123;
+        @Override
+        public void onClick(View v) &#123;
+            CheckBox checkBox = (CheckBox) v;
+            finalHolder.mCheckBox.setChecked(checkBox.isChecked());
+        &#125;
+    &#125;);
+&#125;
+return convertView;
+&#125;
+
+private static class ViewHolder &#123;
+private TextView mNameTv;
+private TextView mAgeTv;
+private CheckBox mCheckBox;
+
+public ViewHolder(View view) &#123;
+    mNameTv = (TextView) view.findViewById(R.id.tv_item_list_name);
+    mAgeTv = (TextView) view.findViewById(R.id.tv_item_list_age);
+    mCheckBox = (CheckBox) view.findViewById(R.id.ckb_item_list);
+&#125;
+</code></pre>
+<p>}</p>
+</li>
+</ol>
+<p>在为CheckBox设置选中状态时,这里需要用setOnClickListener(),才不会出现混乱,如果用setOnCheckedChangeListener()就会出现以下的情况</p>
+<p><img src="http://img.blog.csdn.net/20161124165242502" alt="CheckBox的选中状态出现混乱"><br>3. 一个很简单的实体类</p>
+<pre><code>    package com.limiao.checkbox;
+    /**
+     * Created by limiao on 16/11/23.
+     */
+
+    public class Person  &#123;
+    String  name ;
+    String age;
+
+    public Person(String name, String age) &#123;
+    this.name = name;
+    this.age = age;
+    &#125;
+
+    public String getName() &#123;
+    return name;
+    &#125;
+
+    public void setName(String name) &#123;
+    this.name = name;
+    &#125;
+
+    public String getAge() &#123;
+    return age;
+    &#125;
+
+    public void setAge(String age) &#123;
+    this.age = age;
+    &#125;
+    &#125;
+</code></pre>
+<ol start="4">
+<li><p>最后是MainActivity</p>
+<pre><code>package com.limiao.checkbox;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity &#123;
+private ListView mListView;
+private MyAdapter mMyAdapter;
+private List&lt;Person&gt; mPersons;
+@Override
+protected void onCreate(Bundle savedInstanceState) &#123;
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+mListView = (ListView) findViewById(R.id.lv_aty_main);
+mPersons = new ArrayList&lt;&gt;();
+for (int i = 0; i &lt; 90; i++) &#123;
+    Person person = new Person(&quot;aaa&quot;,&quot;34&quot;);
+    mPersons.add(person);
+&#125;
+mMyAdapter = new MyAdapter(this);
+mMyAdapter.setPersons(mPersons);
+mListView.setAdapter(mMyAdapter);
+mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() &#123;
+    @Override
+    public boolean onItemLongClick(AdapterView&lt;?&gt; parent, View view, int position, long id) &#123;
+        mMyAdapter.setVisibility(true);
+        return false;
+    &#125;
+&#125;);
+&#125;
+&#125;
+</code></pre>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/miao9999/checkbox/tree/master">demo的完整的下载地址</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

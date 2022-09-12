@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mac 用 ssh 设置免密登录到 ubuntu 时的一些问题 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="设置步骤
+提示：有关 ssh 配置信息都保存在用户的 home 目录下
+
+以下执行在 mac 终端执行
+
+cd .ssh 进入到 .ssh 目录中
+执行 ssh-keygen 生成 ssh 钥匙，一直回车就可以
+执行 ssh-copy-id -p port user@remote，把生成的公钥复制到远程计算机中
+执行成功后，再登录到远程 ubuntu 中就不会再提示输入密码，而是直接登录成功
+
+以上是正常情况下的操作，但在实际操作中可能会出现一些问题。">
+  
+
+  
+  
+  <meta name="keywords" content="ssh">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="mac 用 ssh 设置免密登录到 ubuntu 时的一些问题"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>mac 用 ssh 设置免密登录到 ubuntu 时的一些问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-10-09T08:57:00.000Z">
+          2017-10-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="设置步骤"><a href="#设置步骤" class="headerlink" title="设置步骤"></a>设置步骤</h4><blockquote>
+<p>提示：有关 ssh 配置信息都保存在用户的 home 目录下</p>
+</blockquote>
+<p>以下执行在 mac 终端执行</p>
+<ol>
+<li>cd .ssh 进入到 .ssh 目录中</li>
+<li>执行 ssh-keygen 生成 ssh 钥匙，一直回车就可以</li>
+<li>执行 ssh-copy-id -p port user@remote，把生成的公钥复制到远程计算机中</li>
+<li>执行成功后，再登录到远程 ubuntu 中就不会再提示输入密码，而是直接登录成功</li>
+</ol>
+<p>以上是正常情况下的操作，但在实际操作中可能会出现一些问题。 <span id="more"></span></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<li>id_rsa already exists</li>
+</ol>
+<p>   生成 ssh key 的时候提示id_rsa 已经存在，这个提示是因为该台计算机已经设置过 ssh-key ，比如 git 等。</p>
+<p>   解决办法：</p>
+<ul>
+<li><p>在执行 ssh-keygen 之后会有提示</p>
+</li>
+<li><p>Enter file in which to save the key (&#x2F;Users&#x2F;limiao&#x2F;.ssh&#x2F;id_rsa):<br>在这行提示的后面重命名一个id_rsa，比如 id_rsa_ubuntu</p>
+</li>
+<li><p>然后再一直回车，就可以创建出名为 id_rsa_ubuntu 、id_rsa_ubuntu.pub的两个文件</p>
+</li>
+<li><p>这时系统是不识别这两个文件的</p>
+</li>
+<li><p>在.ssh 文件夹中新建 config 文件</p>
+</li>
+<li><p>在 config 文件中添加以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">github</span></span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">github对应的私钥</span></span><br><span class="line">IdentityFile  ~/.ssh/id_rsa </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ubuntu</span> </span><br><span class="line">Host 别名</span><br><span class="line">HostName 远程地址</span><br><span class="line">User 远程计算机用户名</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa_ubuntu </span><br><span class="line">Port 22</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后再继续下面的步骤</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>Permission denied (publickey,password)</p>
+<p>在执行第三步的时候，可能会提示Permission denied (publickey,password)，这是因为没有权限。</p>
+<p>解决办法：<br>在命令前加上 sudo，即 sudo ssh-copy-id -p port user@remote</p>
+</li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ssh/">ssh</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

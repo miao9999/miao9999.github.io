@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kotlin in Action 1 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="Kotlin in Action 1: what and why本章节包含的内容:
+
+一个简单的 Kotlin 示例
+Kotlin 语言的主要特性
+可以开发 Android 和服务器端
+Kotlin 与其他编程语言的不同点
+编写并运行 Kotlin 代码">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Kotlin in Action 1"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Kotlin in Action 1</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/08/01/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -1/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-01T09:03:27.000Z">
+          2017-08-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Kotlin-in-Action-1-what-and-why"><a href="#Kotlin-in-Action-1-what-and-why" class="headerlink" title="Kotlin in Action 1: what and why"></a>Kotlin in Action 1: what and why</h2><p>本章节包含的内容:</p>
+<ul>
+<li>一个简单的 Kotlin 示例</li>
+<li>Kotlin 语言的主要特性</li>
+<li>可以开发 Android 和服务器端</li>
+<li>Kotlin 与其他编程语言的不同点</li>
+<li>编写并运行 Kotlin 代码  <span id="more"></span></li>
+</ul>
+<h3 id="1-1-初试-Kotlin"><a href="#1-1-初试-Kotlin" class="headerlink" title="1.1 初试 Kotlin"></a>1.1 初试 Kotlin</h3><p>首先，Kotlin 到底是什么？它是一个针对 Java 平台的新的程序语言。Kotlin是简洁、安全、务实、注重与 java 代码的交互操作。Kotlin 几乎可以使用在任何使用 Java 的地方，如：服务器端的开发，Android apps 开发，或是其他的地方。Kotlin 可以很好运行 Java 现有的所有的库和框架，并且有和 Java 相同的性能水平。接下来让我们用一个简单的例子来展示 Kotlin 是什么样子的。这个例子定义一个 Person 类，创建一个人的集合，找到其中年龄最大的那个，并把结果打印出来。虽然只有少量的代码，但你能看到很多 Kotlin 有趣的特点。我们已经在本书中标记了其中的一些，这样在以后的阅读中可以很容易地找到它们。代码作了一些简单的说明，如果有什么不清楚的地方现在也不用担心。在后面我们会详细的介绍。</p>
+<p>如果你想要运行这个盒子，最简单的选择就是使用在线编辑器 <a target="_blank" rel="noopener" href="https://try.kotl.in/">https://try.kotl.in/</a> 在示例中输入代码，并点击 Run 按钮，代码就会被执行。下面是代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Person</span>(<span class="keyword">val</span> name: String, 			   <span class="number">1</span> </span><br><span class="line">                  <span class="keyword">val</span> age: <span class="built_in">Int</span>? = <span class="literal">null</span>)		       <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;                    <span class="number">3</span></span><br><span class="line">    <span class="keyword">val</span> persons = listOf(Person(<span class="string">&quot;Alice&quot;</span>),              </span><br><span class="line">                         Person(<span class="string">&quot;Bob&quot;</span>, age = <span class="number">29</span>))  <span class="number">4</span></span><br><span class="line">    <span class="keyword">val</span> oldest = persons.maxBy &#123; it.age ?: <span class="number">0</span> &#125;     <span class="number">5</span></span><br><span class="line">    println(<span class="string">&quot;The oldest is: <span class="variable">$oldest</span>&quot;</span>) &#125;            <span class="number">6</span></span><br><span class="line"><span class="comment">// The oldest is: Person(name=Bob, age=29)         7</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>数据类</li>
+<li>可以为空的 int 类型，参数的默认值</li>
+<li>顶级函数</li>
+<li>命名参数</li>
+<li>lambda 表达式，『elvis』操作器</li>
+<li>字符串模板</li>
+<li>自动生成的说明</li>
+</ol>
+<p>你声明了一个简单的数据类，包含两个属性：name 和 age。age 属性默认为 null（如果没有指定）。当创建一个人的集合时，省略了 <em>Alice</em>的年龄，因此它的默认值为 null。然后使用 maxBy 函数在人的集合中查寻年龄最大的那个人。传递给函数的 lambda 表达式需要一个参数，使用 it 作为该参数的默认名称。<em>Elvis</em> 操作器 **?:*<em>返回0 ，当 age 的值是 null 时。因为 <em>Alice</em> 的年龄没有指定，</em>Elvis* 操作器用 0 代替了它，所以 <em>Bob</em> 就是年龄最大的人。</p>
+<h3 id="1-2-Kotlin-的主要特征"><a href="#1-2-Kotlin-的主要特征" class="headerlink" title="1.2 Kotlin 的主要特征"></a>1.2 Kotlin 的主要特征</h3><p>你可能已经知道 Kotlin 是什么样的语言。接下来让我们更详细的看看它的主要属性。首先，我们了解一下用 Kotlin 可以构建哪些应用。</p>
+<h4 id="1-2-1-目标平台：服务器端，Android，Java-运行的任何地方"><a href="#1-2-1-目标平台：服务器端，Android，Java-运行的任何地方" class="headerlink" title="1.2.1 目标平台：服务器端，Android，Java 运行的任何地方"></a>1.2.1 目标平台：服务器端，Android，Java 运行的任何地方</h4><p>Kotlin 的主要目标就是提供一个更简洁，更高效，更安全的替代品，适用于现在所有 Java 使用的场合。Java 是一种非常流行的语言，并且它被使用的环境的种类也是非常广泛，从智能卡（Java Card 技术）到 Google、Twitter、LinkdIn、其互联网规模的公司运行的最大的数据中心。在大多数的这些地方，使用 Kotlin 可以帮助开发者用更少的代码，更少的烦恼从而实现自己的目标。</p>
+<p>以下是 Kotlin 最常用的领域：</p>
+<ul>
+<li>构建服务器端代码（典型的，web 应用的后端）</li>
+<li>构建运行在 Android 设备上的移动应用</li>
+</ul>
+<p>但是 Kotlin 也可以运行在其他的地方。例如，你可以使用 Intel MultiOS Engine ^1^ 在  iOS 设备上运行 Kotlin 代码。你也可以同时使用 Kotlin 与 JavaFX ^2^ 构建桌面应用。</p>
+<p>Footnote 1 <a target="_blank" rel="noopener" href="https://software.intel.com/en-us/multi-os-engine">https://software.intel.com/en-us/multi-os-engine</a></p>
+<p>Footnote 2 Oracle，<a target="_blank" rel="noopener" href="http://mng.bz/500y">http://mng.bz/500y</a></p>
+<p>除了 Java，Kotlin 也能编译 JavaScript，允许你运行 Kotlin 代码在浏览器。但是在撰写此文时，JavaScript 的支持仍处在探索并且原型在 JetBrains，所以这个超出了本书的范围。其他平台也在考虑未来语言的版本。</p>
+<p>正如你看到的，Kotlin 的目标是非常广泛的。Kotlin 并没有专注于软件开发人员今天面临的单一的问题领域或地址单一型的挑战。相反的，它为开发过程中出现的所有任务提供全面的生产力改进。它提供了与支持特定域或编程范例的库的良好集成级别。让我们看一下 Kotlin 作为编程语言的主要作用。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>webview 截图 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="截取整个 webview 的内容（包括未显示的部分）
+
+在实现之前需要了解几个概念
+
+webview.getContentHeight() 
+
+Gets the height of the HTML content.  
+
+获取到的是 html 内容的高度，但是这个值的单位不是 px，而是 dp，所以不能直接拿来就用，需要先转换成 px，后面再说。
+
+webview.getWidth()
+
+Return the width of your view.
+
+这是 view 的方法，返回 view 的宽，高同理
+
+没有获取 html 内容宽度的方法，想要获取该值的话需要用 js 去获取。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="webview 截图"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>webview 截图</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/11/27/一/web view 截图/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-11-27T08:57:00.000Z">
+          2018-11-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>截取整个 webview 的内容（包括未显示的部分）</p>
+<ol>
+<li><p>在实现之前需要了解几个概念</p>
+<ol>
+<li><p>webview.getContentHeight() </p>
+<blockquote>
+<p>Gets the height of the HTML content.  </p>
+</blockquote>
+<p>获取到的是 html 内容的高度，但是这个值的单位不是 px，而是 dp，所以不能直接拿来就用，需要先转换成 px，后面再说。</p>
+</li>
+<li><p>webview.getWidth()</p>
+<blockquote>
+<p>Return the width of your view.</p>
+</blockquote>
+<p>这是 view 的方法，返回 view 的宽，高同理</p>
+</li>
+<li><p>没有获取 html 内容宽度的方法，想要获取该值的话需要用 js 去获取。</p>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>这几个值了解了实现起来就很简单了， 方法如下</p>
+</li>
+<li><pre><code class="java">public Bitmap snapshotView(WebView view)&#123;
+    // 获取屏幕密度，用于把 dp 转成 px
+    float density = getResources().getDisplayMetrics().density;
+    // 创建指定宽高的 bitmap 宽为 webview 的宽，高为 html 的高度（需要转换成 px，否则生成的图片不全）
+    Bitmap temBitmap = Bitmap.createBitmap(view.getWidth(), (int) (view.getContentHeight() * density), Bitmap.Config.ARGB_4444);
+    // 这里要记得把 bipmap 绘制出来，不然显示的图片是空白的
+    Canvas canvas = new Canvas(temBitmap);
+    view.draw(canvas);
+    return temBitmap;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">除此之外还要在 setContentView() 之前为  webview 设置一个属性</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">    WebView.enableSlowWholeDocumentDraw();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>只截取可视部分，也就是与 view 的大小一样的尺寸</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresApi(api = Build.VERSION_CODES.KITKAT)</span></span><br><span class="line"><span class="keyword">public</span> Bitmap <span class="title function_">snapshotView</span><span class="params">(WebView view)</span>&#123;</span><br><span class="line">    <span class="comment">//设置缓存</span></span><br><span class="line">    view.setDrawingCacheEnabled(<span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// 如果手动调用了 buildDrawingCache()，而没有调用 setDrawingCacheEnabled(true),之后应该调用 destroyDrawingCache() 清除缓存</span></span><br><span class="line">    <span class="comment">// 有关在兼容模式下自动缩放的注意事项:当不能自动缩放时，该方法会创建一个与 view 大小相同的 bitmap，因为这个 bitmap 会按照父容器的比例去绘制，屏幕上可能会显示缩放控件</span></span><br><span class="line">    <span class="comment">// 为了避免这个缩放，应该通过设置为可以自动缩放，这样的话会生成一个与 view 不一样的尺寸的 bitmap，这也意味着你的应用必须能处理这个尺寸</span></span><br><span class="line">    <span class="comment">// 当硬件加速开启的时候应该避免调用这个方法，如果不需要绘制缓存 bitmap 的话，开启会增加内存的消耗，并且会导致 view 在软件中呈现一次，因此会影响性能</span></span><br><span class="line">    view.buildDrawingCache();</span><br><span class="line">        <span class="comment">/*1、从缓存中获取当前屏幕的图片,创建一个DrawingCache的拷贝，因为DrawingCache得到的位图在禁用后会被回收</span></span><br><span class="line"><span class="comment">         如果直接是控件调用buildDrawingCache</span></span><br><span class="line"><span class="comment">         *是该控件当前显示在屏幕上的部分就不用减去状态栏的高度了</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    view.getDrawingCache().setHeight(view.getHeight());</span><br><span class="line">    <span class="type">Bitmap</span> <span class="variable">temBitmap</span> <span class="operator">=</span> Bitmap.createBitmap(view.getDrawingCache(), <span class="number">0</span>, <span class="number">0</span>, view.getWidth(), view.getHeight());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//禁用DrawingCahce否则会影响性能 ,而且不禁止会导致每次截图到保存的是缓存的位图</span></span><br><span class="line">    view.destroyDrawingCache();</span><br><span class="line">    view.setDrawingCacheEnabled(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">return</span> temBitmap;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取 html 内容的宽度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mWebView.addJavascriptInterface(<span class="keyword">new</span> <span class="title class_">JavaScriptInterface</span>(), <span class="string">&quot;HTMLOUT&quot;</span>);</span><br><span class="line"></span><br><span class="line">mWebView.loadUrl(url);</span><br><span class="line">mWebView.setWebViewClient(<span class="keyword">new</span> <span class="title class_">WebViewClient</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onPageFinished</span><span class="params">(<span class="keyword">final</span> WebView view, String url)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onPageFinished(view, url);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用 js 方法  mWebView.loadUrl(&quot;javascript:window.HTMLOUT.getContentWidth(document.getElementsByTagName(&#x27;html&#x27;)[0].scrollWidth);&quot;);</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">JavaScriptInterface</span> &#123;</span><br><span class="line">    <span class="type">int</span> webviewContentWidth;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@JavascriptInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getContentWidth</span><span class="params">(String value)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (value != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 获取到html 的宽度值</span></span><br><span class="line">            webviewContentWidth = Integer.parseInt(value);</span><br><span class="line">            Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;Result from javascript: &quot;</span> + webviewContentWidth);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

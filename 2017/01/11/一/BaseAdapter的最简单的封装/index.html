@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BaseAdapter 的最简单的封装 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="BaseAdapter 的最简单的封装"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>BaseAdapter 的最简单的封装</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/01/11/一/BaseAdapter的最简单的封装/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-01-11T09:03:27.000Z">
+          2017-01-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧. <span id="more"></span></p>
+<p>在做项目时listview可以说是最常用的一个组件了,在使用时需要一个adapter.在项目中也不可能只写一个listview,经常遇到的情况是有很多的页面都需要用listview来显示数据,在adapter中有很多的方法都是重复的,只有ViewHolder是根据不同的页面它的方法是不同的,所以在封装的时候只要把ViewHolder拿出来在需要的时候重写,其他的几个方法都可以封装起来.</p>
+<p>封装的代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">ListAdapter</span>&lt;T&gt;  <span class="keyword">extends</span> <span class="title class_">BaseAdapter</span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> List&lt;T&gt; mDatas;</span><br><span class="line">    <span class="keyword">protected</span> Context mContext;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ListAdapter</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">        mContext = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDatas</span><span class="params">(List&lt;T&gt; datas)</span> &#123;</span><br><span class="line">        mDatas = datas;</span><br><span class="line">        notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getCount</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> mDatas == <span class="literal">null</span> ? <span class="number">0</span> : mDatas.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getItem</span><span class="params">(<span class="type">int</span> position)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> mDatas.get(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">getItemId</span><span class="params">(<span class="type">int</span> position)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> position;</span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用的代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAdapter</span> <span class="keyword">extends</span> <span class="title class_">ListAdapter</span>&lt;String&gt;&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyAdapter</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> View <span class="title function_">getView</span><span class="params">(<span class="type">int</span> position, View convertView, ViewGroup parent)</span> &#123;</span><br><span class="line">        <span class="type">ViewHolder</span> <span class="variable">holder</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (convertView == <span class="literal">null</span>) &#123;</span><br><span class="line">            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list,parent,<span class="literal">false</span>);</span><br><span class="line">            holder = <span class="keyword">new</span> <span class="title class_">ViewHolder</span>(convertView);</span><br><span class="line">            convertView.setTag(holder);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            holder = (ViewHolder) convertView.getTag();</span><br><span class="line">        &#125;</span><br><span class="line">        holder.mTextView.setText(mDatas.get(position));</span><br><span class="line">        <span class="keyword">return</span> convertView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">ViewHolder</span>&#123;</span><br><span class="line">        <span class="keyword">private</span> TextView mTextView;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">ViewHolder</span><span class="params">(View view)</span> &#123;</span><br><span class="line">            mTextView = (TextView) view.findViewById(R.id.list_item_tv);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>在使用的时候直接继承封装好的adapter在这里只需要复写getView()这一个方法就可以了.如果需要多个adapter这样的话写起来会少写很多.</p>
+<p>写出来之后再看,其实也不时很难,当时就是不会,搞不懂这个getView()方法怎么单独拿出来,现在看来,就是当时对抽象类的不理解,不知道在抽象类里可以不用全部复写父类的方法.</p>
+<p>###经验:想要对各个知识点理解的更透彻还是要多看demo,多看看别人都是怎么写的,为什么这么写,遇到没见过的知识点或是模糊的地方再去认真细究,通过这种方法既能加深理解,又能学会如何使用.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

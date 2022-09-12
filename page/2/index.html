@@ -1,564 +1,667 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
   
-  <title>miao9999</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="miao9999">
-<meta property="og:url" content="http://miao9999.github.io.com/page/2/index.html">
-<meta property="og:site_name" content="miao9999">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="miao9999">
+  <title>第 2 页 | windymiao | code for fun</title>
+
   
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css">
+  <meta name="author" content="windymiao">
   
 
-</head>
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
 
 <body>
-  <div id="container">
-    <header id="header">
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-      <a id="logo" class="logo" href="/"></a>
-      <nav id="main-nav">
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        <div id="search-form-wrap">
-          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://miao9999.github.io.com"></form>
-        </div>
-      </nav>
-    </div>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
   </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
 </header>
-    <section id="main" class="outer">
-      <article id="post-ViewGroup-MarginLayoutParams" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
+
+    <main class="site-main posts-loop">
     
-    
-      <header class="article-header">
-        
+  <article>
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/02/ViewGroup-MarginLayoutParams/">ViewGroup.MarginLayoutParams</a>
-    </h1>
+    
+    <h3 class="article-title"><a href="/2018/05/12/一/OkHttp Interceptor 的迭代递归实现的简化/"><span>OkHttp Interceptor 的迭代递归实现的简化</span></a></h3>
+    
   
 
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/07/02/ViewGroup-MarginLayoutParams/" class="article-date">
-  <time datetime="2017-07-02T09:03:27.000Z" itemprop="datePublished">2017-07-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/翻译/">翻译</a>
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/05/12/一/OkHttp Interceptor 的迭代递归实现的简化/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-12T08:57:00.000Z">
+          2018-05-12
+        </time>
+      </a>
+    </span>
   </div>
 
+
+  
+
+  <div class="article-content">
+    <div class="entry">
       
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>layouts 的每个子 layout 信息都支持 margins。参考 <strong>ViewGroup Margin Layout Attributes</strong> 列举了该类支持的所有子 view 的属性。<br>
+        <p>OkHttp 的拦截器，那一块的代码很多，也比较复杂，在 debug 的时候好多个类来回跳，看的很懵，其实把整个框架拿出来，简化一些之后再看，就清晰多了。下面就是一个简化后的，为了更容易理解，对应的类名还是用了 OkHttp 中的类名，返回的值直接用 String。
         
-          <p class="article-more-link">
-            <a href="/2017/07/02/ViewGroup-MarginLayoutParams/#more">Read More</a>
-          </p>
+          <p><a class="excerpt-btn" href="/2018/05/12/一/OkHttp Interceptor 的迭代递归实现的简化/"><span>阅读全文</span></a></p>
         
       
     </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
     
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
     
   </div>
+</article>
+
+
+
+  <article>
+
   
+    
+    <h3 class="article-title"><a href="/2018/05/07/工作总结2/"><span>2018 工作总结</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/05/07/工作总结2/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-07T08:57:00.000Z">
+          2018-05-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>工作总结</p>
+<p>最近连续加班快有一个月了，这是第一次时间最长，强度最大的一次加班，另外来这里工作也快半年了，总结一下吧。 </p>
+        
+          <p><a class="excerpt-btn" href="/2018/05/07/工作总结2/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/总结/">总结</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/05/04/青年节大会之感想/"><span>青年节大佬之感想 - 工匠精神</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/05/04/青年节大会之感想/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-04T08:57:00.000Z">
+          2018-05-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>今天是 5.4 青年节，一般指 14-28 周岁之前的年轻人。为此所里举办了一会会议，主要是表彰一些在工作中表现优秀的青年，另一方面也为超出团龄的青年发放一些纪念品，同时也欢迎新加入一些新青年。在会上其中的一位领导的发言让我感触良多。</p>
+        
+          <p><a class="excerpt-btn" href="/2018/05/04/青年节大会之感想/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/随想/">随想</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/04/12/一/屏幕的一些高度值/屏幕的一些高度值/"><span>屏幕的一些高度值</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/04/12/一/屏幕的一些高度值/屏幕的一些高度值/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-04-12T08:57:00.000Z">
+          2018-04-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="屏幕的一些高度值"><a href="#屏幕的一些高度值" class="headerlink" title="屏幕的一些高度值"></a>屏幕的一些高度值</h3><ol>
+<li><p>屏幕的高度(1920px)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//屏幕</span></span><br><span class="line"><span class="type">DisplayMetrics</span> <span class="variable">dm</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DisplayMetrics</span>();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(dm);</span><br><span class="line">Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;屏幕高:&quot;</span> + dm.heightPixels);</span><br></pre></td></tr></table></figure>
+        
+          <p><a class="excerpt-btn" href="/2018/04/12/一/屏幕的一些高度值/屏幕的一些高度值/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/03/15/工作总结/"><span>离职总结</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/03/15/工作总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-03-15T08:57:00.000Z">
+          2018-03-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>终于在上周五离职了，这次的离职是考虑了很久才做的决定。休息了一周，投了一些简历，刷了一些面试题。这几天想了很多关于工作时的一些事，算是一个总结吧，但其实大多数是反思。
+        
+          <p><a class="excerpt-btn" href="/2018/03/15/工作总结/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/总结/">总结</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/"><span>mac 用 ssh 设置免密登录到 ubuntu 时的一些问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-10-09T08:57:00.000Z">
+          2017-10-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="设置步骤"><a href="#设置步骤" class="headerlink" title="设置步骤"></a>设置步骤</h4><blockquote>
+<p>提示：有关 ssh 配置信息都保存在用户的 home 目录下</p>
+</blockquote>
+<p>以下执行在 mac 终端执行</p>
+<ol>
+<li>cd .ssh 进入到 .ssh 目录中</li>
+<li>执行 ssh-keygen 生成 ssh 钥匙，一直回车就可以</li>
+<li>执行 ssh-copy-id -p port user@remote，把生成的公钥复制到远程计算机中</li>
+<li>执行成功后，再登录到远程 ubuntu 中就不会再提示输入密码，而是直接登录成功</li>
+</ol>
+<p>以上是正常情况下的操作，但在实际操作中可能会出现一些问题。
+        
+          <p><a class="excerpt-btn" href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ssh/">ssh</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/"><span>Kotlin in Action 7</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-09-13T09:03:27.000Z">
+          2017-09-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="1-4-4-互操作性"><a href="#1-4-4-互操作性" class="headerlink" title="1.4.4 互操作性"></a>1.4.4 互操作性</h4><p>关于互操作性，你关心的第一件事可能是在  Kotlin 中『我可以使用现有的库吗？』，答案是『是的，当然可以』。不管是哪种库的 API 你都可以使用，你可以在 Kotlin 中使用它们。你可以调用 Java 的方法，扩展 Java 类以及实现 Java 接口，在 Kotlin 类中使用 Java 的注释，等等。
+        
+          <p><a class="excerpt-btn" href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/"><span>Kotlin in Action 6</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-09-05T09:03:27.000Z">
+          2017-09-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="1-4-3-安全性"><a href="#1-4-3-安全性" class="headerlink" title="1.4.3 安全性"></a>1.4.3 安全性</h4><p>一般来说，我们所说的程序语言的安全性，意思是它的设计可以防止程序中的某些错误。当然，这也不是绝对的性能，没有语言能够防止所有可能的错误。另外，防止错误通常是要付出代价的。你需要把更多的程序运行的目的信息告诉编译器，所以编译器能够查实与程序的目的相匹配的信息。正因为如此，所以总是会有一个关于权衡安全水平和效率损失的更详细的注释。
+        
+          <p><a class="excerpt-btn" href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/"><span>Kotlin in Action 5</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-26T09:03:27.000Z">
+          2017-08-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="1-4-Kotlin-的哲学"><a href="#1-4-Kotlin-的哲学" class="headerlink" title="1.4 Kotlin 的哲学"></a>1.4 Kotlin 的哲学</h3><p>当我们说起 Kotlin 的时候，我们喜欢说它是一种实用、简洁、安全的语言，重点是互操作性。这几个词到底是什么意思呢？我们依次来看。
+        
+          <p><a class="excerpt-btn" href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/08/18/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -4/"><span>Kotlin in Action 4</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/08/18/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -4/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-18T09:03:27.000Z">
+          2017-08-18
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="1-3-2-Kotlin-用于-Android"><a href="#1-3-2-Kotlin-用于-Android" class="headerlink" title="1.3.2 Kotlin 用于 Android"></a>1.3.2 Kotlin 用于 Android</h4><p>典型的移动应用与典型的企业应用是非常不同的。移动应用是比较小的，它不依赖于整合现有的代码库，它通常需要迅速交付，同时确保在多种设备上可靠地运行。Kotlin 正好可以做这样的项目。
+        
+          <p><a class="excerpt-btn" href="/2017/08/18/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -4/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
 </article>
 
 
 
 
-
-
-
-
-    
-      <article id="post-ViewGroup-LayoutParams" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<nav class="pagination">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/30/ViewGroup-LayoutParams/">ViewGroup.LayoutParams</a>
-    </h1>
+  <a href="/" class="pagination-prev">上一页</a>
   
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/06/30/ViewGroup-LayoutParams/" class="article-date">
-  <time datetime="2017-06-30T09:03:27.000Z" itemprop="datePublished">2017-06-30</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/翻译/">翻译</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 <em>ViewGroup Layout Attribute</em> ，列举了该类支持的所有子 view 的属性。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/06/30/ViewGroup-LayoutParams/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
   
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-ClearEditText" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+  <a href="/page/3/" class="pagination-next">下一页</a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/21/ClearEditText/">带删除按钮的 EditText</a>
-    </h1>
-  
+</nav>
+    </main>
 
-      </header>
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
     
-    <div class="article-meta">
-      <a href="/2017/06/21/ClearEditText/" class="article-date">
-  <time datetime="2017-06-21T03:49:27.000Z" itemprop="datePublished">2017-06-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好通过触摸事件来实现，通过计算触摸的位置，这个位置正好就是该 Drawable 所在的位置。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/06/21/ClearEditText/#more">Read More</a>
-          </p>
-        
-      
-    </div>
+    &copy; 2022 windymiao
     
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-Object" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/02/Object/">Object</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/06/02/Object/" class="article-date">
-  <time datetime="2017-06-02T09:03:27.000Z" itemprop="datePublished">2017-06-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/翻译/">翻译</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>这个类是 Java 类等级中的根。所有非初级的类型（包括数组）都是直接或间接继承这个类。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/06/02/Object/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-file" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/07/file/">File</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/05/07/file/" class="article-date">
-  <time datetime="2017-05-07T04:36:15.000Z" itemprop="datePublished">2017-05-07</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/翻译/">翻译</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview (类概述)"></a>Class Overview (类概述)</h3><p>一个由路径名确定文件系统实体的“抽象”表示。这个路径名可能是绝对路径（相对于文件系统的根目录）或是相对于程序运行的当前路径。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/05/07/file/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-github_+_hexo_博客搭建过程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/github_+_hexo_博客搭建过程/">Github + Hexo 博客的搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/04/14/github_+_hexo_博客搭建过程/" class="article-date">
-  <time datetime="2017-04-14T09:03:27.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>安装 Node.js &nbsp;&nbsp;  <a href="https://nodejs.org/en/">点击下载</a><br/><br>对 Node.js 不是很懂，只知道需要它。<br/>
-        
-          <p class="article-more-link">
-            <a href="/2017/04/14/github_+_hexo_博客搭建过程/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-aty。fragment的简单封装" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/08/aty。fragment的简单封装/">Activity 、Fragment 的简单封装</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/03/08/aty。fragment的简单封装/" class="article-date">
-  <time datetime="2017-03-08T09:03:27.000Z" itemprop="datePublished">2017-03-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在android开发中activity与fragment每个项目最基本的类，所以对它们二者的封装也是非常有必要的，今天就把这两个类简单的封装一下。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/03/08/aty。fragment的简单封装/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-胡说八道之射雕" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/21/胡说八道之射雕/">胡说八道之射雕</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/01/21/胡说八道之射雕/" class="article-date">
-  <time datetime="2017-01-21T09:03:27.000Z" itemprop="datePublished">2017-01-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/胡说八道/">胡说八道</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这几天在追网络版《射雕英雄传》，《射雕英雄传》是我最喜欢的一部武侠小说，从小看到大，除了李亚鹏，周迅的版没有看过之外，其他的版本都看过不止一次，有的版本甚至看过四五次了。当网络版的出来之后，其实并没有报太大的希望，尤其是在于妈妈改编后的《笑傲江湖》之后，对后来的翻拍的金庸剧都不报太大的希望了。但是正好赶上过年，这几天没什么事情做，比较清闲就点开看了看，发现比想象中的好多了，更重要的是这次看的时候，从中看到了很多以前没看到的东西（也许是年纪大了,想的比较多了吧)。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/21/胡说八道之射雕/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-接口回调----点击item中的ImageView,在Activity中显示dialog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/12/接口回调----点击item中的ImageView,在Activity中显示dialog/">接口回调-----点击 item 中的 ImageView，在 Activity 中显示dialog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/01/12/接口回调----点击item中的ImageView,在Activity中显示dialog/" class="article-date">
-  <time datetime="2017-01-12T09:03:27.000Z" itemprop="datePublished">2017-01-12</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在做项目的时候有一个功能是:点击listview的item中的一个图标,在activity中弹出一个dialog.想到的一个办法就是用接口回调来实现.对于接口回调这一块我其实也还是不太懂,别人写的复杂的一点的慢慢看也能看懂,但要自己写的话,也就只能写一些简单的,这个demo就是一个很简单的接口回调,跟RecyclerView的点击事件的回调是类似的.主要就是在adapter和activity中操作.<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/12/接口回调----点击item中的ImageView,在Activity中显示dialog/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-BaseAdapter的最简单的封装" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/11/BaseAdapter的最简单的封装/">BaseAdapter 的最简单的封装</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/01/11/BaseAdapter的最简单的封装/" class="article-date">
-  <time datetime="2017-01-11T09:03:27.000Z" itemprop="datePublished">2017-01-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一本正经/">一本正经</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/11/BaseAdapter的最简单的封装/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; Назад</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Далее &raquo;</a>
-      </nav>
-    </section>
-    <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 miao9999&nbsp;
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
-    </div>
-  </div>
+  </p>
 </footer>
     
-
-<script src="/js/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
+    
   </div>
+</div>
 </body>
 </html>

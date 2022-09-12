@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>《笨办法学 Python 习题41》 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="这几天在看《笨办法学 Python》看习题 41 的时候卡住了，第一次照着敲完后，一运行有好多地方都报错，这时我想到了一个最好的解决办法，那就是关上电脑，上床睡觉 ，完美解决^_^ ！！ ，开个玩笑。虽然错误很多，但还是要解决的。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="《笨办法学 Python 习题41》"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>《笨办法学 Python 习题41》</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/06/02/一/learn_python/learn_python_41/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-06-02T09:03:27.000Z">
+          2017-06-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>这几天在看《笨办法学 Python》看习题 41 的时候卡住了，第一次照着敲完后，一运行有好多地方都报错，这时我想到了一个最好的解决办法，那就是关上电脑，上床睡觉 ，完美解决^_^ ！！ ，开个玩笑。虽然错误很多，但还是要解决的。</p>
+<span id="more"></span>
+
+<p>正如书名所言，我用的就是最笨的办法———一行一行的看，弄清楚每一行的内容，并写一些注释，帮助理解。接下来就来分析一下这些代码：</p>
+<p>这部分是为程序准备的一些数据，第一次写的时候就是被 PHRASES 这里面的这些字符串给整懵了，其实没有实际的意义，只是一些假数据，为后面使用而已。不要被它们吓到！！！      </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单词的数据</span></span><br><span class="line">WORD_URL = <span class="string">&quot;http://learncodethehardway.org/words.txt&quot;</span></span><br><span class="line">WORDS = []</span><br><span class="line"><span class="comment"># 一个dic</span></span><br><span class="line">PHRASES = &#123;</span><br><span class="line">    <span class="string">&quot;class %%%(%%%)&quot;</span>: <span class="string">&quot;Make a class named %%% that is-a %%%.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;class %%%(object):\n\tdef __init__(self, ***)&quot;</span>: <span class="string">&quot;class %%% has-a __init__ that takes self and *** parameters.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;class %%%(object):\n\tdef ***(self, @@@)&quot;</span>: <span class="string">&quot;class %%% has-a function named *** that takes self and @@@ parameters.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;*** = %%%()&quot;</span>: <span class="string">&quot;set *** to an instance of class %%%&quot;</span>,</span><br><span class="line">    <span class="string">&quot;***.***(@@@)&quot;</span>: <span class="string">&quot;From *** get the *** function, and call it with parameters self, @@@.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;***.*** = ***&quot;</span>: <span class="string">&quot;From *** get attribute and set it to &#x27;***&#x27;.&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面的这个部分代码我也还没弄清楚为什么要写，但对本程序是没有用的，不写也不会影响程序的运行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PHRASES_FIRST = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) == <span class="number">2</span> <span class="keyword">and</span> sys.argv[<span class="number">1</span>] == <span class="string">&quot;english&quot;</span>:</span><br><span class="line">    PHRASES_FIRST = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这部分是把 url 中的单词数据读取出来存放在 WORDS 这个 lsit 中，并去掉了每个单词后面的多余字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> urllib.urlopen(WORD_URL).readlines():</span><br><span class="line">    WORDS.append(word.strip())</span><br></pre></td></tr></table></figure>
+
+<p>下面这部分就是一直出错的地方，也是程序的核心部分，convert 这个函数主要实现的功能就是把上面 PHRASES 里的 key 值与 value 值中的指定字符替换成 WORDS 列表中随机取出的值，最后把替换后的数据返回。代码里的注释写的的很全，我的办法就是只用一组数据测试，这样每次打印出来的内容不会变，便于分析。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">convert</span>(<span class="params">snippet, phrase</span>):</span><br><span class="line">    <span class="comment"># 如果此时第一个 key（snippet） 值为『*** = %%%（）』</span></span><br><span class="line">    <span class="comment"># snippet.count 的值就为1</span></span><br><span class="line">    <span class="comment"># class_name 就是从 WORDS 中随机取出一个值，并把首字母设置为大写。比如取的 word 为 clam</span></span><br><span class="line">    class_name = [w.capitalize() <span class="keyword">for</span> w <span class="keyword">in</span> random.sample(WORDS, snippet.count(<span class="string">&quot;%%%&quot;</span>))]</span><br><span class="line">    <span class="comment"># other_name 与 class_name 类似</span></span><br><span class="line">    other_name = random.sample(WORDS, snippet.count(<span class="string">&quot;***&quot;</span>))</span><br><span class="line">    results = []</span><br><span class="line">    param_names = []</span><br><span class="line">    <span class="comment"># 这个 key 值里面没有『@@@』</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, snippet.count(<span class="string">&quot;@@@&quot;</span>)):</span><br><span class="line">        param_count = random.randint(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">        param_names.append(<span class="string">&quot;, &quot;</span>.join(random.sample(WORDS, param_count)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> sentence <span class="keyword">in</span> snippet, phrase:</span><br><span class="line">        <span class="comment"># 把 snippet，phrase 的值都复制到 result 中</span></span><br><span class="line">        <span class="comment"># 此时 result 的值为 『*** = %%%（）</span></span><br><span class="line">        <span class="comment">#                    Set *** to an instance of class %%%.』</span></span><br><span class="line">        result = sentence[:]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> class_name:</span><br><span class="line">            <span class="comment"># 把 result 中 『%%%』替换成 class_name 中的元素，这里就是 clam</span></span><br><span class="line">            <span class="comment"># 此时 result 的值为 『*** = clam（）</span></span><br><span class="line">            <span class="comment">#                     Set *** to an instance of class clam.』</span></span><br><span class="line">            result = result.replace(<span class="string">&quot;%%%&quot;</span>, word, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 与上一个类似 把 result 中的 *** 替换成other 中的元素</span></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> other_name:</span><br><span class="line">            result = result.replace(<span class="string">&quot;***&quot;</span>, word, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> param_names:</span><br><span class="line">            result = result.replace(<span class="string">&quot;@@@&quot;</span>, word, <span class="number">1</span>)</span><br><span class="line">        results.append(result)</span><br><span class="line">        <span class="comment"># print &quot;----------result---------&quot;</span></span><br><span class="line">        <span class="comment"># print results</span></span><br><span class="line">    <span class="keyword">return</span> results</span><br></pre></td></tr></table></figure>
+
+<p> 最后这部分就是调用刚才的那个方法，里面的参数就是 PHRASES  中的所有 key 值，并把顺序打乱了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        snippets = PHRASES.keys()</span><br><span class="line">        <span class="comment"># 把 PHRASES 中的 key 值的顺序打乱</span></span><br><span class="line">        random.shuffle(snippets)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> snippet <span class="keyword">in</span> snippets:</span><br><span class="line">            phrase = PHRASES[snippet]</span><br><span class="line">            <span class="comment"># print convert(&quot;***.***(@@@)&quot;, &quot;Set *** to an instance of class %%%&quot;)</span></span><br><span class="line">            question, answer = convert(<span class="string">&quot;*** = %%%()&quot;</span>, <span class="string">&quot;Set *** to an instance of class %%%&quot;</span>)</span><br><span class="line">            <span class="comment"># question, answer = convert(snippet, phrase)</span></span><br><span class="line">            <span class="comment"># *** = clam（） question</span></span><br><span class="line">            <span class="comment"># Set *** to an instance of class clam.  answer</span></span><br><span class="line">            question, answer = answer, question</span><br><span class="line"></span><br><span class="line">            <span class="comment"># *** = clam（） answer</span></span><br><span class="line">            <span class="comment">#  Set *** to an instance of class clam. question</span></span><br><span class="line">        <span class="built_in">print</span> question</span><br><span class="line"></span><br><span class="line">        raw_input(<span class="string">&quot;&gt; &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;ANSWER: %s\n\n&quot;</span> % answer</span><br><span class="line"><span class="keyword">except</span> EOFError:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;\nbye&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个习题的内容大致就是这些，有点乱，但是只要慢慢分析还是能看得懂的。《笨办法学 Python》，嗯，很笨，但很有效！！！</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

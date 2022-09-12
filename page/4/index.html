@@ -1,0 +1,706 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 4 页 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/06/02/一/译/Object/"><span>Object</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/06/02/一/译/Object/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-06-02T09:03:27.000Z">
+          2017-06-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>这个类是 Java 类等级中的根。所有非初级的类型（包括数组）都是直接或间接继承这个类。</p>
+<p>按照以下这种风格写一个规范的 <span id="equals">equals</span> 方法：
+        
+          <p><a class="excerpt-btn" href="/2017/06/02/一/译/Object/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-翻译/">Android 翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/05/23/一/mac 手动安装 gradle/"><span>mac 手动安装 gradle</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/05/23/一/mac 手动安装 gradle/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-05-23T08:57:00.000Z">
+          2017-05-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在 gradle 的官网里提供了两种安装方式，一种是用 brew 安装，一种是手动安装。用 brew 安装实在是太慢了，所以我选择用 gradle 安装。安装并不难，重要的是路径的配置，坑了好多次了，这个坑必须填一下了。</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://gradle.org/releases">下载 gradle</a></p>
+</li>
+<li><p>解压文件</p>
+</li>
+<li><p>配置路径</p>
+<ol>
+<li><p>终端配置，只能在当前会话内使用，关闭后，再打开，需要重新配置</p>
+<p>export PATH&#x3D;$PATH:gradle 的路径（如果相对路径不行，就设置绝对路径，把 gradle 的文件夹拖到终端就可以看到了）</p>
+</li>
+<li><p>在 .bash_profile 文件中配置，这种方式只配置一次，之后都不用再配置</p>
+<ol>
+<li>在终端中输入 open -e .bash_profile ,打开 .bash_profile 文件</li>
+<li>在 .bash_profile 文件中输入export PATH&#x3D;$PATH:gradle 的路径&#x2F;bin ，保存文件</li>
+<li>在终端中执行 source ~&#x2F;.bash_profile,更新.bash_profile 文件</li>
+<li>到此路径配置完成，在终端中输入 gradle -v 就可以查看 gradle 的版本信息，但现在如果关闭终端，再次打开，路径就失效了。所以还需要以下的设置。</li>
+<li>在终端输入 vim ~&#x2F;.zshrc ，之后在.zshrc 文件中加入一句 source ~&#x2F;.bash_profile 保存并退出。这样每次打开终端都不用再重新配置路径了。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-gradle/">Android gradle</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/05/07/一/译/file/"><span>File</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/05/07/一/译/file/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-05-07T04:23:43.000Z">
+          2017-05-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview (类概述)"></a>Class Overview (类概述)</h3><p>一个由路径名确定文件系统实体的“抽象”表示。这个路径名可能是绝对路径（相对于文件系统的根目录）或是相对于程序运行的当前路径。</p>
+<p>文件所引用的实际文件可能存在也可能不存在。它也可能是忽略文件的名称，只是一个目录或是一个非常规的文件。</p>
+<p>这个类提供了有限的函数来获取或设置文件的权限，文件的类型，文件的最后修改时间。</p>
+<p>当 Android 字符串转换为 UTF-8 字节序列时，发送文件到操作系统，字节序列会被系统返回（从各种列表方法）按照 UTF-8 转换为字符串。</p>
+        
+          <p><a class="excerpt-btn" href="/2017/05/07/一/译/file/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-翻译/">Android 翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/04/14/一/github_+_hexo_博客搭建过程/"><span>github + hexo 博客的搭建过程</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/14/一/github_+_hexo_博客搭建过程/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-14T08:57:00.000Z">
+          2017-04-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <ol>
+<li><p>安装 Node.js &amp;nbsp;&amp;nbsp;  <a target="_blank" rel="noopener" href="https://nodejs.org/en/">点击下载</a><br/><br>对 Node.js 不是很懂，只知道需要它。<br/></p>
+</li>
+<li><p>安装 git (mac 自带，windows 就不清楚了)<br/></p>
+</li>
+<li><p>注册 github 账号。</p>
+</li>
+<li><p>设置 SSH Key 到 github
+        
+          <p><a class="excerpt-btn" href="/2017/04/14/一/github_+_hexo_博客搭建过程/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/hexo-博客/">hexo 博客</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/04/05/胡/胡说八道之射雕/"><span>胡说八道之射雕</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/05/胡/胡说八道之射雕/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-05T08:57:00.000Z">
+          2017-04-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="胡说八道之射雕"><a href="#胡说八道之射雕" class="headerlink" title="胡说八道之射雕"></a>胡说八道之射雕</h2><p>这几天在追网络版《射雕英雄传》，《射雕英雄传》是我最喜欢的一部武侠小说，从小看到大，除了李亚鹏，周迅的版没有看过之外，其他的版本都看过不止一次，有的版本甚至看过四五次了。
+        
+          <p><a class="excerpt-btn" href="/2017/04/05/胡/胡说八道之射雕/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/胡说八道/">胡说八道</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/03/08/一/aty。fragment的简单封装/"><span>Activity 、Fragment 的简单封装</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/03/08/一/aty。fragment的简单封装/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-03-08T09:03:27.000Z">
+          2017-03-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在android开发中activity与fragment每个项目最基本的类，所以对它们二者的封装也是非常有必要的，今天就把这两个类简单的封装一下。
+        
+          <p><a class="excerpt-btn" href="/2017/03/08/一/aty。fragment的简单封装/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/01/12/一/接口回调----点击item中的ImageView,在Activity中显示dialog/"><span>接口回调-----点击 item 中的 ImageView，在 Activity 中显示dialog</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/01/12/一/接口回调----点击item中的ImageView,在Activity中显示dialog/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-01-12T09:03:27.000Z">
+          2017-01-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在做项目的时候有一个功能是:点击listview的item中的一个图标,在activity中弹出一个dialog.想到的一个办法就是用接口回调来实现.对于接口回调这一块我其实也还是不太懂,别人写的复杂的一点的慢慢看也能看懂,但要自己写的话,也就只能写一些简单的,这个demo就是一个很简单的接口回调,跟RecyclerView的点击事件的回调是类似的.主要就是在adapter和activity中操作.
+        
+          <p><a class="excerpt-btn" href="/2017/01/12/一/接口回调----点击item中的ImageView,在Activity中显示dialog/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2017/01/11/一/BaseAdapter的最简单的封装/"><span>BaseAdapter 的最简单的封装</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/01/11/一/BaseAdapter的最简单的封装/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-01-11T09:03:27.000Z">
+          2017-01-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>前一段时间在网上找了一个demo,里面有很多封装的类,仔细看了其中的几个,对封装又有了多一点的认识和理解.在最近做项目的过程中居然还利用到了,在学习的时候老师一直强调要我们学会封装,那个时候只会跟着老师做或是在网上找demo照着demo做,没想到这次在项目中自己也能做一个简单的封装,虽然是一个很简单的封装,但也算是一点小小的进步吧.
+        
+          <p><a class="excerpt-btn" href="/2017/01/11/一/BaseAdapter的最简单的封装/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/12/05/一/用gradle打包android_apk时遇到的一些问题/"><span>用 gradle 打包 Android APK 时遇到的一些问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/12/05/一/用gradle打包android_apk时遇到的一些问题/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-12-05T09:03:27.000Z">
+          2016-12-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>1.打开终端进入到项目的根目录下,执行**.&#x2F;gradlew -v** 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到**&#x2F;User&#x2F;用户名&#x2F;.gradle&#x2F;wrapper&#x2F;dists**(mac的地址)这个文件中,一定要解压之后的文件.这个时候再执行.&#x2F;gradlew -v命令时就不会下载了,直接显示gradle的版本信息.在网速不是很好的情况下,这种方法可以快很多.
+        
+          <p><a class="excerpt-btn" href="/2016/12/05/一/用gradle打包android_apk时遇到的一些问题/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-gradle/">Android gradle</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/11/24/一/CheckBox与ListView结合使用/"><span>checkbox 与 listView 的结合使用</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/11/24/一/CheckBox与ListView结合使用/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-11-24T09:03:32.000Z">
+          2016-11-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="实现效果-长按LitsView的item时-CheckBox显示-CheckBox可选中-在这个效果当中可能会有CheckBox被选中时出现混乱的情况-在此记录一下这个解决办法"><a href="#实现效果-长按LitsView的item时-CheckBox显示-CheckBox可选中-在这个效果当中可能会有CheckBox被选中时出现混乱的情况-在此记录一下这个解决办法" class="headerlink" title="实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.  "></a>实现效果: 长按LitsView的item时, CheckBox显示,CheckBox可选中,在这个效果当中可能会有CheckBox被选中时出现混乱的情况,在此记录一下这个解决办法.
+        
+          <p><a class="excerpt-btn" href="/2016/11/24/一/CheckBox与ListView结合使用/"><span>阅读全文</span></a></p>
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/3/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/5/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

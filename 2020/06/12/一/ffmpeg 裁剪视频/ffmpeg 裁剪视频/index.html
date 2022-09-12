@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ffmpet 裁剪视频 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="前言之前写过一篇用 shell 脚本与 ffmpeg 结合，批量把视频切割成指定时长的多个视频片断，当时写的那个脚本只支持这一个小功能，写的粗糙，原视频的总时长也没有获取到，还需要手动填写。">
+  
+
+  
+  
+  <meta name="keywords" content="ffmpeg">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ffmpet 裁剪视频"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ffmpet 裁剪视频</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/06/12/一/ffmpeg 裁剪视频/ffmpeg 裁剪视频/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-06-12T08:57:00.000Z">
+          2020-06-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前写过一篇用 shell 脚本与 ffmpeg 结合，批量把视频切割成指定时长的多个视频片断，当时写的那个脚本只支持这一个小功能，写的粗糙，原视频的总时长也没有获取到，还需要手动填写。 <span id="more"></span></p>
+<p>这次在那个的基础上添加了自动获取视频分辨率、时长，并且按指定的宽高裁剪视频的中间部分的画面(在这个 demo 中是这样设置，可以根据需要改为指定部分的画面，原理就是计算指定画面在原视频中的比例)的功能。</p>
+<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h4><ol>
+<li><p>首先要先获取文件夹中的文件，并且判断哪些文件是视频文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取该脚本文件所在的文件夹中的所有文件名</span></span><br><span class="line">path=$1</span><br><span class="line">files=$(ls $path)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据文件的格式判断文件是否是视频文件，这里是直接写死的，如果有其他的格式，这里就要手动更换，其实也可以自动获取，与获取视频时宽高是类似的，这里就不写了。</span></span><br><span class="line">type=&quot;.mp4&quot;</span><br><span class="line">if [[ $filename =~ $type ]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里开始使用 ffmpeg ，把视频文件的信息以 json 的格式提取出来，在这个 demo 中把视频的信息保存到了 videoinfo 文件中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffprobe -print_format json -show_streams $filename &gt; videoinfo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来就是从 videoinfo 文件的 json 字符串中把我们要的宽高以及时长提取出来</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一段执行之后，videowidth 的值就是视频的宽</span></span><br><span class="line">while  read line </span><br><span class="line">			do</span><br><span class="line">				#statements</span><br><span class="line">				if [[ $line =~ &#x27;width&#x27; ]]; then</span><br><span class="line">					#statements</span><br><span class="line">					# 这里用了 awk 的方法提取字符串的一部分</span><br><span class="line">					videowidth=`echo $line | awk -F: &#x27;&#123;print $2&#125;&#x27; | awk -F, &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">					echo $line</span><br><span class="line">					echo &#x27;width&#x27; + $videowidth</span><br><span class="line">					break</span><br><span class="line">				fi</span><br><span class="line">			done &lt; videoinfo</span><br></pre></td></tr></table></figure>
+
+<p>用下面的这种循环方法也可以得到视频的宽，但是这样的话，videowidth 的值只能在这个循环里有用，在循环外面这个值是获取不到的，而上面的那种写法叫重定向，就可以解决这个问题。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat videoinfo | while  read line </span><br><span class="line">do</span><br><span class="line"><span class="meta prompt_">	#</span><span class="language-bash">statements</span></span><br><span class="line">	if [[ $line =~ &#x27;width&#x27; ]]; then</span><br><span class="line"><span class="meta prompt_">		#</span><span class="language-bash">statements</span></span><br><span class="line">		videowidth=`echo $line | awk -F: &#x27;&#123;print $2&#125;&#x27; | awk -F, &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">		echo $line</span><br><span class="line">	    echo &#x27;width&#x27; + $videowidth</span><br><span class="line">	    </span><br><span class="line"><span class="meta prompt_">		# </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$videowidth</span>&quot;</span></span></span><br><span class="line">		break</span><br><span class="line"></span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>类似的视频的高和时长也是用同样的方法可以获取到。就不贴详细代码了。</p>
+</li>
+<li><p>我们需要的信息都获取到之后，就开始对视频进行处理了，这里我们的需求是把裁剪视频中间的画面，并切割成指定的时长。这里我们分成两步：</p>
+<ol>
+<li><p>第一步：把视频先进行裁剪</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个是 ffmpeg 的命令，裁剪的功能主要是 crop 这个命令，它的参数分别代表的是：输出视频的宽：输入出视频的高：裁剪的起始点的 x 的位置：裁剪起始点的 y 的位置。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这四个值可以根据需要去计算</span></span><br><span class="line">ffmpeg -i $filename -strict -2 -vf  crop=$($w:$h:$x:0)  $filename+out.mp4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步：把裁剪后的视频切割成指定的时长</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while [ $endTime -le $duration ]; do</span><br><span class="line">    			#statements</span><br><span class="line">    			i=$[$i+1]</span><br><span class="line">    			endTime=$[$startTime+4]</span><br><span class="line">    			# 切割视频的时长</span><br><span class="line">    			ffmpeg -i /Users/limiao/Desktop/video/$filename+out.mp4  -ss $startTime -to $endTime -acodec copy -vcodec copy outvideo/$filename+$i.mp4  </span><br><span class="line">    			startTime=$[endTime]</span><br><span class="line"></span><br><span class="line">    		done</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>到此，想要实现的功能就都实现了。在实现的过程中有几个问题纠缠了挺久的。</p>
+<ol>
+<li><p>拿到 json 字符串后，如何从这里拿到我们需要的视频的宽高和时长？</p>
+<p>百度了一些，最后确定的文案是使用 awk，把 json 字符串根据一定的规则切分，最终留下我们要的值。</p>
+<p>用完之后，我觉得 awk 是一个挺有意思的东西，还是值得研究一下的。</p>
+</li>
+<li><p>循环的重定向</p>
+<p>刚开始的写的时候，只写了一个小例子测试的时候是没问题的，但一放到正式的文件中要用的时候，那个值就获取不到了，也是查了很多，才找到原因。这两种方式的区别也还有待研究。</p>
+</li>
+<li><p>在设置 ffmpeg 中的 crop 参数时，刚开始的写法是这样的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crop=$w:$h:$x:0</span><br></pre></td></tr></table></figure>
+
+<p>运行之后提示的错误是参数错误：只有三个参数，后来改为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crop=$($w:$h:$x:0) </span><br></pre></td></tr></table></figure>
+
+<p>这样就对了，参数不管是什么它都是一个整体，要使用一个整体去引用。</p>
+</li>
+</ol>
+<p>代码虽少，但包含的东西挺多的，也弄了好多天，找了很多资料，这些东西基本都是现学现卖，根据需要有目的的学习，效率还挺不错的。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/miao9999/ffmpegDemo/blob/master/video.sh">查看全部文件</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ffmpeg/">ffmpeg</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

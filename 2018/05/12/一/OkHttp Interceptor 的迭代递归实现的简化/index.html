@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OkHttp Interceptor 的迭代递归实现的简化 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="OkHttp 的拦截器，那一块的代码很多，也比较复杂，在 debug 的时候好多个类来回跳，看的很懵，其实把整个框架拿出来，简化一些之后再看，就清晰多了。下面就是一个简化后的，为了更容易理解，对应的类名还是用了 OkHttp 中的类名，返回的值直接用 String。">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="OkHttp Interceptor 的迭代递归实现的简化"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>OkHttp Interceptor 的迭代递归实现的简化</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/05/12/一/OkHttp Interceptor 的迭代递归实现的简化/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-12T08:57:00.000Z">
+          2018-05-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>OkHttp 的拦截器，那一块的代码很多，也比较复杂，在 debug 的时候好多个类来回跳，看的很懵，其实把整个框架拿出来，简化一些之后再看，就清晰多了。下面就是一个简化后的，为了更容易理解，对应的类名还是用了 OkHttp 中的类名，返回的值直接用 String。 <span id="more"></span></p>
+<ol>
+<li><p>首先是定义一个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Interceptor</span> &#123;</span><br><span class="line">    <span class="comment">// 拦截</span></span><br><span class="line">    String <span class="title function_">intercept</span><span class="params">(Chain chain)</span>;</span><br><span class="line">		</span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">Chain</span></span><br><span class="line">      	<span class="comment">// 分发</span></span><br><span class="line">        String <span class="title function_">proceed</span><span class="params">(String request)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 5 个 interceptor 类分别是：RetryAndFollowUpInterceptor、BridgeInterceptor、CacheInterceptor、ConnectInterceptor、CallServerInterceptor ，实现 Interceptor 接口，重写 intercept(Chain chain) 方法，在这个方法里调用 chain.proceed() 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">intercept</span><span class="params">(Chain chain)</span> &#123;</span><br><span class="line">    chain.proceed(<span class="string">&quot;CacheInterceptor&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;CacheInterceptor&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;CacheInterceptor&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来创建一个类 RealInterceptorChain 实现 Chain 接口，重写 proceed() 方法，在该方法里遍历 interceptor，并调用 interceptor.intercept() 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RealInterceptorChain</span> <span class="variable">next</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealInterceptorChain</span>(index + <span class="number">1</span>,interceptors);</span><br><span class="line"></span><br><span class="line"><span class="type">Interceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> interceptors.get(index);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;遍历 interceptor 的值：第&quot;</span> + (index + <span class="number">1</span>) + <span class="string">&quot;个 interceptor:&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;RealInterceptor：&quot;</span> + interceptor.getClass().getName());</span><br><span class="line"><span class="comment">// 在 interceptor 的 intercept 方法里需要用到 Chain 对象，所以在每次取出 interceptor 对象的时候，也要重新创建一个 Chain 对象</span></span><br><span class="line"><span class="type">String</span> <span class="variable">intercept</span> <span class="operator">=</span> interceptor.intercept(next);</span><br></pre></td></tr></table></figure>
+
+<p>注：实现 Chain 的类只有 RealInterceptorChain 这一个类。</p>
+</li>
+<li><p>添加 interceptors，然后开始迭代</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Interceptor&gt; interceptors = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">interceptors.add(<span class="keyword">new</span> <span class="title class_">RetryAndFollowUpInterceptor</span>());</span><br><span class="line">interceptors.add(<span class="keyword">new</span> <span class="title class_">BridgeInterceptor</span>());</span><br><span class="line">interceptors.add(<span class="keyword">new</span> <span class="title class_">CacheInterceptor</span>());</span><br><span class="line">interceptors.add(<span class="keyword">new</span> <span class="title class_">ConnectInterceptor</span>());</span><br><span class="line">interceptors.add(<span class="keyword">new</span> <span class="title class_">CallServerInterceptor</span>());</span><br><span class="line"></span><br><span class="line"><span class="type">RealInterceptorChain</span> <span class="variable">chain</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealInterceptorChain</span>(<span class="number">0</span>,interceptors);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">real_call</span> <span class="operator">=</span> chain.proceed(<span class="string">&quot;real call&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>注：chain.proceed() 迭代的开始。</p>
+</li>
+<li><p>当执行完chain.proceed() 方法后就会进入到它的实现类中去，也就是 RealInterceptorChain 类中的 proceed()  方法，也就是第三步中的代码里，在这个方法里核心的一句： interceptor.intercept(next)，执行这一句就会进入到 interceptor 对应的实现类中去，这时的实现类是 RetryAndFollowUpInterceptor，也就是它的 intercept() 方法中去，也就是第二步中的代码，在这个方法最核心的一句 ：chain.proceed(“CacheInterceptor”)，执行这一句，又会回到第三步，创建一个新的 RealInterceptorChain、取出下一个 interceptor，开始又一轮的迭代。</p>
+</li>
+<li><p>当执行到最后一个 interceptor 时，这里对应的是 CallServerInterceptor，在它的 intercept 方法中没有再执行 chain.proceed() 方法，遍历结束，继续后面的操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">intercept</span><span class="params">(Chain chain)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;interceptors 中最后一个 interceptor， intercept 中不再执行 chain,遍历结束，开始返回值&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;CallServerInterceptor&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;返回的值：CallServerInterceptor&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结束遍历之后，开始返回数据，返回的时候从最后一个 interceptor 开始返回，依次返回到第一个，最后返回到最初调用的地方。</p>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/miao9999/JavaDemo.git">全部文件</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

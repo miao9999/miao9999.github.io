@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mac 手动安装 gradle | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="在 gradle 的官网里提供了两种安装方式，一种是用 brew 安装，一种是手动安装。用 brew 安装实在是太慢了，所以我选择用 gradle 安装。安装并不难，重要的是路径的配置，坑了好多次了，这个坑必须填一下了。
+
+下载 gradle
+
+解压文件
+
+配置路径
+
+终端配置，只能在当前会话内使用">
+  
+
+  
+  
+  <meta name="keywords" content="Android gradle">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="mac 手动安装 gradle"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>mac 手动安装 gradle</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/05/23/一/mac 手动安装 gradle/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-05-23T08:57:00.000Z">
+          2017-05-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在 gradle 的官网里提供了两种安装方式，一种是用 brew 安装，一种是手动安装。用 brew 安装实在是太慢了，所以我选择用 gradle 安装。安装并不难，重要的是路径的配置，坑了好多次了，这个坑必须填一下了。</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://gradle.org/releases">下载 gradle</a></p>
+</li>
+<li><p>解压文件</p>
+</li>
+<li><p>配置路径</p>
+<ol>
+<li><p>终端配置，只能在当前会话内使用，关闭后，再打开，需要重新配置</p>
+<p>export PATH&#x3D;$PATH:gradle 的路径（如果相对路径不行，就设置绝对路径，把 gradle 的文件夹拖到终端就可以看到了）</p>
+</li>
+<li><p>在 .bash_profile 文件中配置，这种方式只配置一次，之后都不用再配置</p>
+<ol>
+<li>在终端中输入 open -e .bash_profile ,打开 .bash_profile 文件</li>
+<li>在 .bash_profile 文件中输入export PATH&#x3D;$PATH:gradle 的路径&#x2F;bin ，保存文件</li>
+<li>在终端中执行 source ~&#x2F;.bash_profile,更新.bash_profile 文件</li>
+<li>到此路径配置完成，在终端中输入 gradle -v 就可以查看 gradle 的版本信息，但现在如果关闭终端，再次打开，路径就失效了。所以还需要以下的设置。</li>
+<li>在终端输入 vim ~&#x2F;.zshrc ，之后在.zshrc 文件中加入一句 source ~&#x2F;.bash_profile 保存并退出。这样每次打开终端都不用再重新配置路径了。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-gradle/">Android gradle</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>带删除按钮的 EditText | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好通过触摸事件来实现，通过计算触摸的位置，这个位置正好就是该 Drawable 所在的位置。">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="带删除按钮的 EditText"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>带删除按钮的 EditText</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/06/21/一/clearEditText/ClearEditText/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-06-21T03:46:00.000Z">
+          2017-06-21
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>一个带删除按钮的 EditText 在各种 APP 中随处可见，比如，搜索框、登录时用户名与密码的输入框等等。在没有自己实现之前，想法是这样的：在 EditText 中的添加一个 Drawable 然后给这个 Drawable 添加一个监听事件，当点击 Drawable 时设置 EditText 里的字符串为空。当要实现的时候却发现 Drawable 没有点击事件，所以这个方法是行不通的。那么只好通过触摸事件来实现，通过计算触摸的位置，这个位置正好就是该 Drawable 所在的位置。<span id="more"></span></p>
+<p>1.获取 EditText 的 DrawableRight</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mClearDrawable = getCompoundDrawables()[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+
+<p>getCompoundDrawables() 方法源码是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">	* Returns drawables for the left, top, right, and bottom borders.</span></span><br><span class="line"><span class="comment">	*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@attr</span> ref android.R.styleable#TextView_drawableLeft</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@attr</span> ref android.R.styleable#TextView_drawableTop</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@attr</span> ref android.R.styleable#TextView_drawableRight</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@attr</span> ref android.R.styleable#TextView_drawableBottom</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="keyword">public</span> Drawable[] getCompoundDrawables() &#123;</span><br><span class="line">   <span class="keyword">final</span> <span class="type">Drawables</span> <span class="variable">dr</span> <span class="operator">=</span> mDrawables;</span><br><span class="line">   <span class="keyword">if</span> (dr != <span class="literal">null</span>) &#123;</span><br><span class="line">       <span class="keyword">return</span> dr.mShowing.clone();</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Drawable</span>[] &#123; <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span> &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   返回值是控件四周的 Drawable 数组，顺序为左、上、右、下。在这里需要的是右边的 Drawable，所以下标为 2.</p>
+<p>2.接下来就是获取并设置 Drawable 图标</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (mClearDrawable == <span class="literal">null</span>) &#123;</span><br><span class="line">       mClearDrawable = getResources().getDrawable(R.drawable.x);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 为 Drawable 设置为自身大小的宽高</span></span><br><span class="line">    mClearDrawable.setBounds(<span class="number">0</span>, <span class="number">0</span>, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());</span><br></pre></td></tr></table></figure>
+
+
+<p>3.最后一步就是设置点击 Drawable 图标实现删除文本框中的内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">onTouchEvent</span><span class="params">(MotionEvent event)</span> &#123;</span><br><span class="line">  	<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_UP)&#123;</span><br><span class="line">      <span class="keyword">if</span> (getCompoundDrawables()[<span class="number">2</span>] != <span class="literal">null</span>)&#123;</span><br><span class="line">          <span class="type">boolean</span> <span class="variable">touchable</span>  <span class="operator">=</span> event.getX() &gt; (getWidth() - getTotalPaddingRight())</span><br><span class="line">                  &amp;&amp; (event.getX() &lt; (getWidth() - getPaddingRight()));</span><br><span class="line">          <span class="keyword">if</span> (touchable)&#123;</span><br><span class="line">              <span class="built_in">this</span>.setText(<span class="string">&quot;&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="built_in">super</span>.onTouchEvent(event);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>    	
+</code></pre>
+<p>   <img src="http://onyvps7wa.bkt.clouddn.com/image/blogclear.png" alt="clear"></p>
+<p>   红色的横线代表的是 (getWidth() - getTotalPaddingRight()）的值，黑色的横线代表的是 (getWidth() - getPaddingRight()) 的值，当触摸到这两个值之间的位置就正好是 Drawable 所在位置。也就实现了点击删除图标就可以清空文本框中的内容。</p>
+<p> 到此最主要功能就可以实现了，当然还可以再添加一些其他的功能，以提高用户体验。比如，当文本框中没有内容时，就不显示删除图标，或是在输入错误时文本框抖动等。</p>
+<p> 首先实现删除图标的隐藏功能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setClearIconVisible</span><span class="params">(<span class="type">boolean</span> visible)</span> &#123;</span><br><span class="line">   <span class="type">Drawable</span> <span class="variable">right</span> <span class="operator">=</span> visible ? mClearDrawable : <span class="literal">null</span>;</span><br><span class="line">   setCompoundDrawables(getCompoundDrawables()[<span class="number">0</span>],getCompoundDrawables()[<span class="number">1</span>],right,getCompoundDrawables()[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   setCompoundDrawables() 方法里的四个参数就是按照左、上、右、下的顺序分别为组件添加四个方向上的 Drawable。这里添加的在右边的，所以在第三个位置设置刚刚设置好的 Drawable。其他设置为默认的。然后实 TextWatcher 接口，在 onTextChange 方法里进行设置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onTextChanged</span><span class="params">(CharSequence text, <span class="type">int</span> start, <span class="type">int</span> lengthBefore, <span class="type">int</span> lengthAfter)</span> &#123;</span><br><span class="line">   <span class="keyword">if</span> (hasFocus)&#123;</span><br><span class="line">       setClearIconVisible(text.length() &gt; <span class="number">0</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>   接下来实现抖动功能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSharkAnimation</span><span class="params">()</span>&#123;</span><br><span class="line">   <span class="built_in">this</span>.setAnimation(sharkAnimation(<span class="number">5</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Animation <span class="title function_">sharkAnimation</span><span class="params">(<span class="type">int</span> counts)</span>&#123;</span><br><span class="line">  <span class="type">Animation</span> <span class="variable">translateAnimation</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TranslateAnimation</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">  translateAnimation.setInterpolator(<span class="keyword">new</span> <span class="title class_">CycleInterpolator</span>(counts));</span><br><span class="line">  translateAnimation.setDuration(<span class="number">1000</span>);</span><br><span class="line">  <span class="keyword">return</span> translateAnimation;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+
+
+<p>   在输入错误或是有重要信息时调用 setSharkAnimation() 方法就可以实现了。</p>
+<p>   最终效果图：<br>       <img src="http://onyvps7wa.bkt.clouddn.com/image/blogclear.gif" alt="clear"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  实现文章中的功能并不是很难，只要动动手基本都可以实现。所以重点是要动手去做，在没有动手之前虽然也有很多的想法，想了几种可能实现的方法，那些方法到底能不能实现，或是实现起来有什么困难，亦或是可以更加简洁等等，这些都不是只靠想就可以做到的，所以以后再想到什么想法的时候一定要亲自动手实践一下，再做结论。以上！</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

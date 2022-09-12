@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>接口回调-----点击 item 中的 ImageView，在 Activity 中显示dialog | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="在做项目的时候有一个功能是:点击listview的item中的一个图标,在activity中弹出一个dialog.想到的一个办法就是用接口回调来实现.对于接口回调这一块我其实也还是不太懂,别人写的复杂的一点的慢慢看也能看懂,但要自己写的话,也就只能写一些简单的,这个demo就是一个很简单的接口回调,跟RecyclerView的点击事件的回调是类似的.主要就是在adapter和activity中操作.">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="接口回调-----点击 item 中的 ImageView，在 Activity 中显示dialog"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>接口回调-----点击 item 中的 ImageView，在 Activity 中显示dialog</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/01/12/一/接口回调----点击item中的ImageView,在Activity中显示dialog/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-01-12T09:03:27.000Z">
+          2017-01-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在做项目的时候有一个功能是:点击listview的item中的一个图标,在activity中弹出一个dialog.想到的一个办法就是用接口回调来实现.对于接口回调这一块我其实也还是不太懂,别人写的复杂的一点的慢慢看也能看懂,但要自己写的话,也就只能写一些简单的,这个demo就是一个很简单的接口回调,跟RecyclerView的点击事件的回调是类似的.主要就是在adapter和activity中操作. <span id="more"></span></p>
+<p>效果图如下:<br><img src="http://img.blog.csdn.net/20170112165329015?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbWlhbzk5OTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="效果图"></p>
+<p>   1.首先是在adapter中的操作:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.limiao.baselistadapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"><span class="keyword">import</span> android.widget.ImageView;</span><br><span class="line"><span class="keyword">import</span> android.widget.MediaController;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Miao on 17/1/11.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAdapter</span> <span class="keyword">extends</span> <span class="title class_">ListAdapter</span>&lt;Bean&gt;&#123;</span><br><span class="line">    <span class="keyword">private</span> IShowDialog mIShowDialog;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setIShowDialog</span><span class="params">(IShowDialog IShowDialog)</span> &#123;</span><br><span class="line">        mIShowDialog = IShowDialog;</span><br><span class="line">        notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyAdapter</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> View <span class="title function_">getView</span><span class="params">(<span class="keyword">final</span> <span class="type">int</span> position, View convertView, ViewGroup parent)</span> &#123;</span><br><span class="line">        <span class="type">ViewHolder</span> <span class="variable">holder</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (convertView == <span class="literal">null</span>) &#123;</span><br><span class="line">            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list,parent,<span class="literal">false</span>);</span><br><span class="line">            holder = <span class="keyword">new</span> <span class="title class_">ViewHolder</span>(convertView);</span><br><span class="line">            convertView.setTag(holder);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            holder = (ViewHolder) convertView.getTag();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Bean</span> <span class="variable">bean</span> <span class="operator">=</span> mDatas.get(position);</span><br><span class="line">        holder.mTextView.setText(bean.getNum());</span><br><span class="line">        holder.mImageView.setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span> &#123;</span><br><span class="line">                mIShowDialog.show();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> convertView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">ViewHolder</span>&#123;</span><br><span class="line">        <span class="keyword">private</span> TextView mTextView;</span><br><span class="line">        <span class="keyword">private</span> ImageView mImageView;</span><br><span class="line">        <span class="keyword">private</span> TextView msgTv;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">ViewHolder</span><span class="params">(View view)</span> &#123;</span><br><span class="line">            mTextView = (TextView)view.findViewById(R.id.list_item_tv);</span><br><span class="line">            mImageView = (ImageView)view.findViewById(R.id.list_item_iv);</span><br><span class="line">            msgTv = (TextView)view.findViewById(R.id.list_item_data_tv);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IShowDialog</span>&#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>2 .在MainActivity中的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.limiao.baselistadapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.AlertDialog;</span><br><span class="line"><span class="keyword">import</span> android.content.DialogInterface;</span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.ListView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title class_">MyAdapter</span>.IShowDialog &#123;</span><br><span class="line">    <span class="keyword">private</span> ListView mListView;</span><br><span class="line">    <span class="keyword">private</span> MyAdapter mMyAdapter;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Bean&gt; mDatas;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        mListView = (ListView) findViewById(R.id.main_lv);</span><br><span class="line">        mDatas = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        mMyAdapter= <span class="keyword">new</span> <span class="title class_">MyAdapter</span>(<span class="built_in">this</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">            <span class="type">Bean</span> <span class="variable">bean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bean</span>();</span><br><span class="line">            bean.setNum(i + <span class="string">&quot;&quot;</span>);</span><br><span class="line">            mDatas.add(bean);</span><br><span class="line">        &#125;</span><br><span class="line">        mMyAdapter.setDatas(mDatas);</span><br><span class="line">        mListView.setAdapter(mMyAdapter);</span><br><span class="line">        mMyAdapter.setIShowDialog(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        showMsg();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">showMsg</span><span class="params">()</span> &#123;</span><br><span class="line">        AlertDialog.<span class="type">Builder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AlertDialog</span>.Builder(<span class="built_in">this</span>);</span><br><span class="line">        <span class="type">View</span> <span class="variable">dialogView</span> <span class="operator">=</span> LayoutInflater.from(<span class="built_in">this</span>).inflate(R.layout.item_dialog_view,<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">EditText</span> <span class="variable">editText</span> <span class="operator">=</span> (EditText) dialogView.findViewById(R.id.item_dialog_et);</span><br><span class="line">        builder.setPositiveButton(<span class="string">&quot;yes&quot;</span>, <span class="keyword">new</span> <span class="title class_">DialogInterface</span>.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(DialogInterface dialog, <span class="type">int</span> which)</span> &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> editText.getText().toString();</span><br><span class="line">                <span class="type">Bean</span> <span class="variable">bean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bean</span>();</span><br><span class="line">                bean.setDialogData(msg);</span><br><span class="line">                mListView.setAdapter(mMyAdapter);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).setNegativeButton(<span class="string">&quot;no&quot;</span>,<span class="literal">null</span>).setView(dialogView).show();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在MyAdapter中的有一个接口IShowDialog,里面有一个show()方法,这个方法在ImageView的点击事件里调用—mIShowDialog.show(),mIShowDialog是接口对象,在MainActivity里实现IShowDialog接口,同时复写show()方法,显示dialog的代码就写在这个方法里.在点击对应的ImageView时就会调用这个方法,实现通过item的组件来控制activity里组件的显示.在MyAdapter里还有一个setIShowDialog(IShowDialog IShowDialog)方法,这个方法是在MainActivity中调用—mMyAdapter.setIShowDialog(this);这里的this就是指MainActivity,也就是通过这个方法把activity与adapter联系起来,实现在adapter中的操作activity中组件.</p>
+<p>###总结:<br>代码执行的大致流程是: 点击相应的ImageView —&gt; mImageView.setOnClickListener —-&gt; mIShowDialog(在这里相当于MainActivity).show(); –&gt;执行MainActivity中的代码 public void show(){} —-&gt; showMsg();</p>
+<p>ps:本来还要做的是点击dialog的yes按钮时就会把EditText中的内容显示到相应的item中的TextView中的,但是由于convertView的复用,item显示内容时会出现混乱,而且当在其他的item中显示EditText输入的内容时,前一条显示的内容就会消失,并没有保存下来.这几个问题还没有想出解决的办法,就先写这个吧,等想到了解决的办法之后,再完善吧!!!</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何让吴磊、易烊千玺、肖站等小鲜肉围着你转 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="话不多说， 先上效果图">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="如何让吴磊、易烊千玺、肖站等小鲜肉围着你转"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>如何让吴磊、易烊千玺、肖站等小鲜肉围着你转</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/03/06/公众号/windymaio/环形旋转/环形旋转/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-03-06T08:57:00.000Z">
+          2020-03-06
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>话不多说， 先上效果图</p>
+<img src='image/1.gif'>
+
+
+
+
+
+<span id="more"></span>
+
+<p>接下来看如何实现。</p>
+<p>用到的知识点就是 css 中的 position 属性，以及 transform、transition 属性。</p>
+<p>代码不是很多就直接上代码码了，相关的注释也都写了，应该不难懂。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="variable constant_">DOCTYPE</span> html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;环形旋转&lt;/title&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;style&gt;</span><br><span class="line"></span><br><span class="line">        .container &#123;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            position: relative;</span><br><span class="line">            width: 50%;</span><br><span class="line">            height: 1000px;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .circle-box &#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            top: 36%;</span><br><span class="line">            left: 41%;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .center-point &#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            top: 32%;</span><br><span class="line">            left: 32%;</span><br><span class="line">            width: 240px;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .circle &#123;</span><br><span class="line">            /* 这里一定要绝对定位，这样位置才能铺开来 */</span><br><span class="line">            position: absolute;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 50px;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        .circle img &#123;</span><br><span class="line">            border-radius: 50% 50%;</span><br><span class="line">            width: 100px;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;img class=&quot;center-point&quot; src=&quot;./image/10.jpeg&quot; alt=&quot;&quot;/&gt;</span><br><span class="line">    &lt;div class=&quot;circle-box&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle0&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/1.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle1&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/2.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle2&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/3.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle3&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/4.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div class=&quot;circle circle4&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/5.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle5&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/6.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle6&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/7.jpeg&quot; alt=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle7&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/8.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;circle circle8&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;./image/9.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var length = $(&#x27;.circle&#x27;).length</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    for (var i = 0; i &lt; length; i++) &#123;</span><br><span class="line">        $(&#x27;.circle&#x27;).eq(i).css(&#123;</span><br><span class="line">            &#x27;transform&#x27;: &#x27;rotate(&#x27; + (i * 40) + &#x27;deg) &#x27; + &#x27;translateY(260px) &#x27; + &#x27;rotateZ(-&#x27; + (i * 40) + &#x27;deg)&#x27;,</span><br><span class="line">            &#x27;transition&#x27;: &#x27;all 2s&#x27;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    var times = 0</span><br><span class="line"></span><br><span class="line">    // 鼠标悬浮到图片上面，触发旋转动画</span><br><span class="line">    // $(&#x27;.circle-box&#x27;).hover(function () &#123;</span><br><span class="line">    //     for (var i = 0; i &lt; length; i++) &#123;</span><br><span class="line">    //         $(&#x27;.circle&#x27;).eq(i).css(&#123;</span><br><span class="line">    //             &#x27;transform&#x27;: &#x27;rotate(&#x27; + ((i + times) * 40) + &#x27;deg) &#x27; + &#x27;translateY(260px) &#x27; + &#x27;rotateZ(-&#x27; + ((i + times) * 40) + &#x27;deg)&#x27;,</span><br><span class="line">    //             &#x27;transition&#x27;: &#x27;all 2s&#x27;</span><br><span class="line">    //         &#125;)</span><br><span class="line">    //     &#125;</span><br><span class="line">    // &#125;, function () &#123;</span><br><span class="line">    //     times++</span><br><span class="line">    // &#125;)</span><br><span class="line"></span><br><span class="line">    // 每隔 2s 执行一次动画</span><br><span class="line"></span><br><span class="line">    setInterval(function()&#123;</span><br><span class="line">        times++ </span><br><span class="line">        for (var i = 0; i &lt; length; i++) &#123;</span><br><span class="line">            $(&#x27;.circle&#x27;).eq(i).css(&#123;</span><br><span class="line">                &#x27;transform&#x27;: &#x27;rotate(&#x27; + ((i + times) * 40) + &#x27;deg) &#x27; + &#x27;translateY(260px) &#x27; + &#x27;rotateZ(-&#x27; + ((i + times) * 40) + &#x27;deg)&#x27;,</span><br><span class="line">                &#x27;transition&#x27;: &#x27;all 2s&#x27;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,2000)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

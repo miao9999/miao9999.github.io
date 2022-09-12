@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>github + hexo 博客的搭建过程 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="安装 Node.js &amp;amp;nbsp;&amp;amp;nbsp;  点击下载对 Node.js 不是很懂，只知道需要它。
+
+安装 git (mac 自带，windows 就不清楚了)
+
+注册 github 账号。
+
+设置 SSH Key 到 github">
+  
+
+  
+  
+  <meta name="keywords" content="hexo 博客">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="github + hexo 博客的搭建过程"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>github + hexo 博客的搭建过程</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/14/一/github_+_hexo_博客搭建过程/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-14T08:57:00.000Z">
+          2017-04-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <ol>
+<li><p>安装 Node.js &amp;nbsp;&amp;nbsp;  <a target="_blank" rel="noopener" href="https://nodejs.org/en/">点击下载</a><br/><br>对 Node.js 不是很懂，只知道需要它。<br/></p>
+</li>
+<li><p>安装 git (mac 自带，windows 就不清楚了)<br/></p>
+</li>
+<li><p>注册 github 账号。</p>
+</li>
+<li><p>设置 SSH Key 到 github <span id="more"></span></p>
+</li>
+<li><p>添加 SSH Key 到 github<br><strong>以上的几步网上随便找都能找到，比较简单，就不多啰嗦了</strong></p>
+</li>
+<li><p>在 Github 中创建一个名字名 username.github.io 的仓库<br /><br><strong>注意：</strong>这个仓库的名字必须要以相关联的 github的 username</p>
+</li>
+<li><p>安装 Hexo</p>
+<ol>
+<li>新建一个名为 Hexo 的文件夹</li>
+<li>打开终端，运行 npm install -g hexo 进行安装</li>
+<li>安装完成后进入 Hexo 文件中运行<br>hexo init （初始化）<br>hexo g （生成）<br>hexo s（启动服务本地预览）</li>
+</ol>
+<p>  <strong>到此博客搭建就完成了</strong><br>  接下来换一个好看一点的主题</p>
+</li>
+<li><p>更换博客主题</p>
+<ol>
+<li>运行 hexo clean（清除以前的主题配置）</li>
+<li>复制主题 git clone 主题链接（如：git clone <a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Anisina.git%EF%BC%89">https://github.com/Haojen/hexo-theme-Anisina.git）</a></li>
+<li>修改 Hexo 目录下的 config.yml 配置文件中的 theme 属性为主主题的名字（上面的例子中属性的名字就是Anisina）</li>
+<li>启动主题<br>cd themes&#x2F;Anssina（主题名）<br>git pull<br>hexo g<br>hexo s （可有可无，不想本地预览可以省略）</li>
+</ol>
+<p>  <strong>接下来就是重要的一步</strong>  </p>
+</li>
+<li><p>把博客的主题、文章等其他内容关联到 github 中，就可以通过username.github.io 访问  </p>
+<ol>
+<li>进入 Hexo 的根目录  在 github 上新那一个名为 username.github.io 的仓库<br>git clone https：&#x2F;&#x2F;github.com.username&#x2F;username.github.io.git  .deploy&#x2F;miao9999.github.io<br>这里的意思是把 github 的远程仓库 clone 到本地一个 .deploy 文件中</li>
+<li>创建一个文本文件（.txt），复制以下的内容<br>hexo generate<br> cp -R public&#x2F;* .deploy&#x2F;miao9999.github.io<br>cd .deploy&#x2F;miao9999.github.io<br>git add .<br>git commit -m “update”<br> git push origin master<br> 把该文件命名为 deploy.sh 这样这个文件就是一个脚本文件，并把它放到 username.github.io 文件中的 .git文件夹中。在终端执行 bash deploy.sh 执行脚本文件，输入密码就可以完成博客的部署。</li>
+</ol>
+</li>
+<li><p>当完成可修改文章之后，进入 Hexo 根目录中执行<br>hexo g<br>bash deploy.sh 即可。</p>
+</li>
+</ol>
+<hr />
+**PS:**  常用的一些 hexo 命令    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+hexo new ’文章名‘ 新建文章    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo new page 'pagename'  新建页面      
+
+<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;常用简写：<br>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;hexo n &#x3D; hexo new 新建文章<br>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;hexo g &#x3D; hexo &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;generate 生成页面<br>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;hexo s &#x3D; hexo server 启动本地服务<br>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;hexo d &#x3D; hexo deploy 部署博客</p>
+<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;刚开始学习，只能理解这<br>么多，后续对博客的美化以及一些其他的配置，研究之后再做记录。</p>
+<p>​    </p>
+<p>   &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<em><strong>附</strong></em>  <a target="_blank" rel="noopener" href="http://www.kancloud.cn/wizardforcel/hexo-doc/101377">Hexo 中文文档</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/hexo-博客/">hexo 博客</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

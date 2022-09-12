@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kotlin in Action 7 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="1.4.4 互操作性关于互操作性，你关心的第一件事可能是在  Kotlin 中『我可以使用现有的库吗？』，答案是『是的，当然可以』。不管是哪种库的 API 你都可以使用，你可以在 Kotlin 中使用它们。你可以调用 Java 的方法，扩展 Java 类以及实现 Java 接口，在 Kotlin 类中使用 Java 的注释，等等。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Kotlin in Action 7"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Kotlin in Action 7</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-09-13T09:03:27.000Z">
+          2017-09-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="1-4-4-互操作性"><a href="#1-4-4-互操作性" class="headerlink" title="1.4.4 互操作性"></a>1.4.4 互操作性</h4><p>关于互操作性，你关心的第一件事可能是在  Kotlin 中『我可以使用现有的库吗？』，答案是『是的，当然可以』。不管是哪种库的 API 你都可以使用，你可以在 Kotlin 中使用它们。你可以调用 Java 的方法，扩展 Java 类以及实现 Java 接口，在 Kotlin 类中使用 Java 的注释，等等。<span id="more"></span></p>
+<p>与其他的 JVM 语言不同的是，在互操作性方面，Kotlin 更进一步，在 Java 中也可以很容易的调用 Kotlin 代码。不需要任何技巧：Kotlin 类和方法可以像标准的 Java 类和方法一样被准确的调用。这样就提供了在项目中任何有 Java 和 Kotlin 代码混合的地方的灵活性。当你开始在 Java 代码的项目中使用 Kotlin 代码时，先在代码库在的任何一个类里运行 Java —&gt; Kotlin 的转换器，然后剩余的代码就会自动编译执行而不需要做任何修改。不管转换的类在项目中起什么作用，这个操作都会有效。</p>
+<p>Kotlin 在互操作性上的另一个注重的领域是，最大程度的利用 Java 现有的库。例如，Kotlin 没有它自己的集合库。它完全依赖 Java 标准库里的类，通过扩展它们的功能从而在使用 Kotlin 时更加方便。（我们会在后续的章节详细的介绍这个机制）这就意味着当你从 Kotlin 中调用 Java API 时不再需要包装或转换对象，反之亦然。Kotlin 提供的所有的 API 在运行时都不会有其他的消耗。</p>
+<p>Kotlin 工具也完全支持跨语言项目。它能够编译 Java 和 Kotlini 混合的任意的源文件，并不关心它们依赖什么语言。IDE 也可以跨语言工作，可以作的事情如下：</p>
+<ul>
+<li>自由运行在 Java 和 Kotlin 源文件之中</li>
+<li>调试混合语言的项目和不同的语言编写的代码之间的步骤</li>
+<li>重构 Java 方法，让他们在 Kotlin 代码中使用时是正确的，反之亦然</li>
+</ul>
+<p>我相信我们已经说服你想要试一试 Kotlin。那么，如何开始呢？在下一章我们会讨论 Kotlin 代码的编译和运行过程，使用命令行和不同的工具进行。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

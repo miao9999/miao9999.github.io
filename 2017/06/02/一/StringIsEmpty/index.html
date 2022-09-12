@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>判断字符串是否为空 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="判断字符串是否为空是在 Android 开发中是最长用的一个判断，判断时也经常会看到有不同的判断方式，今天专门研究了一下，记录下来。">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="判断字符串是否为空"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>判断字符串是否为空</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/06/02/一/StringIsEmpty/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-06-02T09:03:27.000Z">
+          2017-06-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>判断字符串是否为空是在 Android 开发中是最长用的一个判断，判断时也经常会看到有不同的判断方式，今天专门研究了一下，记录下来。 <span id="more"></span></p>
+<p>先定义一个字符串，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String s;</span><br></pre></td></tr></table></figure>
+
+<p>这种定义方式是我们学用的方式，那么这样定义时在字符串时，该怎么判断它是不是空呢？来用代码验证一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (s == <span class="literal">null</span>)&#123;</span><br><span class="line">    Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;s == null&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;s&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打出的来 log 是这样的：</p>
+<blockquote>
+<p>12-13 22:57:01.693 5129-5129&#x2F;com.example.dddd.myapplication E&#x2F;MainActivity: s &#x3D;&#x3D; null</p>
+</blockquote>
+<p>可以看到这个时候，如果 s 没有赋值，它就为 null。</p>
+<p>现在做一个小改动，这样定义字符串，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这时我们这这样来判断，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (s == <span class="literal">null</span>)&#123;</span><br><span class="line">    Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;s == null&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span> (s.isEmpty())&#123;</span><br><span class="line">    Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;s is empty&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;s&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样打出来的 log 是这样的：</p>
+<blockquote>
+<p>12-13 23:06:35.263 6017-6017&#x2F;com.example.dddd.myapplication E&#x2F;MainActivity: s is empty</p>
+</blockquote>
+<p>当用 new 关键字创建字符串对象时，如果 s 没有赋值，那么这时的 s 并不是 null，而它的 isEmpty（）方法为 true，这时进入到 isEmpty（）方法中去看看，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns &#123;<span class="doctag">@code</span> true&#125; if, and only if, &#123;<span class="doctag">@link</span> #length()&#125; is &#123;<span class="doctag">@code</span> 0&#125;.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if &#123;<span class="doctag">@link</span> #length()&#125; is &#123;<span class="doctag">@code</span> 0&#125;, otherwise</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> false&#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// Empty string has &#123;@code count == 0&#125; with or without string compression enabled.</span></span><br><span class="line">    <span class="keyword">return</span> count == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到只有当字符串的长度为 0 时，才会返回 true。所有用 new 关键字创建的字符串对象在没有赋值的情况下它的长度是 0 ，但并不是 null。</p>
+<p>还有一个方法是用 TextUtils.isEmpty() 这个方法来判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TextUtils.isEmpty(string))&#123;</span><br><span class="line">    Log.d(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;string.isempty&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入到这个方法里面去看一看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns true if the string is null or 0-length.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> str the string to be examined</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> true if str is null or zero length</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">(<span class="meta">@Nullable</span> CharSequence str)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> str == <span class="literal">null</span> || str.length() == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这个方法是当字符串为 null 或长度为 0 时，返回 true，与 String 的 isEmpty（）方法比起来，这个方法更严谨一些，所以可以尽量使用这个方法来避免字符串的空指针异常。</p>
+<p>还有一个经常用的判断方法就是 if（s &#x3D;&#x3D; “”），这个就很简单了，就不多言了。</p>
+<p><strong>总结：</strong>当没有用 new 关键字创建字符串对象，或是没有 s &#x3D; “”，这两种创建方式的话，是不能用 isEmpty（）方法来判断的，那样的话会报空指针异常。所以在判断字符串是否为空时要注意这一点，避免报错。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Kotlin/">Kotlin</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

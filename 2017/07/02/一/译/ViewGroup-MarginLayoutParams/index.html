@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ViewGroup.MarginLayoutParams | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="Class Overview(类概述)layouts 的每个子 layout 信息都支持 margins。参考 ViewGroup Margin Layout Attributes 列举了该类支持的所有子 view 的属性。">
+  
+
+  
+  
+  <meta name="keywords" content="Android 翻译">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ViewGroup.MarginLayoutParams"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ViewGroup.MarginLayoutParams</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/07/02/一/译/ViewGroup-MarginLayoutParams/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-07-02T09:03:27.000Z">
+          2017-07-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>layouts 的每个子 layout 信息都支持 margins。参考 <strong>ViewGroup Margin Layout Attributes</strong> 列举了该类支持的所有子 view 的属性。<span id="more"></span></p>
+<h3 id="XML-Attributes-XML-属性"><a href="#XML-Attributes-XML-属性" class="headerlink" title="XML Attributes(XML 属性)"></a>XML Attributes(XML 属性)</h3><p><strong><code>android:layout_marginBotton</code></strong></p>
+<p>在该 view 的底边指定一个特定的空间。这个空间是在 view 边界的外部。margin 值应该是正数。</p>
+<p>必须是一个具体的值，一个浮点数字加一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>这相当于全局属性资源符号 layout_marginBottom。</p>
+<p><em>相关的方法：</em></p>
+<p>setMargins(int,int,int,int)</p>
+<p><strong><code>android:layout_marginEnd</code></strong></p>
+<p>在该 view 的结束的一边指定一个特定的空间。这个空间是在 view 边界的外部。margin 的值应该是正数。</p>
+<p>必须是一个具体的值，一个浮点数字加一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>这相当于全局属性资源符号 layout_marginEnd。</p>
+<p><em>相关的方法：</em></p>
+<p>setMarginEnd(int)</p>
+<p><strong><code>android_marginLeft</code></strong></p>
+<p>在该 view 的左边指定一个特定的空间。这个空间是在 view 边界的外部。margin 的值应该是正数。</p>
+<p>必须是一个具体的值，一个浮点数字加一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>这相当于全局属性资源符号 layout_marginLeft。</p>
+<p><em>相关的方法：</em></p>
+<p>setMargins(int,int,int,int)</p>
+<p><strong><code>android:layout_marginRight</code></strong></p>
+<p>在该 view 的右边指定一个特定的空间。这个空间是在 view 边界的外部。margin 的值应该是正数。</p>
+<p>必须是一个具体的值，一个浮点数字加一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>这相当于全局属性资源符号 layout_marginRight。</p>
+<p><em>相关的方法：</em></p>
+<p>setMargins(int,int,int,int)</p>
+<p><strong><code>android:layout_marginStart</code></strong></p>
+<p>在该 view 的开始的一边指定一个特定的空间。这个空间是在 view 边界的外部。margin 的值应该是正数。</p>
+<p>必须是一个具体的值，一个浮点数字加一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>这相当于全局属性资源符号 layout_marginStart。</p>
+<p><em>相关的方法：</em></p>
+<p>setMarginStart(int)</p>
+<p><strong><code>android:layout_marginTop</code></strong></p>
+<p>在该 view 的上边指定一个特定的空间。这个空间是在 view 边界的外部。margin 的值应该是正数。</p>
+<p>必须是一个具体的值，一个浮点数字加一个单位如『14.5sp』。可选的单位有：px（pixels 象素），dp（density-independent pixels 密度独立象素），sp（scaled pixels based on perferred font size 基于优选字体大小的缩放像素『一般用于设置字体大小』），mm（millimeters 毫米）。</p>
+<p>也可能是对包含该类型值的资源或主题属性的引用。</p>
+<p>这相当于全局属性资源符号 layout_marginTop。</p>
+<p><em>相关的方法：</em></p>
+<p>setMargins(int,int,int,int)</p>
+<h3 id="Fields-字段"><a href="#Fields-字段" class="headerlink" title="Fields(字段)"></a>Fields(字段)</h3><p><strong><code>public int bottomMargin</code></strong></p>
+<p>以象素为单位的下边距。margin 值应该是正数。调用 setLayoutParams(LayoutParamsp) 方法后为这个值重新分配一个新的值。</p>
+<p><strong><code>public int leftMargin</code></strong></p>
+<p>以象素为单位的左边距。margin 值应该是正数。调用 setLayoutParams(LayoutParamsp) 方法后为这个值重新分配一个新的值。</p>
+<p><strong><code>public int rightMargin</code></strong></p>
+<p>以象素为单位的右边距。margin 值应该是正数。调用 setLayoutParams(LayoutParamsp) 方法后为这个值重新分配一个新的值。</p>
+<p><strong><code>public int topMargin</code></strong></p>
+<p>以象素为单位的上边距。margin 值应该是正数。调用 setLayoutParams(LayoutParamsp) 方法后为这个值重新分配一个新的值。</p>
+<h3 id="Public-Constructors-公共构造方法"><a href="#Public-Constructors-公共构造方法" class="headerlink" title="Public Constructors(公共构造方法)"></a>Public Constructors(公共构造方法)</h3><p><strong><code>public ViewGroup.MarginLayoutParams(Context c,AttributeSet attrs)</code></strong></p>
+<p>创建一个新的布局参数集合。这些值是从提供的属性集合和 context 中提取的。</p>
+<p><em>参数</em></p>
+<p>c 		应用的环境</p>
+<p>attrs 	来自于布局参数的属性集合</p>
+<p><strong><code>public ViewGroup.MarginLayoutParams(int width,int height)</code></strong></p>
+<p><strong><code>public ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams source)</code></strong></p>
+<p>复制构造方法。克隆 source 的宽、高和 margin 值。</p>
+<p><em>参数</em></p>
+<p>source 	克隆的对象</p>
+<h3 id="Public-Methods-公共方法"><a href="#Public-Methods-公共方法" class="headerlink" title="Public Methods(公共方法)"></a>Public Methods(公共方法)</h3><p><strong><code>public int getLayoutDirection()</code></strong></p>
+<p>返回布局的方向。可以是 LAYOUT_DIRECTION_LTR 或是 LAYOUT_DIRECTION_RTL	。</p>
+<p><em>返回值</em></p>
+<p>int 		布局的方向</p>
+<p><strong><code>public int getMarginEnd()</code></strong></p>
+<p>返回以象素为单位的结尾 margin 值。</p>
+<p><strong>相关的 XML 属性值</strong></p>
+<p>android:layout_marginEnd</p>
+<p><em>返回值</em></p>
+<p>int 		以象素为单位的结尾 margin 值</p>
+<p><strong><code>public int getMarginStart()</code></strong></p>
+<p>返回以象素为单位的开始的 margin 值。</p>
+<p><strong>相关的 XML 属性值</strong></p>
+<p>android:layout_marginStart</p>
+<p><em>返回值</em></p>
+<p>int 		以象素为单位的开始 margin 值</p>
+<p><strong><code>public boolean isMarginRelative()</code></strong></p>
+<p>检查 margin 是否相对。</p>
+<p><strong>相关的 XML 属性</strong></p>
+<p>android:layout_marginStart</p>
+<p>android:layout_marginEnd</p>
+<p><em>返回值</em></p>
+<p>boolean 	marginStart 或 marginEnd 已经设定，返回 true</p>
+<p><strong><code>public void resolveLayoutDirection(int layoutDircetion)</code></strong></p>
+<p>由 requestLayout()方法调用。根据布局的方向可以重写左右 margin 的值。</p>
+<p><em>参数</em></p>
+<p>layoutDircetion 		布局的方向值（int）</p>
+<p><strong><code>public void setLayoutDircetion(int layoutDirection)</code></strong></p>
+<p>设置布局的方向。</p>
+<p><em>参数</em></p>
+<p>layoutDirection 		布局的方向。LAYOUT_DIRECTION_LTR 或是 LAYOUT_DIRECTION_RTL</p>
+<p><strong><code>public void setMarginEnd(int end)</code></strong></p>
+<p>设置相对结束 margin。margin 值应该是正数。</p>
+<p><strong>相关的 XML 属性</strong></p>
+<p>android:layout_marginEnd</p>
+<p><em>参数</em></p>
+<p>end 	结束 margin 的值</p>
+<p><strong><code>public void setMarginStart(int start)</code></strong></p>
+<p>设置相对开始 margin。margin 值应该是正数。</p>
+<p><strong>相关的 XML 属性</strong></p>
+<p>android:layout_marginStart</p>
+<p><em>参数</em></p>
+<p>start 	开始 margin 的值</p>
+<p><strong><code> public void setMargins（int left,int top,int right,int bottom）</code></strong></p>
+<p>设置 margin，以象素为单位。需要先调用 requestLayout() 方法，这样新的 margin 值才能被使用。根据布局的方向左右 margin 值可能会被重写。margin 值应该是正数。</p>
+<p><strong>相关的 XML 属性</strong></p>
+<p>android:layout_marginLeft</p>
+<p>android:layout_marginTop</p>
+<p>android:layout_marginRight</p>
+<p>android:layout_marginBottom</p>
+<p><em>参数</em></p>
+<p>left 			左 margin 值</p>
+<p>top 			上 margin 值</p>
+<p>right 		右 margin 值</p>
+<p>bottom 		下 margin 值</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-翻译/">Android 翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

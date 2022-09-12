@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Toast 解决连续显示 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="Toast  是 Android 开发最常见的组件之一，经常用 toast 来显示一些提示信息，但在开发中经常有这样一个问题：连续点击某个按钮，toast 会一直现，如果点击的次数很多，可能会有十几秒的时间都在显示 toast，这样的用户体验就不是很好。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Toast 解决连续显示"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Toast 解决连续显示</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/06/02/一/toast禁止连续点击/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-06-02T09:03:27.000Z">
+          2017-06-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Toast  是 Android 开发最常见的组件之一，经常用 toast 来显示一些提示信息，但在开发中经常有这样一个问题：连续点击某个按钮，toast 会一直现，如果点击的次数很多，可能会有十几秒的时间都在显示 toast，这样的用户体验就不是很好。 <span id="more"></span></p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Toast.makeText(MainActivity.<span class="built_in">this</span>, <span class="string">&quot;&quot;</span>, Toast.LENGTH_SHORT).show();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的这种创建方法是最常见的一种，尤其是配合 Android Studio 插件一起使用时更加方便快捷，只需要打几个字母就可以创建完成。但是这样的创建方法就会导致上述问题，那么该如何解决呢？</p>
+<p>进去 Toast 源码查看 makeText 方法可以看到这个方法会返回一个 Toast 对象，如果我们的代码写成这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">findViewById(R.id.tv).setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span> &#123;</span><br><span class="line">                Toast.makeText(MainActivity.<span class="built_in">this</span>, <span class="string">&quot;toast&quot;</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>每点击一次就会创建一个 Toast 对象，每个 Toast 对象都会显示几秒，这样问题就出来了，其实到这里就可以看出问题的根本原因是每次点击都会创建一个 Toast 对象，如果设置成只有一个 Toast 对象，不管怎么点击都不会创建新的对象，而是只有已经创建好的对象，这样问题是不是就可以解决了呢，用代码验证一下就知道了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Toast toast;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line">    findViewById(R.id.tv).setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (toast == <span class="literal">null</span>)&#123;</span><br><span class="line">                toast = Toast.makeText(MainActivity.<span class="built_in">this</span>,<span class="string">&quot;content &quot;</span>,Toast.LENGTH_SHORT);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                toast.setText(<span class="string">&quot;content&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            toast.show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>先定义一个 Toast 对象，在点击时判断 toast 是否为空，如果为空则创建一个 Toast 对象，不为空就直接设置显示信息。这样就可以避免每次点击都会创建 Toast 对象的问题了。</p>
+<p>如果每次需要 Toast 的时候都这么写一次就太烦琐了，所以接下来的事情就是封装，封装成一个 Toast 的工具类，一次封装，到处使用，这个很程序员 ，嘻嘻……</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShowToast</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Toast toast;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">showToastOne</span><span class="params">(Context context,<span class="type">int</span> content)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (toast == <span class="literal">null</span>)&#123;</span><br><span class="line">            toast = Toast.makeText(context,content + <span class="string">&quot;&quot;</span>,Toast.LENGTH_SHORT);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            toast.setText(content + <span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        toast.show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">showToastOne</span><span class="params">(Context context,String content)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (toast == <span class="literal">null</span>)&#123;</span><br><span class="line">            toast = Toast.makeText(context,content + <span class="string">&quot;&quot;</span>,Toast.LENGTH_SHORT);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            toast.setText(content + <span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        toast.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Android/">Android</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

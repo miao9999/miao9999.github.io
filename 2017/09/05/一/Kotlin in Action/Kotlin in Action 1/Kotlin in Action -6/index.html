@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kotlin in Action 6 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="1.4.3 安全性一般来说，我们所说的程序语言的安全性，意思是它的设计可以防止程序中的某些错误。当然，这也不是绝对的性能，没有语言能够防止所有可能的错误。另外，防止错误通常是要付出代价的。你需要把更多的程序运行的目的信息告诉编译器，所以编译器能够查实与程序的目的相匹配的信息。正因为如此，所以总是会有一个关于权衡安全水平和效率损失的更详细的注释。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Kotlin in Action 6"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Kotlin in Action 6</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-09-05T09:03:27.000Z">
+          2017-09-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="1-4-3-安全性"><a href="#1-4-3-安全性" class="headerlink" title="1.4.3 安全性"></a>1.4.3 安全性</h4><p>一般来说，我们所说的程序语言的安全性，意思是它的设计可以防止程序中的某些错误。当然，这也不是绝对的性能，没有语言能够防止所有可能的错误。另外，防止错误通常是要付出代价的。你需要把更多的程序运行的目的信息告诉编译器，所以编译器能够查实与程序的目的相匹配的信息。正因为如此，所以总是会有一个关于权衡安全水平和效率损失的更详细的注释。<span id="more"></span></p>
+<p>在 Kotlin 中，我们会努力实现比 Java 更高的安全水平，而减少更多的代价。运行在 JVM 上已经提供了大量的安全保证：例如，内存安全，防止缓冲溢出，和一些其他由于动态内存分配错误的使用而导致的问题。做为一个在 JVM 上的静态语言，Kotlin 也会确保应用程序的类型安全。这样做付出的代价比 Java 更小一些：你不需要指定所有类型的声明，因为大多数的时候，编译器会自动推断类型。</p>
+<p>Kotlin 还做出了超越，意味着通过在编译时检查而不是在运行是失败从而防止更多的错误。更重要的是，Kotlin 移除了 <em>空指针异常</em> 。Kotlin 类型系统会检查值能不能为空，并且会禁止在运行时可能会导致空指针异常的操作。这需要的额外的代价是最小的：标记为可空类型只有一个字符，一个问号结尾：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s:String? = <span class="literal">null</span>       <span class="number">1</span></span><br><span class="line"><span class="keyword">val</span> s2:String = <span class="string">&quot;&quot;</span>         <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>1:可以为空</p>
+<p>2:不可以为空</p>
+<p>另外，Kotlin 提供了许多处理可空数据的便捷方法。</p>
+<p>总是有一个权衡你的安全水平和生产力损失需要投入更详细的注释。这将大大有助于消除应用程序崩溃。</p>
+<p>Kotlin 消除的另外一个异常类型是 <em>类型转换异常</em> 。当你要把一个对象投射到一种类型时，没有首先检查这个类型是否正确是会出现的异常。在 Java 中，开发者通常会省略检查，因为在下面的检查中类型必须是重复的。另一方面，在 Kotlin 中，检查和转换结合成了一个单一的操作：检查类型后，可以引用该类型的成员而无需添加任何类型。所以，没有任何理由去省略查检，也没有出错的可能。以下是工作的原理；</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(value <span class="keyword">is</span> String)        <span class="number">1</span></span><br><span class="line">    println(value.toUpperCase()) <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>1：检查类型</p>
+<p>2：使用类型的方法</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

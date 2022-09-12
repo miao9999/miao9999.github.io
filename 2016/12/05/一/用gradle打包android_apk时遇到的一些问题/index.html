@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用 gradle 打包 Android APK 时遇到的一些问题 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="1.打开终端进入到项目的根目录下,执行**.&amp;#x2F;gradlew -v** 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到**&amp;#x2F;User&amp;#x2F;用户名&amp;#x2F;.gradle&amp;#x2F;wrapper&amp;#x2F;dists**(mac的地址)这个文件中,一定要解压之后的文件.这个时候再执行.&amp;#x2F;gradlew -v命令时就不会下载了,直接显示gradle的版本信息.在网速不是很好的情况下,这种方法可以快很多.">
+  
+
+  
+  
+  <meta name="keywords" content="Android gradle">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="用 gradle 打包 Android APK 时遇到的一些问题"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>用 gradle 打包 Android APK 时遇到的一些问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/12/05/一/用gradle打包android_apk时遇到的一些问题/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-12-05T09:03:27.000Z">
+          2016-12-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>1.打开终端进入到项目的根目录下,执行**.&#x2F;gradlew -v** 这时会显示gradle的版本信息,如果是第一次执行这个命令时会自动下载gradle,但需要翻墙.这个过程是很慢的,也容易出现一些问题,为了避免出现这各种问题也为了能快一些完成,可以用另一个办法,就是把下载的地址复制到浏览器中,在浏览器中下载,下载好了之后再把文件放到**&#x2F;User&#x2F;用户名&#x2F;.gradle&#x2F;wrapper&#x2F;dists**(mac的地址)这个文件中,一定要解压之后的文件.这个时候再执行.&#x2F;gradlew -v命令时就不会下载了,直接显示gradle的版本信息.在网速不是很好的情况下,这种方法可以快很多. <span id="more"></span></p>
+<p>在这个过程中有时候还会出现gradlew:Perssion Denied 这样的错误提示,解决办法是:执行<strong>chmod +x gradlew</strong> 这样就可以解决了.</p>
+<p>如果在网上下载的demo的gradle版本跟自己的不一样,在执行这个命令时又会下载相应的版本,不想下载的话,就打开gradlewrapper.properties文件把里面的gradle版本改成自己已有的,不知道的话打开一个用自己的studio编译的文件打开相应的文件就可以看到,这样就不会下载了.</p>
+<p>2.在执行**.&#x2F;gradlew clean** 的时候,可能会出现getting error when trying to run new project in Android Studio 2.2.1这样的错误提示, 这是因为<strong>jdk的版本问题</strong>,我之前用的是1.7的,升级到1.8就好了.</p>
+<p>还可能出现SDK location not found .Define loaction with sdk .dir in the local,properties file or with  an ANDROID_HOME environment variable．这样的错误提示，这是因为找不到sdk的路径.  执行<strong>export ANDROID_HOME&#x3D;&#x2F;SDK地址&#x2F;</strong>(可以在sdkmanager中查看)就可以解决了.</p>
+<p>4.执行**.&#x2F;gradlew build **的时候会出现gradle build fails on lint task 这样的错误提示,我不懂lint是指的什么,所心查了一下lint,在维基百科中是这样解释lint的:</p>
+<blockquote>
+<p>在电脑科学中,lint是一种工具程式的名称,它用来标记原始码中，某些可疑的、不具结构性（可能造成bug）的段落。它是一种静态程序分析工具，最早适用于C语言，在UNIX平台上开发出来。后来它成为通用术语，可用于描述在任何一种电脑程式语言中，用来标记原始码中有疑义段落的工具。</p>
+</blockquote>
+<p>解决办法是:在app中的build.gradle文件中在这里添加<strong>lintOptions</strong><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/20699147/gradle-build-fails-on-lint-task">这里有详细介绍</a></p>
+<pre><code>android &#123;    
+ // This is important, it will run lint   
+ //checks but won&#39;t abort build   
+    lintOptions &#123;      
+     abortOnError false   
+     &#125;
+ &#125;
+</code></pre>
+<p>​	<br>###总结:这是第一次使用gradle编译打包android apk,在这个过程中遇到很多问题,找了很多资料,很感谢前辈们的分享与总结,虽然在找资料的过程中很心烦,但还是坚持下来,把遇到的每一个问题都找到解决的办法,对自己来说也是一次很大的提升,至少对gradle有了更深的了解,加油!!!</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android-gradle/">Android gradle</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>屏幕的一些高度值 | windymiao | code for fun</title>
+
+  
+  <meta name="author" content="windymiao">
+  
+
+  
+  <meta name="description" content="屏幕的一些高度值
+屏幕的高度(1920px)
+1234//屏幕DisplayMetrics dm = new DisplayMetrics();getWindowManager().getDefaultDisplay().getMetrics(dm);Log.e(&amp;quot;MainActivity&amp;quot;, &amp;quot;屏幕高:&amp;quot; + dm.heightPixels);">
+  
+
+  
+  
+  <meta name="keywords" content="Android">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="屏幕的一些高度值"/>
+
+  <meta property="og:site_name" content="windymiao"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">windymiao</a>
+    </h1>
+    <p class="site-description">code for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>屏幕的一些高度值</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/04/12/一/屏幕的一些高度值/屏幕的一些高度值/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-04-12T08:57:00.000Z">
+          2018-04-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="屏幕的一些高度值"><a href="#屏幕的一些高度值" class="headerlink" title="屏幕的一些高度值"></a>屏幕的一些高度值</h3><ol>
+<li><p>屏幕的高度(1920px)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//屏幕</span></span><br><span class="line"><span class="type">DisplayMetrics</span> <span class="variable">dm</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DisplayMetrics</span>();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(dm);</span><br><span class="line">Log.e(<span class="string">&quot;MainActivity&quot;</span>, <span class="string">&quot;屏幕高:&quot;</span> + dm.heightPixels);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+</li>
+<li><p>顶部状态栏的高度(66px)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 状态栏的高度</span></span><br><span class="line"><span class="type">int</span> <span class="variable">statusBarHeight1</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line"><span class="comment">//获取status_bar_height资源的ID</span></span><br><span class="line"><span class="type">int</span> <span class="variable">resourceId</span> <span class="operator">=</span> getResources().getIdentifier(<span class="string">&quot;status_bar_height&quot;</span>, <span class="string">&quot;dimen&quot;</span>, <span class="string">&quot;android&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (resourceId &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">//根据资源ID获取响应的尺寸值</span></span><br><span class="line">    statusBarHeight1 = getResources().getDimensionPixelSize(resourceId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用区域的高度（屏幕的高度-状态栏的高度）(1854px)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//应用区域</span></span><br><span class="line"><span class="type">Rect</span> <span class="variable">outRect1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Rect</span>();</span><br><span class="line"><span class="comment">// outRect1 被处理成应用的显示区域（除状态栏之外的所有可视区域）</span></span><br><span class="line">getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect1);</span><br></pre></td></tr></table></figure>
+
+<p>通过 getWindowVisibleDisplayFrame(outRect1) 方法获取到应用区域的高度</p>
+</li>
+<li><pre><code class="java">public void getWindowVisibleDisplayFrame(Rect outRect) &#123;
+  ...
+      // 通过下面几行获取到应用区域的高度
+        final Rect insets = mAttachInfo.mVisibleInsets;
+        outRect.left += insets.left;
+        outRect.top += insets.top;
+        outRect.right -= insets.right;
+        outRect.bottom -= insets.bottom;
+        return;
+    &#125;
+    // The view is not attached to a display so we don&#39;t have a context.
+    // Make a best guess about the display size.
+    Display d = DisplayManagerGlobal.getInstance().getRealDisplay(Display.DEFAULT_DISPLAY);
+    d.getRectSize(outRect);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. 标题栏的高度（168px）</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   // 标题栏的高度</span><br><span class="line">   int viewTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop(); </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>具体实例</p>
+<p><img src="/Users/limiao/personal/blog/%E4%B8%80/%E5%B1%8F%E5%B9%95%E7%9A%84%E4%B8%80%E4%BA%9B%E9%AB%98%E5%BA%A6%E5%80%BC/DAFF9AA39497391770224A1BA76660C7.jpg" alt="DAFF9AA39497391770224A1BA76660C7"></p>
+<p>​	</p>
+<p>整个屏幕的高度是 1920px，最上面红色的部分为状态栏高度是 66px，拉下来蓝色的部分是标题栏高度是 168px，剩余部分为 content 的内容，setContentView() 时设置的根布局的高度。如果 theme 的主题设置为 NoActionBar 的话，标题栏的高度为 0 ，content 的高度为屏幕的高度-状态栏的高度。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 windymiao
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
