@@ -3,20 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>OkHttp 源码分析 | windymiao | code for fun</title>
+  <title>OkHttp 源码分析 | Five Dimensions(5D) | writing for fun</title>
 
   
-  <meta name="author" content="windymiao">
+  <meta name="author" content="5 D">
   
 
   
-  <meta name="description" content="get 请求
-12345678910111213OkHttpClient client = new OkHttpClient();String run(String url) throws IOException &amp;#123;  Request request = new Request.Builder()      .url(url)      .build();  try (Response response = client.newCall(request).execute()) &amp;#123;    return response.body().string();  &amp;#125;
-
-Response response &amp;#x3D; client.newCall(request).execute()
-返回一个 response 需要一个 OkHttpClient，一个 Request。
-先看 OkHttpClient 类：
-核心代码就是 newCall 方法，其他的代码都是一些值的初始化以及对 OkHttpClient 的配置。">
+  <meta name="description" content="five dimensions">
   
 
   
@@ -30,14 +24,14 @@ Response response &amp;#x3D; client.newCall(request).execute()
 
   <meta property="og:title" content="OkHttp 源码分析"/>
 
-  <meta property="og:site_name" content="windymiao"/>
+  <meta property="og:site_name" content="Five Dimensions(5D)"/>
 
   
   <meta property="og:image" content="/favicon.ico"/>
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="windymiao" type="application/atom+xml">
+  <link href="/images/5d.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Five Dimensions(5D)" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -49,9 +43,9 @@ Response response &amp;#x3D; client.newCall(request).execute()
     <header>
   <div class="site-branding">
     <h1 class="site-title">
-      <a href="/">windymiao</a>
+      <a href="/">Five Dimensions(5D)</a>
     </h1>
-    <p class="site-description">code for fun</p>
+    <p class="site-description">writing for fun</p>
   </div>
   <nav class="site-navigation">
     <ul>
@@ -181,7 +175,7 @@ Response response &amp;#x3D; client.newCall(request).execute()
     Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
     </br>
     
-    &copy; 2022 windymiao
+    &copy; 2022 5 D
     
   </p>
 </footer>
