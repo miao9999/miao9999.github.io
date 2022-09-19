@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>github-ssh设置 | Five Dimensions(5D) | writing for fun</title>
+
+  
+  <meta name="author" content="5 D">
+  
+
+  
+  <meta name="description" content="five dimensions">
+  
+
+  
+  
+  <meta name="keywords" content="工具">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="github-ssh设置"/>
+
+  <meta property="og:site_name" content="Five Dimensions(5D)"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/5d.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Five Dimensions(5D)" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Five Dimensions(5D)</a>
+    </h1>
+    <p class="site-description">writing for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>github-ssh设置</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2022/09/18/github-ssh设置/" rel="bookmark">
+        <time class="entry-date published" datetime="2022-09-18T08:23:12.000Z">
+          2022-09-18
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>用 git 拉取代码时可以选择 https 也可以选择 ssh 的方式。https 方式简单，但需要输入密码，ssh 方式，可以不输入密码，接下来就配置一下 git 上的 ssh。</p>
+<span id="more"></span> 
+
+<h1 id="git-ssh-设置"><a href="#git-ssh-设置" class="headerlink" title="git ssh 设置"></a>git ssh 设置</h1><ol>
+<li><p>先检查电脑上是否已经有 ssh key</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ls</span><br><span class="line">open id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/18/github-ssh%E8%AE%BE%E7%BD%AE/image-20220912135637840.png" alt="image-20220912135637840"></p>
+<p>如果有的话，进入第三步。</p>
+<p>如果没有的话，创建一个 ssh key。</p>
+</li>
+<li><p>创建 ssh key</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email@qq.com&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-t ：指定密钥类型，默认是 rsa，可以省略</li>
+<li>-C：设置注释文字，比如邮箱</li>
+<li>-f：指定密钥文件存储文件名，不指定就使用默认文件名，推荐使用默认的文件名</li>
+</ul>
+<p>接下来会生成  id_rsa 和 id_rsa.pub 两个密钥文件。</p>
+<p>然后会输入两次 push 文件时的密码，不输入直接回车，push 的时候就没有密码，直接提交。</p>
+<blockquote>
+<p>Your identification has been saved in &#x2F;c&#x2F;Users&#x2F;you&#x2F;.ssh&#x2F;id_rsa.<br> Your public key has been saved in &#x2F;c&#x2F;Users&#x2F;you&#x2F;.ssh&#x2F;id_rsa.pub.</p>
+</blockquote>
+</li>
+</ol>
+<p>​			当出现上面的提示的时候，就表明 ssh key 已经生成了。</p>
+<ol start="3">
+<li><p>添加 ssh key 到 github 中</p>
+<ul>
+<li><p>打开 ssh key ，复制文件中内容，注意复制时不要包括 「空格、回车等符号」。</p>
+</li>
+<li><p>登录 github ，右上角进入 settings，进入 SSH and GPG keys 中，点击 New SSH Key，把刚才复制的 key 粘贴到文本框中，key type 保存默认的 Authentication Key，然后点击 Add SSH Key。</p>
+</li>
+</ul>
+</li>
+<li><p>测试 SSH Key</p>
+<p>打开终端输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>有提示，输入 yes 回车即可，如果在前面设置了密码，这里会提示输入密码。</p>
+<blockquote>
+<p>You’ve successfully authenticated, but GitHub does notprovide shell access.</p>
+</blockquote>
+</li>
+</ol>
+<p>​			当看到上面的提示后，ssh key 就设置成功了。</p>
+<p>​			拉取代码的时候，通过 ssh 链接。</p>
+
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/工具/">工具</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 5 D
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
