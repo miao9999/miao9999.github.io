@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>split,splice,slice,sbustring,substr的用法 | Five Dimensions(5D) | writing for fun</title>
+
+  
+  <meta name="author" content="5 D">
+  
+
+  
+  <meta name="description" content="five dimensions">
+  
+
+  
+  
+  <meta name="keywords" content="JavaScript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="split,splice,slice,sbustring,substr的用法"/>
+
+  <meta property="og:site_name" content="Five Dimensions(5D)"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/5d.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Five Dimensions(5D)" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Five Dimensions(5D)</a>
+    </h1>
+    <p class="site-description">writing for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>split,splice,slice,sbustring,substr的用法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2022/09/21/split-splice-slice-sbustring-substr的用法/" rel="bookmark">
+        <time class="entry-date published" datetime="2022-09-21T11:30:34.000Z">
+          2022-09-21
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>split、splice、slice、substring、substr 这几个方法是不是经常看到，是不是经常迷惑， 是不是经常有种【好像是这个，但又不确定】的时候，这篇文章就把这几个方法都整理出来，再也不怕搞混了。</p>
+<!--  more --> 
+
+
+
+<h2 id="split-char-String"><a href="#split-char-String" class="headerlink" title="split(char)  String"></a>split(char)  String</h2><p>使分裂（成不同的派别）；分开；分担；分摊</p>
+<ul>
+<li>char：切分的字符</li>
+</ul>
+<p>用来切分字符串，以某一个字符切分成数组，返回切分之后的数组，数组中不包括切分的字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> arr = str.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr); <span class="comment">// [&#x27;hello&#x27;, &#x27;world&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="splice-index-howmany-item1…itemx-Array"><a href="#splice-index-howmany-item1…itemx-Array" class="headerlink" title="splice(index,howmany,item1…itemx)  Array"></a>splice(index,howmany,item1…itemx)  Array</h2><p>拼接；接合</p>
+<ul>
+<li><p>Index：开始的数组索引，为负数时，从尾部开始，不传为 0</p>
+</li>
+<li><p>howmany：删除几个元素</p>
+</li>
+<li><p>item1：添加的第一个元素</p>
+</li>
+<li><p>itemx：添加的第x个元素</p>
+</li>
+</ul>
+<p>用来删除数组中的项，返回被删除的项，会改变原数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">splice</span>(<span class="number">2</span>,<span class="number">1</span>,<span class="string">&quot;hello&quot;</span>));<span class="comment">//从第 2 个位置，删除 1 个元素，所以[3] 被删除了，所以返回的新数组就是 [3]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);<span class="comment">//[1, 2, &quot;hello&quot;, 4, 5]  改变了原数组，并在被删除的地方添加了新元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="slice-start-end-左开右闭-Array-、String"><a href="#slice-start-end-左开右闭-Array-、String" class="headerlink" title="slice(start,end)  左开右闭   Array 、String"></a>slice(start,end)  左开右闭   Array 、String</h2><p>切成片；削球；被切成片</p>
+<p>用来从一个数组当中切取部分元素，返回一个新的数组，不会改变原数组。</p>
+<ul>
+<li>两个参数可以是负数，为负数时，参数与长度相加，也就是从后往前数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">slice</span>(<span class="number">1</span>));<span class="comment">//[2,3,4,5]  选择序列号从1到最后的所有元素组成的新数组。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">slice</span>(<span class="number">1</span>,<span class="number">3</span>))<span class="comment">//[2,3]  不包含end，序列号为3的元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="substring-start-end-左开右闭-String"><a href="#substring-start-end-左开右闭-String" class="headerlink" title="substring(start,end) 左开右闭 String"></a>substring(start,end) 左开右闭 String</h2><p>用来从一个字符串当中截取部分数据，返回一个新的字符串。</p>
+<ul>
+<li>参数为负数时，自动转换为 0</li>
+</ul>
+<h2 id="substr-start-length-String-不推荐使用，标准里没有规定"><a href="#substr-start-length-String-不推荐使用，标准里没有规定" class="headerlink" title="substr(start,length)  String 不推荐使用，标准里没有规定"></a>substr(start,length)  String 不推荐使用，标准里没有规定</h2><p>用来从一个字符串当中截取部分数据，返回一个新的字符串。</p>
+<ul>
+<li><p>start：开始位置，为负数时与长度相加， 也就是从后往前数</p>
+</li>
+<li><p>length：要截取的长度，为负数时自动转换为 0</p>
+</li>
+</ul>
+
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 5 D
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
