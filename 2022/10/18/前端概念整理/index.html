@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript概念整理 | Five Dimensions(5D) | writing for fun</title>
+
+  
+  <meta name="author" content="5 D">
+  
+
+  
+  <meta name="description" content="five dimensions">
+  
+
+  
+  
+  <meta name="keywords" content="Javascript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JavaScript概念整理"/>
+
+  <meta property="og:site_name" content="Five Dimensions(5D)"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/5d.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Five Dimensions(5D)" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Five Dimensions(5D)</a>
+    </h1>
+    <p class="site-description">writing for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>JavaScript概念整理</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2022/10/18/前端概念整理/" rel="bookmark">
+        <time class="entry-date published" datetime="2022-10-18T02:08:20.000Z">
+          2022-10-18
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>在大多数简单的术语中，函数式是一种编程形式，你可以<font color='red'>将函数作为参数传递给其他函数，并将函数作为值返回</font>。 在函数式编程中，我们以函数的形式思考和编程。</p>
+<p>JavaScript，Haskell，Clojure，Scala 和 Erlang 是部分实现了函数式编程的语言。</p>
+<h2 id="一等函数"><a href="#一等函数" class="headerlink" title="一等函数"></a>一等函数</h2><p>　</p>
+<p> JavaScript 将函数视为一等公民。 那是因为在 JavaScript 及其他函数式编程语言中，<strong>函数是对象</strong>。</p>
+<p>在 JavaScript 中，函数是一种特殊类型的对象。 它们是 Function objects。</p>
+<p>在 JavaScript, 可以像操作其他对象一样操作函数。</p>
+<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><p>高阶函数是对其他函数进行操作的函数，简单来说，高阶函数就是接收一个函数作为参数的函数，或者是把函数作为返回值的函数。</p>
+<p>JavaScript 中的内置函数有很多都是高阶函数，比如操作数组的很多函数，map()、filter()、some() 等等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 高阶函数的使用</span></span><br><span class="line">arr.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item*<span class="number">2</span>);</span><br><span class="line"><span class="comment">// map 函数把函数作为一个参数，是高阶函数的一种使用形式</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>命名空间本质上就是一个普通的对象，将相关的变量和函数封装起来，做为该对象属性和方法。</p>
+<p>作用：解决变量污染的问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&#x27;ll&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&#x27;aa&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">30</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// obj 和 obj1 都是一个命名空间，里面的变量名可以独立存在，不会互相受到影响</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="自执行函数"><a href="#自执行函数" class="headerlink" title="自执行函数"></a>自执行函数</h2><p>自执行函数是将函数的声明和调用合并在一起。</p>
+<p>作用：</p>
+<ul>
+<li><p>封装，通过命名空间或自执行函数实现程序的基本封装，提升程序的可维护性。</p>
+</li>
+<li><p>两种写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">x,y</span>)&#123;<span class="keyword">return</span> x+y&#125;)(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">(<span class="keyword">function</span> (<span class="params">x,y</span>)&#123;<span class="keyword">return</span> x+y&#125;(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自执行函数属于高阶函数</p>
+</li>
+</ul>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>一个函数的返回值是另一个函数。</p>
+<p>闭包是一个携带内部参数的函数，并且这个参数对外是完全隐藏的，不会受到外面的影响。</p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023021250770016">https://www.liaoxuefeng.com/wiki/1022910821149312/1023021250770016</a></p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>Javascript 的作用域是函数作用域。</p>
+<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>使用模块化的好处：</p>
+<ul>
+<li>解决命名冲突</li>
+<li>提供复用性</li>
+<li>提高代码可维护性</li>
+<li>方便模块之间组合，解耦</li>
+<li>多人协作互不干扰</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/145582090">https://zhuanlan.zhihu.com/p/145582090</a></p>
+<h2 id="AMD-规范"><a href="#AMD-规范" class="headerlink" title="AMD 规范"></a>AMD 规范</h2><h2 id="CMD-规范"><a href="#CMD-规范" class="headerlink" title="CMD 规范"></a>CMD 规范</h2>
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Javascript/">Javascript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 5 D
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

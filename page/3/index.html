@@ -67,6 +67,85 @@
 
   
     
+    <h3 class="article-title"><a href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/"><span>mac 用 ssh 设置免密登录到 ubuntu 时的一些问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-10-09T08:57:00.000Z">
+          2017-10-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="设置步骤"><a href="#设置步骤" class="headerlink" title="设置步骤"></a>设置步骤</h4><blockquote>
+<p>提示：有关 ssh 配置信息都保存在用户的 home 目录下</p>
+</blockquote>
+<p>以下执行在 mac 终端执行</p>
+<ol>
+<li>cd .ssh 进入到 .ssh 目录中</li>
+<li>执行 ssh-keygen 生成 ssh 钥匙，一直回车就可以</li>
+<li>执行 ssh-copy-id -p port user@remote，把生成的公钥复制到远程计算机中</li>
+<li>执行成功后，再登录到远程 ubuntu 中就不会再提示输入密码，而是直接登录成功</li>
+</ol>
+<p>以上是正常情况下的操作，但在实际操作中可能会出现一些问题。
+        
+        
+          
+          <p><a class="excerpt-btn" href="/2017/10/09/一/mac 用 ssh 设置免密登录到 ubuntu 时的一些问题/mac 用 ssh 免密登录到 ubuntu 时的一些问题/"><span>阅读全文</span></a></p>
+        
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ssh/">ssh</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/"><span>Kotlin in Action 7</span></a></h3>
     
   
@@ -89,6 +168,8 @@
       
         <h4 id="1-4-4-互操作性"><a href="#1-4-4-互操作性" class="headerlink" title="1.4.4 互操作性"></a>1.4.4 互操作性</h4><p>关于互操作性，你关心的第一件事可能是在  Kotlin 中『我可以使用现有的库吗？』，答案是『是的，当然可以』。不管是哪种库的 API 你都可以使用，你可以在 Kotlin 中使用它们。你可以调用 Java 的方法，扩展 Java 类以及实现 Java 接口，在 Kotlin 类中使用 Java 的注释，等等。
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/"><span>阅读全文</span></a></p>
         
       
@@ -142,6 +223,8 @@
       
         <h4 id="1-4-3-安全性"><a href="#1-4-3-安全性" class="headerlink" title="1.4.3 安全性"></a>1.4.3 安全性</h4><p>一般来说，我们所说的程序语言的安全性，意思是它的设计可以防止程序中的某些错误。当然，这也不是绝对的性能，没有语言能够防止所有可能的错误。另外，防止错误通常是要付出代价的。你需要把更多的程序运行的目的信息告诉编译器，所以编译器能够查实与程序的目的相匹配的信息。正因为如此，所以总是会有一个关于权衡安全水平和效率损失的更详细的注释。
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/"><span>阅读全文</span></a></p>
         
       
@@ -195,6 +278,8 @@
       
         <h3 id="1-4-Kotlin-的哲学"><a href="#1-4-Kotlin-的哲学" class="headerlink" title="1.4 Kotlin 的哲学"></a>1.4 Kotlin 的哲学</h3><p>当我们说起 Kotlin 的时候，我们喜欢说它是一种实用、简洁、安全的语言，重点是互操作性。这几个词到底是什么意思呢？我们依次来看。
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/"><span>阅读全文</span></a></p>
         
       
@@ -248,6 +333,8 @@
       
         <h4 id="1-3-2-Kotlin-用于-Android"><a href="#1-3-2-Kotlin-用于-Android" class="headerlink" title="1.3.2 Kotlin 用于 Android"></a>1.3.2 Kotlin 用于 Android</h4><p>典型的移动应用与典型的企业应用是非常不同的。移动应用是比较小的，它不依赖于整合现有的代码库，它通常需要迅速交付，同时确保在多种设备上可靠地运行。Kotlin 正好可以做这样的项目。
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/08/18/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -4/"><span>阅读全文</span></a></p>
         
       
@@ -301,6 +388,8 @@
       
         <h4 id="1-2-2-静态类型"><a href="#1-2-2-静态类型" class="headerlink" title="1.2.2 静态类型"></a>1.2.2 静态类型</h4><p>正如 Java 一样，Kotlin 是一个静态类型的编程语言。意味着，在编译时程序中的每个表达式的类型都是已知的，编译器可以验证您试图访问的方法和字段是否存在于所使用的对象上。这与动态类型的编程语言形成对比，以在 JVM 上为代表的如 Groovy 和 JRuby。这些语言允许你定义能够存储或返回任意类型的数据的变量和函数，并且在运行时能解析方法和字段的引用。这使得创建数据结构的代码更短，灵活性更高。但也存在缺点，如果名字拼写错误，在编译的时候不能被检测出来，从而人导致运行错误。
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/08/08/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -2/"><span>阅读全文</span></a></p>
         
       
@@ -354,6 +443,8 @@
       
         <h4 id="1-2-4-免费开源"><a href="#1-2-4-免费开源" class="headerlink" title="1.2.4 免费开源"></a>1.2.4 免费开源</h4><p>Kotlin 语言，包括编译器、库、所有相关的工具都是完全开源的，并且免费用于任何目的。它在Apache 2许可证的获得，开放在 GitHub ^3^ 上，欢迎在为社区贡献。可以选择三个开源 IDE 开发 Kotlin 应用：IntelliJ IDEA Community Edition、Android Studio、Eclipse 这三个都是支持的。（IntelliJ IDEA Ultimate也可以开发）
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/08/08/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -3/"><span>阅读全文</span></a></p>
         
       
@@ -413,6 +504,8 @@
 <li>Kotlin 与其他编程语言的不同点</li>
 <li>编写并运行 Kotlin 代码
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/08/01/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -1/"><span>阅读全文</span></a></p>
         
       
@@ -466,6 +559,8 @@
       
         <p>不知不觉已经毕业一年了，现在的状况又回到了去年的这个时候——在各大招聘网站上狂投简历，每天时时刻刻都在刷着邮箱、招聘 APP ，生怕错过一条面试信息。每当有公司回应时，看到消息的那一刻的心情就像是被电击了一样，全身汗毛直立，心跳加快，不知道是我太过紧张这个工作的机会，还是因为心理素质太差。其实每当看完信息，或是跟对方聊过之后也并没有觉得自己太差劲。</p>
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/07/08/胡/轮回-----记毕业一年/"><span>阅读全文</span></a></p>
         
       
@@ -526,6 +621,8 @@
       
         <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>layouts 的每个子 layout 信息都支持 margins。参考 <strong>ViewGroup Margin Layout Attributes</strong> 列举了该类支持的所有子 view 的属性。
         
+        
+          
           <p><a class="excerpt-btn" href="/2017/07/02/一/译/ViewGroup-MarginLayoutParams/"><span>阅读全文</span></a></p>
         
       
@@ -541,74 +638,6 @@
   <div class="article-footer">
     <div class="article-meta pull-left">
 
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Android-翻译/">Android 翻译</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2017/06/30/一/译/ViewGroup-LayoutParams/"><span>ViewGroup.LayoutParams</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2017/06/30/一/译/ViewGroup-LayoutParams/" rel="bookmark">
-        <time class="entry-date published" datetime="2017-06-30T09:03:27.000Z">
-          2017-06-30
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="Class-Overview-类概述"><a href="#Class-Overview-类概述" class="headerlink" title="Class Overview(类概述)"></a>Class Overview(类概述)</h3><p>LayoutParams 是 views 用来告诉它的父容器，它们在父容器中是如何摆放的。参考 <em>ViewGroup Layout Attribute</em> ，列举了该类支持的所有子 view 的属性。</p>
-<p>LayoutParams 基类仅仅描述了 view 对宽度和高度的要求。对于每个方面，可以选择以下的一个：
-        
-          <p><a class="excerpt-btn" href="/2017/06/30/一/译/ViewGroup-LayoutParams/"><span>阅读全文</span></a></p>
-        
-      
-
-
-
-
-
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/一本正经/">一本正经</a>
-    </span>
     
 
     
