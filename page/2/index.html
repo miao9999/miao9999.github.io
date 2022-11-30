@@ -67,6 +67,207 @@
 
   
     
+    <h3 class="article-title"><a href="/2018/11/13/胡/红楼梦/2018-03-23-红楼梦话--1/"><span>红楼梦话--1</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/11/13/胡/红楼梦/2018-03-23-红楼梦话--1/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-11-13T10:34:45.000Z">
+          2018-11-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>初时看红楼梦，有点讨厌黛玉，一有点不高兴，就会耍小性子，又是哭，又是言语尖酸。时隔几年之后再看，反倒是有点喜欢她了。细细想来，当初不喜欢她，其实并不是因为她经常哭，耍小性子而讨厌她，而是因为妒忌才讨厌她。 </p>
+        
+          <p><a class="excerpt-btn" href="/2018/11/13/胡/红楼梦/2018-03-23-红楼梦话--1/"><span>阅读全文</span></a></p>
+        
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/胡说八道/">胡说八道</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/10/23/编译注解 ---实例/"><span>编译注解实例</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/10/23/编译注解 ---实例/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-10-23T08:57:00.000Z">
+          2018-10-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>这个 demo 是<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011315960/article/details/64439575">这篇博客</a>里的一个例子，光看没看懂，又照着写了一遍也还是很懵，为了更好的理解，几乎把每一句核心代码都打印，都注释了，这样才略懂了一些在编译时生成代码这个流程。</p>
+<p>下面这个方法是最懵的，所以注释写了很多，里面的各种元素都比较抽象，看的时候，甚至是第一次写的时候，都不知道在写什么，通过打印把抽象的东西，还原成我们熟悉的东西就好理解多了。
+        
+          <p><a class="excerpt-btn" href="/2018/10/23/编译注解 ---实例/"><span>阅读全文</span></a></p>
+        
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/07/09/一/okhttp源码分析/"><span>OkHttp 源码分析</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/07/09/一/okhttp源码分析/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-09T08:57:00.000Z">
+          2018-07-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>get 请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OkHttpClient</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OkHttpClient</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">String <span class="title function_">run</span><span class="params">(String url)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">Request</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Request</span>.Builder()</span><br><span class="line">      .url(url)</span><br><span class="line">      .build();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> (<span class="type">Response</span> <span class="variable">response</span> <span class="operator">=</span> client.newCall(request).execute()) &#123;</span><br><span class="line">    <span class="keyword">return</span> response.body().string();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em><strong>Response response &#x3D; client.newCall(request).execute()</strong></em></p>
+<p>返回一个 response 需要一个 OkHttpClient，一个 Request。</p>
+<p>先看 OkHttpClient 类：</p>
+<p>核心代码就是 newCall 方法，其他的代码都是一些值的初始化以及对 OkHttpClient 的配置。
+        
+          <p><a class="excerpt-btn" href="/2018/07/09/一/okhttp源码分析/"><span>阅读全文</span></a></p>
+        
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/一本正经/">一本正经</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Android/">Android</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2018/05/28/庆生日/"><span>废话也是有用的</span></a></h3>
     
   
@@ -537,165 +738,6 @@
       <i class="icon-tags"></i>
         <a href="/tags/ssh/">ssh</a>
     </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/"><span>Kotlin in Action 7</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/" rel="bookmark">
-        <time class="entry-date published" datetime="2017-09-13T09:03:27.000Z">
-          2017-09-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h4 id="1-4-4-互操作性"><a href="#1-4-4-互操作性" class="headerlink" title="1.4.4 互操作性"></a>1.4.4 互操作性</h4><p>关于互操作性，你关心的第一件事可能是在  Kotlin 中『我可以使用现有的库吗？』，答案是『是的，当然可以』。不管是哪种库的 API 你都可以使用，你可以在 Kotlin 中使用它们。你可以调用 Java 的方法，扩展 Java 类以及实现 Java 接口，在 Kotlin 类中使用 Java 的注释，等等。
-        
-          <p><a class="excerpt-btn" href="/2017/09/13/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -7/"><span>阅读全文</span></a></p>
-        
-      
-
-
-
-
-
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/"><span>Kotlin in Action 6</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/" rel="bookmark">
-        <time class="entry-date published" datetime="2017-09-05T09:03:27.000Z">
-          2017-09-05
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h4 id="1-4-3-安全性"><a href="#1-4-3-安全性" class="headerlink" title="1.4.3 安全性"></a>1.4.3 安全性</h4><p>一般来说，我们所说的程序语言的安全性，意思是它的设计可以防止程序中的某些错误。当然，这也不是绝对的性能，没有语言能够防止所有可能的错误。另外，防止错误通常是要付出代价的。你需要把更多的程序运行的目的信息告诉编译器，所以编译器能够查实与程序的目的相匹配的信息。正因为如此，所以总是会有一个关于权衡安全水平和效率损失的更详细的注释。
-        
-          <p><a class="excerpt-btn" href="/2017/09/05/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action -6/"><span>阅读全文</span></a></p>
-        
-      
-
-
-
-
-
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/"><span>Kotlin in Action 5</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/" rel="bookmark">
-        <time class="entry-date published" datetime="2017-08-26T09:03:27.000Z">
-          2017-08-26
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="1-4-Kotlin-的哲学"><a href="#1-4-Kotlin-的哲学" class="headerlink" title="1.4 Kotlin 的哲学"></a>1.4 Kotlin 的哲学</h3><p>当我们说起 Kotlin 的时候，我们喜欢说它是一种实用、简洁、安全的语言，重点是互操作性。这几个词到底是什么意思呢？我们依次来看。
-        
-          <p><a class="excerpt-btn" href="/2017/08/26/一/Kotlin in Action/Kotlin in Action 1/Kotlin in Action - 5/"><span>阅读全文</span></a></p>
-        
-      
-
-
-
-
-
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
     
 
     </div>

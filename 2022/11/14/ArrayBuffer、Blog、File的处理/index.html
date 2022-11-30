@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ArrayBuffer、Blog、File的处理 | Five Dimensions(5D) | writing for fun</title>
+
+  
+  <meta name="author" content="5 D">
+  
+
+  
+  <meta name="description" content="five dimensions">
+  
+
+  
+  
+  <meta name="keywords" content="JavaScript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ArrayBuffer、Blog、File的处理"/>
+
+  <meta property="og:site_name" content="Five Dimensions(5D)"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/5d.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Five Dimensions(5D)" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Five Dimensions(5D)</a>
+    </h1>
+    <p class="site-description">writing for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ArrayBuffer、Blog、File的处理</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2022/11/14/ArrayBuffer、Blog、File的处理/" rel="bookmark">
+        <time class="entry-date published" datetime="2022-11-14T01:11:45.000Z">
+          2022-11-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在计算机中处理数据，最常用的数据类型就是字符串和二进制，字符串的处理是比较简单的，毕竟我们为类能看得懂，数据不对马上就能看出来，对 String 的处理方法也经常使用，不陌生。</p>
+<p>但是二进制数据是我们人类看不懂的数据，数据是否正确，不能一下子就看出来，略显陌生。在 JavaScript 中的经常用到的二进制的格式有三种：ArrayBuffer、Blob、File。</p>
+<span id="more"></span>
+
+<p>在了解这三种二进制之前，先了解一个类 FileReader，这个类是用来读取计算上的文件的一个类，是用来读取二进制文件的类。</p>
+<p>读取到的结果有四种类型：</p>
+<ul>
+<li>ArrayBuffer</li>
+<li>BinaryString：原始二进制数据，如果是流的话，就是一些乱码</li>
+<li>DataUrl：base64 数据</li>
+<li>Text：文本</li>
+</ul>
+<p>用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fr = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">fr.<span class="title function_">readAsArrayBuffer</span>(blob);</span><br><span class="line">fr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123; </span><br><span class="line">	<span class="keyword">var</span> ab = event.<span class="property">target</span>.<span class="property">result</span>;</span><br><span class="line">    <span class="comment">// event.target.result 中的保存的就是读取到的数据</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="ArrayBuffer"><a href="#ArrayBuffer" class="headerlink" title="ArrayBuffer"></a>ArrayBuffer</h3><p><strong><code>ArrayBuffer</code></strong> 对象用来表示通用的、固定长度的原始二进制数据缓冲区。</p>
+<p>生成 ArrayBuffer 使用的也是它的构造函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="title class_">ArrayBuffer</span>(<span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer</a></p>
+<p><strong>File 和 Blob 数据要转换成 ArrayBuffer ，需要借助 FileReader 。</strong></p>
+<h4 id="File-转成-ArrayBuffer"><a href="#File-转成-ArrayBuffer" class="headerlink" title="File 转成 ArrayBuffer"></a>File 转成 ArrayBuffer</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fr = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">fr.<span class="title function_">readAsArrayBuffer</span>(file);</span><br><span class="line">fr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123; </span><br><span class="line">	<span class="keyword">var</span> ab = event.<span class="property">target</span>.<span class="property">result</span>;</span><br><span class="line">    <span class="comment">// event.target.result 中的保存的就是读取到的数据</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Blob-转成-ArrayBuffer"><a href="#Blob-转成-ArrayBuffer" class="headerlink" title="Blob 转成 ArrayBuffer"></a>Blob 转成 ArrayBuffer</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fr = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">fr.<span class="title function_">readAsArrayBuffer</span>(blob);</span><br><span class="line">fr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123; </span><br><span class="line">	<span class="keyword">var</span> ab = event.<span class="property">target</span>.<span class="property">result</span>;</span><br><span class="line">    <span class="comment">// event.target.result 中的保存的就是读取到的数据</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h3><p><code>Blob</code> 对象表示一个不可变、原始数据的类文件对象。它的数据可以按&#x3D;&#x3D;文本&#x3D;&#x3D;或&#x3D;&#x3D;二进制&#x3D;&#x3D;的格式进行读取，也可以转换成 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ReadableStream"><code>ReadableStream</code></a> 来用于数据操作。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/Blob">https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/Blob</a></p>
+<p>生成 Blob 对象需要用到构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// data 数据必须是一个数组</span></span><br><span class="line"><span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([data]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="file-转成-blob"><a href="#file-转成-blob" class="headerlink" title="file 转成 blob"></a>file 转成 blob</h4><p>file 是一种特殊的 blob，一般情况下不需要转换，需要转换时先利用 FileReader 转成 ArrayBuffer，再转成 blob。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fr = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">fr.<span class="title function_">readAsArrayBuffer</span>(file);</span><br><span class="line">fr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123; </span><br><span class="line">	<span class="keyword">var</span> ab = event.<span class="property">target</span>.<span class="property">result</span>;</span><br><span class="line">    <span class="comment">// event.target.result 中的保存的就是读取到的数据</span></span><br><span class="line">    <span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([ab]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="arraybuffer-转成-blob"><a href="#arraybuffer-转成-blob" class="headerlink" title="arraybuffer 转成 blob"></a>arraybuffer 转成 blob</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([arraybuffer]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="File"><a href="#File" class="headerlink" title="File"></a>File</h3><p>生成 File 用到的就是 File 的构造函数 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> file = <span class="keyword">new</span> <span class="title class_">File</span>(data,name[,option])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 第一个参数是 数组，如果不是数组会报错，无论哪种类型的数据，都要放到一个数组当中</p>
+<p> <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/File">https://developer.mozilla.org/zh-CN/docs/Web/API/File/File</a></p>
+</blockquote>
+<p>当 arraybuffer 、blob 要转化成 File 的时候，也要通过 File 的构造方法来转换。</p>
+<h4 id="ArrayBuffer-转成-File"><a href="#ArrayBuffer-转成-File" class="headerlink" title="ArrayBuffer 转成 File"></a>ArrayBuffer 转成 File</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">File</span>([<span class="keyword">new</span> <span class="title class_">ArrayBuffer</span>(<span class="number">8</span>)],<span class="string">&#x27;ab&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Blob-转成-File"><a href="#Blob-转成-File" class="headerlink" title="Blob 转成 File"></a>Blob 转成 File</h4><p>file 是特殊类型的 Blob ，能处理 blob 的环境就能处理 File，两者之间一般来说无需互转，如果需要转的话，先把 blob 先借助 FileReader  转成 arraybuffer 再转成 File。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fr = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">fr.<span class="title function_">readAsArrayBuffer</span>(blob);</span><br><span class="line">fr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123; </span><br><span class="line">	<span class="keyword">var</span> ab = event.<span class="property">target</span>.<span class="property">result</span>;</span><br><span class="line">    <span class="comment">// event.target.result 中的保存的就是读取到的数据</span></span><br><span class="line">    <span class="keyword">var</span> file = <span class="keyword">new</span> <span class="title class_">File</span>([ab],<span class="string">&#x27;ab&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 5 D
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
