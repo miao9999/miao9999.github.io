@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从接口中返回二进制数据 | Five Dimensions(5D) | writing for fun</title>
+
+  
+  <meta name="author" content="5 D">
+  
+
+  
+  <meta name="description" content="five dimensions">
+  
+
+  
+  
+  <meta name="keywords" content="JavaScript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="从接口中返回二进制数据"/>
+
+  <meta property="og:site_name" content="Five Dimensions(5D)"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/5d.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Five Dimensions(5D)" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Five Dimensions(5D)</a>
+    </h1>
+    <p class="site-description">writing for fun</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>从接口中返回二进制数据</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2022/11/14/从接口中返回二进制数据/" rel="bookmark">
+        <time class="entry-date published" datetime="2022-11-14T01:22:57.000Z">
+          2022-11-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/responseType">ajax 返回的数据的类型</a></p>
+<p>通过设置 responseType 的值来规定返回的数据类型。</p>
+<p>将 responseType 设置为特定值时，要确保与服务器返回的数据格式是兼容的。如果不兼容，response 的值将是 null。</p>
+<span id="more"></span> 
+
+<ul>
+<li><p>“”</p>
+<p>空的 responseTye 字符串与默认类型 “text” 相同。</p>
+</li>
+<li><p>arraybuffer</p>
+<p>response 是一个包含二进制数据的 JavaScript 的 ArrayBuffer。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">返回的 arraybuffer 对象</span><br><span class="line"><span class="title class_">ArrayBuffer</span>(<span class="number">10863</span>)</span><br><span class="line"><span class="attr">byteLength</span>: <span class="number">10863</span></span><br><span class="line">[[<span class="title class_">Prototype</span>]]: <span class="title class_">ArrayBuffer</span></span><br><span class="line">[[<span class="title class_">Int8Array</span>]]: <span class="title class_">Int8Array</span>(<span class="number">10863</span>)</span><br><span class="line">[[<span class="title class_">Uint8Array</span>]]: <span class="title class_">Uint8Array</span>(<span class="number">10863</span>)</span><br><span class="line">[[<span class="title class_">ArrayBufferByteLength</span>]]: <span class="number">10863</span></span><br><span class="line">[[<span class="title class_">ArrayBufferData</span>]]: <span class="number">228</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>blob    <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob">https://developer.mozilla.org/zh-CN/docs/Web/API/Blob</a></p>
+<p>response 是一个包含二进制数据的 Blob 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">返回的 blob 对象</span><br><span class="line"><span class="title class_">Blob</span></span><br><span class="line"><span class="attr">size</span>: <span class="number">10053</span></span><br><span class="line"><span class="attr">type</span>: <span class="string">&quot;application/octet-stream&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>document</p>
+<p>response 是一个 html 或 xml 的 document，根据接收数据的 MIME  类型而定。</p>
+</li>
+<li><p>json</p>
+<p>response 是通过将接收到的数据内容解析为 JSON 而创建的 JavaScript 对象。</p>
+</li>
+<li><p>text</p>
+<p>默认。response 是 DOMString 对象中的文本。</p>
+</li>
+<li><p>ms-stream</p>
+<p>reponse 是流式下载的一部分，只用于下载的请求。</p>
+</li>
+</ul>
+<h3 id="ajax-不同类型的返回形式、处理方法。"><a href="#ajax-不同类型的返回形式、处理方法。" class="headerlink" title="ajax 不同类型的返回形式、处理方法。"></a>ajax 不同类型的返回形式、处理方法。</h3><h4 id="blob-转为-arraybuffer"><a href="#blob-转为-arraybuffer" class="headerlink" title="blob 转为 arraybuffer"></a>blob 转为 arraybuffer</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// blob 转换为 arraybuffer</span></span><br><span class="line"><span class="comment">// 使用 Blob.prototype.arrayBuffer() 方法</span></span><br><span class="line"><span class="comment">// 方法返回一个 promise ，包含 blob 数据的 arraybuffer</span></span><br><span class="line"><span class="keyword">var</span> ab = xhr.<span class="property">response</span>.<span class="title function_">arrayBuffer</span>();</span><br><span class="line">ab.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res); <span class="comment">// res 就是返回的 arraybuffer 对象</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用 FileReader 的 readAsArrayBuffer 方法把blob 转为 arraybuffer</span></span><br><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">reader.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// reader.result 包含被转化为类型化数组的 blob 中的内容</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(reader.<span class="property">result</span>);</span><br><span class="line">&#125;);</span><br><span class="line">reader.<span class="title function_">readAsArrayBuffer</span>(xhr.<span class="property">response</span>); </span><br></pre></td></tr></table></figure>
+
+<p>ps:</p>
+<p>FileReader：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader">https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader</a></p>
+<p>用来读取 blob 中的内容，可以读取为 arraybuffer、binarystring、dataurl、text。</p>
+<h3 id="jquery-设置responseType-为二进制数据"><a href="#jquery-设置responseType-为二进制数据" class="headerlink" title="jquery  设置responseType 为二进制数据"></a>jquery  设置responseType 为二进制数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;url&#x27;</span>,</span><br><span class="line">    <span class="attr">xhrFields</span>: &#123; <span class="attr">responseType</span>: <span class="string">&quot;arraybuffer&quot;</span> &#125;,</span><br><span class="line">&#125;).<span class="title function_">done</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//	result 为arrayBuffer类型</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 5 D
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
